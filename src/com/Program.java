@@ -1,12 +1,13 @@
 package com;
 
+import com.constants.BoolConstant;
 import com.constants.IntConstant;
 import com.expressions.Expression;
 import com.expressions.binary.Add;
 import com.expressions.unary.Not;
+import com.mutable.ArrayIndex;
 import com.mutable.Identifier;
 import com.mutable.VariableDeclaration;
-import com.statements.ArrayAssign;
 import com.statements.Assign;
 import com.statements.Statement;
 import com.types.Type;
@@ -44,9 +45,16 @@ public class Program {
 
         VariableDeclaration v = new VariableDeclaration(Type.INT, x);
 
+        List<Statement> s = new ArrayList<Statement>();
+        s.add(new Assign(v, first));
+
+        Block b = new Block(s);
+        If i = new If(new BoolConstant(true), b);
+
         List<Statement> l = new ArrayList<Statement>();
         l.add(new Assign(v, first));
-        l.add(new ArrayAssign(y, first, second));
+        l.add(new Assign(new ArrayIndex(y, first), second));
+        l.add(i);
 
         Program p = new Program(l);
 
