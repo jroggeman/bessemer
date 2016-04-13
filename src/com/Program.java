@@ -4,6 +4,7 @@ import com.constants.BoolConstant;
 import com.constants.IntConstant;
 import com.expressions.Expression;
 import com.expressions.binary.Add;
+import com.expressions.binary.LessThan;
 import com.expressions.unary.Not;
 import com.mutable.ArrayIndex;
 import com.mutable.Identifier;
@@ -51,7 +52,7 @@ public class Program {
         s.add(new Assign(v, first));
 
         Block b = new Block(s);
-        While i = new While(new BoolConstant(true), b);
+        If i = new If(new LessThan(y, five), b);
 
         List<Statement> l = new ArrayList<Statement>();
         l.add(new Assign(v, first));
