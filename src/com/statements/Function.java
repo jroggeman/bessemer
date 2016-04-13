@@ -1,8 +1,7 @@
-package com;
+package com.statements;
 
 import com.mutable.Identifier;
 import com.mutable.VariableDeclaration;
-import com.statements.Statement;
 import com.types.Type;
 
 import java.util.List;

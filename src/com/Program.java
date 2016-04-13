@@ -1,6 +1,5 @@
 package com;
 
-import com.constants.BoolConstant;
 import com.constants.IntConstant;
 import com.expressions.Expression;
 import com.expressions.binary.Add;
@@ -9,10 +8,7 @@ import com.expressions.unary.Not;
 import com.mutable.ArrayIndex;
 import com.mutable.Identifier;
 import com.mutable.VariableDeclaration;
-import com.statements.Assign;
-import com.statements.If;
-import com.statements.Statement;
-import com.statements.While;
+import com.statements.*;
 import com.types.Type;
 
 import java.util.ArrayList;

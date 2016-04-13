@@ -1,4 +1,4 @@
-package com;
+package com.statements;
 
 import com.statements.Statement;
 
