@@ -2,7 +2,7 @@ package com.expressions.unary;
 
 import com.expressions.Expression;
 
-public abstract class UnaryExpression extends Expression {
+public abstract class UnaryExpression implements Expression {
     public Expression expression;
 
     public UnaryExpression(Expression expression) {

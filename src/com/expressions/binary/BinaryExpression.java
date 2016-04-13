@@ -2,7 +2,7 @@ package com.expressions.binary;
 
 import com.expressions.Expression;
 
-public abstract class BinaryExpression extends Expression {
+public abstract class BinaryExpression implements Expression {
     public Expression leftHandSide;
     public Expression rightHandSide;
 

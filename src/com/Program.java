@@ -4,6 +4,9 @@ import com.constants.IntConstant;
 import com.expressions.Expression;
 import com.expressions.binary.Add;
 import com.expressions.unary.Not;
+import com.statements.ArrayAssign;
+import com.statements.Assign;
+import com.statements.Statement;
 
 import java.util.ArrayList;
 import java.util.List;

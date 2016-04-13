@@ -1,5 +1,6 @@
-package com;
+package com.statements;
 
+import com.Identifier;
 import com.expressions.Expression;
 
 public class Assign extends Statement {
