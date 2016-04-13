@@ -1,6 +1,6 @@
 package com.statements;
 
-import com.Identifier;
+import com.mutable.Identifier;
 import com.expressions.Expression;
 
 public class ArrayAssign extends Statement {

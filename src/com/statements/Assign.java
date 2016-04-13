@@ -1,13 +1,13 @@
 package com.statements;
 
-import com.Identifier;
+import com.mutable.Mutable;
 import com.expressions.Expression;
 
 public class Assign extends Statement {
-    public Identifier leftHandSide;
+    public Mutable leftHandSide;
     public Expression rightHandSide;
 
-    public Assign(Identifier leftHandSide, Expression rightHandSide) {
+    public Assign(Mutable leftHandSide, Expression rightHandSide) {
         this.leftHandSide = leftHandSide;
         this.rightHandSide = rightHandSide;
     }
