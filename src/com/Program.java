@@ -1,15 +1,15 @@
 package com;
 
-import com.constants.IntConstant;
-import com.expressions.Expression;
-import com.expressions.binary.Add;
-import com.expressions.binary.LessThan;
-import com.expressions.unary.Not;
-import com.mutable.ArrayIndex;
-import com.mutable.Identifier;
-import com.mutable.VariableDeclaration;
-import com.statements.*;
-import com.types.Type;
+import com.ast.constants.IntConstant;
+import com.ast.expressions.Expression;
+import com.ast.expressions.binary.Add;
+import com.ast.expressions.binary.LessThan;
+import com.ast.expressions.unary.Not;
+import com.ast.mutable.ArrayIndex;
+import com.ast.mutable.Identifier;
+import com.ast.mutable.VariableDeclaration;
+import com.ast.statements.*;
+import com.ast.types.Type;
 
 import java.util.ArrayList;
 import java.util.List;
