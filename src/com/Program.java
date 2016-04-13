@@ -9,7 +9,9 @@ import com.mutable.ArrayIndex;
 import com.mutable.Identifier;
 import com.mutable.VariableDeclaration;
 import com.statements.Assign;
+import com.statements.If;
 import com.statements.Statement;
+import com.statements.While;
 import com.types.Type;
 
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class Program {
         s.add(new Assign(v, first));
 
         Block b = new Block(s);
-        If i = new If(new BoolConstant(true), b);
+        While i = new While(new BoolConstant(true), b);
 
         List<Statement> l = new ArrayList<Statement>();
         l.add(new Assign(v, first));
