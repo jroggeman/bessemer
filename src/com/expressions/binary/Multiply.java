@@ -1,7 +1,7 @@
-package com.expressions;
+package com.expressions.binary;
 
 
-import com.Expression;
+import com.expressions.Expression;
 
 public class Multiply extends BinaryExpression {
     public Multiply(Expression leftHandSide, Expression rightHandSide) {

@@ -1,6 +1,6 @@
-package com.expressions;
+package com.expressions.binary;
 
-import com.Expression;
+import com.expressions.Expression;
 
 public class Subtract extends BinaryExpression{
 
