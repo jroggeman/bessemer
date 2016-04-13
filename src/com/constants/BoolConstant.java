@@ -1,4 +1,4 @@
-package constants;
+package com.constants;
 
 public class BoolConstant extends Constant {
     public boolean value;

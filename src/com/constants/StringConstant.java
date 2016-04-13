@@ -1,4 +1,4 @@
-package constants;
+package com.constants;
 
 public class StringConstant extends Constant {
     public String value;
@@ -8,6 +8,6 @@ public class StringConstant extends Constant {
     }
 
     public String toString() {
-        return value;
+        return "\"" + value + "\"";
     }
 }

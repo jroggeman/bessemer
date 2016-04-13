@@ -1,4 +1,4 @@
-package constants;
+package com.constants;
 
 public class CharConstant extends Constant {
     public char value;
@@ -8,6 +8,6 @@ public class CharConstant extends Constant {
     }
 
     public String toString() {
-        return Character.toString(value);
+        return "'" + Character.toString(value) + "'";
     }
 }

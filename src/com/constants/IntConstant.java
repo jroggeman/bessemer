@@ -1,4 +1,4 @@
-package constants;
+package com.constants;
 
 public class IntConstant extends Constant {
     public int value;

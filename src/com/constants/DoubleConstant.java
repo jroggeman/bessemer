@@ -1,6 +1,6 @@
-package constants;
+package com.constants;
 
-public class DoubleConstant {
+public class DoubleConstant extends Constant {
     public double value;
 
     public DoubleConstant(double value) {
