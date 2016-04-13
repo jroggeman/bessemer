@@ -59,6 +59,14 @@ public class Program {
         l.add(new Assign(new ArrayIndex(y, first), second));
         l.add(i);
 
+        List<VariableDeclaration> params = new ArrayList<VariableDeclaration>();
+        Identifier fname = new Identifier("printf");
+        Type ftype = Type.INT;
+
+        Function func = new Function(ftype, fname, params, b);
+
+        l.add(func);
+
         Program p = new Program(l);
 
         System.out.println(p);
