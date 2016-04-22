@@ -1,4 +1,4 @@
-package com;
+package com.ast;
 
 import com.ast.constants.IntConstant;
 import com.ast.expressions.Expression;

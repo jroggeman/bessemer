@@ -1,5 +1,7 @@
 package com.ast.types;
 
-public abstract class Type {
+import com.ast.Token;
+
+public abstract class Type extends Token {
     public static Type INT = new IntegerType();
 }
