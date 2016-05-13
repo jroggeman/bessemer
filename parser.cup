@@ -14,6 +14,7 @@ parser code {:
 scan with {: return lexer.next_token(); :};
 
 terminal PLUS, MINUS, TIMES, DIVIDE, MODULO, LPAREN, RPAREN;
+terminal LBRACE, RBRACE;
 
 terminal COMMA, SEMICOLON;
 
@@ -35,9 +36,25 @@ non terminal Type type;
 
 non terminal VariableDeclaration vardecl;
 
+non terminal Function function;
+non terminal List<Function> function_list;
+
 non terminal Program program;
 
 start with program;
+
+program ::= function_list:fl {: RESULT = new Program(fl); :};
+
+function_list ::= function:f function_list:fl {:
+                                                  fl.add(f);
+                                              :}
+                  |
+                  {: RESULT = new ArrayList<Function>(); :}
+                  ;
+
+function ::= type:t IDENTIFIER:i LPAREN param_decl_list:pdl RPAREN LBRACE statement_list:sl RBRACE {:
+                             RESULT = new Function(t, i, pdl, sl);
+                         :};
 
 type ::= INTEGER_TYPE   {: RESULT = new IntegerType(); :}
          |
@@ -69,10 +86,6 @@ remaining_param_list ::= COMMA param_decl:pd remaining_param_list:rpl
                     {: RESULT = new ArrayList<ParamDeclaration>(); :}
                     ;
 
-vardecl ::= type:t IDENTIFIER:i SEMICOLON {: RESULT = new VariableDeclaration(t, i); :};
-
-statement ::= vardecl:v {: RESULT = v; :};
-
 statement_list ::= statement:s statement_list:sl
                    {:
                        sl.add(s);
@@ -82,4 +95,6 @@ statement_list ::= statement:s statement_list:sl
                    {: RESULT = new ArrayList<Statement>(); :}
                    ;
 
-program ::= statement_list:sl {: RESULT = new Program(sl); :};
+statement ::= vardecl:v {: RESULT = v; :};
+
+vardecl ::= type:t IDENTIFIER:i SEMICOLON {: RESULT = new VariableDeclaration(t, i); :};
