@@ -1,7 +1,6 @@
 package com;
 
 import com.ast.Program;
-import java_cup.parser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,7 +12,7 @@ public class Compiler {
 
         BufferedReader b = new BufferedReader(new FileReader(inputFilename));
 
-        parser parser = new parser(new Lexer(b));
+        Parser parser = new Parser(new Lexer(b));
 
         Program ast = (Program) parser.parse().value;
 

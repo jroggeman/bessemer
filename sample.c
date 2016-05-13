@@ -1,4 +1,2 @@
-int main() {
-    int x;
-    int joel;
-}
+int x;
+int joel;
