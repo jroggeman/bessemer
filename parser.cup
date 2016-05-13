@@ -19,7 +19,7 @@ terminal Character CHARACTER_LITERAL;
 terminal INTEGER_TYPE, DOUBLE_TYPE, CHARACTER_TYPE;
 terminal Identifier IDENTIFIER;
 
-non terminal statement_list;
+non terminal List<Statement> statement_list;
 non terminal Statement statement;
 
 non terminal ParamDeclaration param_decl;
@@ -28,9 +28,9 @@ non terminal List<ParamDeclaration> remaining_param_list;
 
 non terminal Type type;
 
-statement_list ::= statement statement_list {:  :}
-                |
-                ;
+non terminal VariableDeclaration vardecl;
+
+non terminal Program program;
 
 type ::= INTEGER_TYPE   {: RESULT = new IntegerType(); :}
          |
@@ -40,8 +40,9 @@ type ::= INTEGER_TYPE   {: RESULT = new IntegerType(); :}
          ;
 
 param_decl ::= type:t IDENTIFIER:id {: RESULT = new ParamDeclaration(t, id); :}
+               ;
 
-param_decl_list ::= param_decl:p remaining_list:rl {: 
+param_decl_list ::= param_decl:p remaining_param_list:rl {: 
         List<ParamDeclaration> params = new ArrayList<>();
         params.add(p);
         for(ParamDeclaration param : rl) {
@@ -55,11 +56,23 @@ param_decl_list ::= param_decl:p remaining_list:rl {:
 remaining_param_list ::= COMMA param_decl:pd remaining_param_list:rpl
                     {:
                         rpl.add(pd);
+                        RESULT = rpl;
                     :}
                     |
                     {: RESULT = new ArrayList<ParamDeclaration>(); :}
                     ;
 
-vardecl ::= type:t IDENTIFIER:i SEMICOLON {: RESULT = new VariableDeclaration(t, i); :}
+vardecl ::= type:t IDENTIFIER:i SEMICOLON {: RESULT = new VariableDeclaration(t, i); :};
 
-statement ::= vardecl:v {: RESULT = v :}
+statement ::= vardecl:v {: RESULT = v :};
+
+statement_list ::= statement:s statement_list:sl
+                   {:
+                       sl.add(s);
+                       RESULT = sl;
+                   :}
+                   |
+                   {: RESULT = new ArrayList<Statement>(); :}
+                   ;
+
+program ::= statement_list:sl {: RESULT = new Program(sl); :};
