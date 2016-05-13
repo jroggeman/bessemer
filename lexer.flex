@@ -35,3 +35,7 @@ DecIntegerLiteral = 0 | [1-9][0-9]*
 %state STRING
 
 %%
+
+{Identifier}      { return new Identifier(yytext()) }
+
+[^] { throw new Error("Illegal character <" + yytext() + ">"); }

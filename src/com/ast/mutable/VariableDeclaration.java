@@ -1,8 +1,9 @@
 package com.ast.mutable;
 
+import com.ast.statements.Statement;
 import com.ast.types.Type;
 
-public class VariableDeclaration implements Mutable {
+public class VariableDeclaration extends Statement implements Mutable {
     public Type type;
     public Identifier name;
 

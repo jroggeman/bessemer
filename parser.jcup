@@ -1,0 +1,65 @@
+import java_cup.runtime.*;
+
+parser code {:
+    scanner s;
+    Parser(Scanner s){ this.s = s; }
+:}
+
+init with {: s.init(); :};
+scan with {: return s.next_token(); :};
+
+terminal PLUS, MINUS, TIMES, DIVIDE, MODULO, LPAREN, RPAREN;
+
+terminal COMMA, SEMICOLON;
+
+terminal Integer INTEGER_LITERAL;
+terminal Double DOUBLE_LITERAL;
+terminal Character CHARACTER_LITERAL;
+
+terminal INTEGER_TYPE, DOUBLE_TYPE, CHARACTER_TYPE;
+terminal Identifier IDENTIFIER;
+
+non terminal statement_list;
+non terminal Statement statement;
+
+non terminal ParamDeclaration param_decl;
+non terminal ParamDeclarationList param_decl_list;
+non terminal List<ParamDeclaration> remaining_param_list;
+
+non terminal Type type;
+
+statement_list ::= statement statement_list {:  :}
+                |
+                ;
+
+type ::= INTEGER_TYPE   {: RESULT = new IntegerType(); :}
+         |
+         DOUBLE_TYPE    {: RESULT = new DoubleType(); :}
+         |
+         CHARACTER_TYPE {: RESULT = new CharacterType(); :}
+         ;
+
+param_decl ::= type:t IDENTIFIER:id {: RESULT = new ParamDeclaration(t, id); :}
+
+param_decl_list ::= param_decl:p remaining_list:rl {: 
+        List<ParamDeclaration> params = new ArrayList<>();
+        params.add(p);
+        for(ParamDeclaration param : rl) {
+            params.add(param);
+        }
+        RESULT = new ParamDeclarationList(params);
+    :}
+    |
+    ;
+
+remaining_param_list ::= COMMA param_decl:pd remaining_param_list:rpl
+                    {:
+                        rpl.add(pd);
+                    :}
+                    |
+                    {: RESULT = new ArrayList<ParamDeclaration>(); :}
+                    ;
+
+vardecl ::= type:t IDENTIFIER:i SEMICOLON {: RESULT = new VariableDeclaration(t, i); :}
+
+statement ::= vardecl:v {: RESULT = v :}
