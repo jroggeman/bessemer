@@ -13,7 +13,7 @@ public class Program {
         StringBuffer s = new StringBuffer();
 
         for(Function function : functionList) {
-            s.append(function + ";\n");
+            s.append(function +"\n\n");
         }
 
         return s.toString();

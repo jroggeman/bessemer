@@ -48,6 +48,7 @@ program ::= function_list:fl {: RESULT = new Program(fl); :};
 
 function_list ::= function:f function_list:fl {:
                                                   fl.add(f);
+                                                  RESULT = fl;
                                               :}
                   |
                   {: RESULT = new ArrayList<Function>(); :}
@@ -76,7 +77,7 @@ param_decl_list ::= param_decl:p remaining_param_list:rl {:
         RESULT = new ParamDeclarationList(params);
     :}
     |
-    ;
+    {: RESULT = new ParamDeclarationList(new ArrayList<ParamDeclaration>()); :};
 
 remaining_param_list ::= COMMA param_decl:pd remaining_param_list:rpl
                     {:
