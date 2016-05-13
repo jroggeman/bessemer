@@ -1,4 +1,7 @@
+package com;
+
 import java_cup.runtime.*;
+import com.ast.mutable.Identifier;
 
 %%
 
@@ -11,12 +14,12 @@ import java_cup.runtime.*;
 %{
     StringBuffer string = new StringBuffer();
 
-    private Token token(int type) {
-        return new Token(type, yyline, yycolumn);
+    private Symbol symbol(int type) {
+        return new Symbol(type, yyline, yycolumn);
     }
 
-    private Token token(int type, Object value) {
-    return new Token(type, yyline, yycolumn, value);
+    private Symbol symbol(int type, Object value) {
+    return new Symbol(type, yyline, yycolumn, value);
     }
 %}
 
@@ -40,20 +43,20 @@ CharLiteral = "'" [a-zA-Z0-9] "'"
 {WhiteSpace}          { /* Ignore */ }
 {Comment}             { /* Ignore */ }
 
-"*"                   { return symbol(sym.TIMES); }
-"double"              { return symbol(sym.DOUBLE_TYPE); }
-"char"                { return symbol(sym.CHARACTER_TYPE); }
-";"                   { return symbol(sym.SEMICOLON); }
-"+"                   { return symbol(sym.PLUS); }
-")"                   { return symbol(sym.RPAREN); }
-"%"                   { return symbol(sym.MODULO); }
-"("                   { return symbol(sym.LPAREN); }
-","                   { return symbol(sym.COMMA); }
-"int"                 { return symbol(sym.INTEGER_TYPE); }
-"/"                   { return symbol(sym.DIVIDE); }
-"-"                   { return symbol(sym.MINUS); }
-{Identifier}          { return symbol(sym.IDENTIFIER, new Identifier(yytext())); }
-{DecIntegerLiteral}   { return symbol(sym.INTEGER_LITERAL, Integer.parseInt(yytext())); }
-{CharLiteral}         { return symbol(sym.CHARACTER_LITERAL, Character.parseChar(yytext())); }
+"*"                   { return symbol(com.sym.TIMES); }
+"double"              { return symbol(com.sym.DOUBLE_TYPE); }
+"char"                { return symbol(com.sym.CHARACTER_TYPE); }
+";"                   { return symbol(com.sym.SEMICOLON); }
+"+"                   { return symbol(com.sym.PLUS); }
+")"                   { return symbol(com.sym.RPAREN); }
+"%"                   { return symbol(com.sym.MODULO); }
+"("                   { return symbol(com.sym.LPAREN); }
+","                   { return symbol(com.sym.COMMA); }
+"int"                 { return symbol(com.sym.INTEGER_TYPE); }
+"/"                   { return symbol(com.sym.DIVIDE); }
+"-"                   { return symbol(com.sym.MINUS); }
+{Identifier}          { return symbol(com.sym.IDENTIFIER, new Identifier(yytext())); }
+{DecIntegerLiteral}   { return symbol(com.sym.INTEGER_LITERAL, Integer.parseInt(yytext())); }
+{CharLiteral}         { return symbol(com.sym.CHARACTER_LITERAL, yytext().charAt(0)); }
 
 [^] { throw new Error("Illegal character <" + yytext() + ">"); }

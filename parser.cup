@@ -1,12 +1,17 @@
-import java_cup.runtime.*;
+package com;
+
+import com.ast.*;
 
 parser code {:
-    scanner s;
-    Parser(Scanner s){ this.s = s; }
+    Lexer lexer;
+
+    public Parser(Lexer lexer) {
+        super(lexer);
+        this.lexer = lexer;
+    }
 :}
 
-init with {: s.init(); :};
-scan with {: return s.next_token(); :};
+scan with {: return lexer.next_token(); :};
 
 terminal PLUS, MINUS, TIMES, DIVIDE, MODULO, LPAREN, RPAREN;
 
@@ -31,6 +36,8 @@ non terminal Type type;
 non terminal VariableDeclaration vardecl;
 
 non terminal Program program;
+
+start with program;
 
 type ::= INTEGER_TYPE   {: RESULT = new IntegerType(); :}
          |
@@ -64,7 +71,7 @@ remaining_param_list ::= COMMA param_decl:pd remaining_param_list:rpl
 
 vardecl ::= type:t IDENTIFIER:i SEMICOLON {: RESULT = new VariableDeclaration(t, i); :};
 
-statement ::= vardecl:v {: RESULT = v :};
+statement ::= vardecl:v {: RESULT = v; :};
 
 statement_list ::= statement:s statement_list:sl
                    {:

@@ -59,9 +59,10 @@ public class Program {
         Identifier fname = new Identifier("printf");
         Type ftype = Type.INT;
 
-        Function func = new Function(ftype, fname, params, b);
+        // TODO: Update smoke tests with new types
+        //Function func = new Function(ftype, fname, params, b);
 
-        l.add(func);
+        //l.add(func);
 
         Program p = new Program(l);
 
