@@ -13,6 +13,6 @@ public class VariableDeclaration extends Statement implements Mutable {
     }
 
     public String toString() {
-        return type + " " + name;
+        return type + " " + name + ";";
     }
 }

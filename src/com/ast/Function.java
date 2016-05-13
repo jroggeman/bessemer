@@ -29,8 +29,11 @@ public class Function {
             }
             s.append(paramList.params.get(paramList.params.size() - 1));
         }
-        s.append(") ");
-        s.append(statementList);
+        s.append(") {\n");
+        for(Statement statement : statementList) {
+            s.append("\t" + statement + "\n");
+        }
+        s.append("}\n\n");
 
         return s.toString();
     }
