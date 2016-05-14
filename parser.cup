@@ -9,6 +9,7 @@ import com.ast.expressions.Call;
 import com.ast.expressions.binary.*;
 import com.ast.expressions.unary.*;
 import com.ast.expressions.literals.*;
+import com.ast.function.*;
 import com.ast.statements.*;
 import com.ast.types.*;
 import com.ast.*;

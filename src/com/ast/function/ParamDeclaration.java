@@ -1,4 +1,4 @@
-package com.ast;
+package com.ast.function;
 
 import com.ast.mutable.Identifier;
 import com.ast.types.Type;
