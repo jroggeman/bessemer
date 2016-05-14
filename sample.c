@@ -4,7 +4,7 @@ int main() {
     if((x + y) && z) {
         x = func(j, x);
         func(j, 3.4);
-        while(x + 1) {
+        while(x == 1) {
             print(j);
         }
     }

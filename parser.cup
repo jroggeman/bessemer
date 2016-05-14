@@ -24,9 +24,9 @@ scan with {: return lexer.next_token(); :};
 
 terminal PLUS, MINUS, TIMES, DIVIDE, MODULO;
 terminal LOG_AND, LOG_OR;
+terminal EQUALS, LESS_THAN, LESS_THAN_EQUALS, NOT_EQUALS;
 terminal LPAREN, RPAREN;
 terminal LBRACE, RBRACE;
-terminal EQUALS;
 
 terminal COMMA;
 terminal SEMICOLON;
@@ -64,8 +64,9 @@ non terminal List<Expression> remaining_call_param_list;
 
 non terminal Program program;
 
-precedence left TIMES, DIVIDE;
+precedence left TIMES, DIVIDE, MODULO;
 precedence left PLUS, MINUS;
+precedence left EQUALS, LESS_THAN, LESS_THAN_EQUALS, NOT_EQUALS;
 precedence left LOG_AND;
 precedence left LOG_OR;
 
@@ -147,11 +148,21 @@ expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs);
                |
                expression:lhs DIVIDE expression:rhs {: RESULT = new Divide(lhs, rhs); :}
                |
+               expression:lhs MODULO expression:rhs {: RESULT = new Modulo(lhs, rhs); :}
+               |
                expression:lhs LOG_AND expression:rhs {: RESULT = new And(lhs, rhs); :}
                |
                expression:lhs LOG_OR expression:rhs {: RESULT = new Or(lhs, rhs); :}
                |
                LPAREN expression:e RPAREN {: RESULT = e; :}
+               |
+               expression:lhs EQUALS expression:rhs {: RESULT = new Equals(lhs, rhs); :}
+               |
+               expression:lhs LESS_THAN expression:rhs {: RESULT = new LessThan(lhs, rhs); :}
+               |
+               expression:lhs LESS_THAN_EQUALS expression:rhs {: RESULT = new LessThanOrEquals(lhs, rhs); :}
+               |
+               expression:lhs NOT_EQUALS expression:rhs {: RESULT = new NotEquals(lhs, rhs); :}
                |
                function_call:fc {: RESULT = fc; :}
                |
