@@ -29,7 +29,7 @@ terminal EQUALS;
 terminal COMMA;
 terminal SEMICOLON;
 
-terminal IF, WHILE;
+terminal IF, WHILE, RETURN;
 
 terminal Integer INTEGER_LITERAL;
 terminal Double DOUBLE_LITERAL;
@@ -127,6 +127,8 @@ statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
               if_block:ib {: RESULT = ib; :}
               |
               while_block:wb {: RESULT = wb; :}
+              |
+              RETURN expression:e SEMICOLON {: RESULT = new Return(e); :}
               ;
 
 vardecl ::= type:t IDENTIFIER:i {: RESULT = new VariableDeclaration(t, i); :};

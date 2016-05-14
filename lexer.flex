@@ -48,6 +48,7 @@ CharLiteral = "'" [a-zA-Z0-9] "'"
     "char"                { return symbol(sym.CHARACTER_TYPE); }
     "if"                  { return symbol(sym.IF); }
     "while"               { return symbol(sym.WHILE); }
+    "return"              { return symbol(sym.RETURN); }
     ";"                   { return symbol(sym.SEMICOLON); }
     "+"                   { return symbol(sym.PLUS); }
     ")"                   { return symbol(sym.RPAREN); }

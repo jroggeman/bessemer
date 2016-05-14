@@ -22,7 +22,7 @@ public class Call implements Expression {
             for(int i = 0; i < parameterList.size() - 1; i++) {
                 toReturn.append(parameterList.get(i) + ", ");
             }
-            toReturn.append(parameterList.get(parameterList.size() - 1) + ");");
+            toReturn.append(parameterList.get(parameterList.size() - 1) + ")");
         } else {
             toReturn.append(");");
         }
