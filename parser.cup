@@ -14,10 +14,13 @@ parser code {:
 
 scan with {: return lexer.next_token(); :};
 
-terminal PLUS, MINUS, TIMES, DIVIDE, MODULO, LPAREN, RPAREN;
+terminal PLUS, MINUS, TIMES, DIVIDE, MODULO;
+terminal LPAREN, RPAREN;
 terminal LBRACE, RBRACE;
+terminal EQUALS;
 
-terminal COMMA, SEMICOLON;
+terminal COMMA;
+terminal SEMICOLON;
 
 terminal Integer INTEGER_LITERAL;
 terminal Double DOUBLE_LITERAL;
@@ -39,6 +42,13 @@ non terminal VariableDeclaration vardecl;
 
 non terminal Function function;
 non terminal List<Function> function_list;
+
+non terminal Expression expression;
+non terminal Add add_expression;
+non terminal Subtract subtract_expression;
+non terminal Multiply multiply_expression;
+non terminal Divide divide_expression;
+non terminal Modulo modulo_expression;
 
 non terminal Program program;
 
@@ -97,6 +107,13 @@ statement_list ::= statement:s statement_list:sl
                    {: RESULT = new ArrayList<Statement>(); :}
                    ;
 
-statement ::= vardecl:v {: RESULT = v; :};
+statement ::= vardecl:v {: RESULT = v; :}
+              |
+              IDENTIFIER:i EQUALS expression:e {: RESULT = new Assign(i, e); :}
+              ;
 
 vardecl ::= type:t IDENTIFIER:i SEMICOLON {: RESULT = new VariableDeclaration(t, i); :};
+
+expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs); :}
+               |
+               IDENTIFIER:i {: RESULT = i :};
