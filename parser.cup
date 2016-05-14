@@ -2,6 +2,13 @@ package com;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.ast.mutable.Identifier;
+import com.ast.expressions.Expression;
+import com.ast.expressions.binary.*;
+import com.ast.statements.*;
+import com.ast.types.*;
+import com.ast.*;
+
 parser code {:
     Lexer lexer;
 
