@@ -2,19 +2,23 @@ package com.ast.statements;
 
 import com.ast.expressions.Expression;
 
+import java.util.List;
+
 public class If extends Statement {
     public Expression condition;
-    public Block block;
+    public List<Statement> statementList;
 
-    public If(Expression condition, Block block) {
+    public If(Expression condition, List<Statement> statementList) {
         this.condition = condition;
-        this.block = block;
+        this.statementList = statementList;
     }
 
     public String toString() {
         StringBuffer s = new StringBuffer();
-        s.append("if(").append(condition).append(") ");
-        s.append(block);
+        s.append("if(").append(condition).append(") {\n");
+        for(Statement statement : statementList) {
+            s.append("\t" + statement + "\n");
+        }
         return s.toString();
     }
 }

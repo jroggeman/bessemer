@@ -2,21 +2,25 @@ package com.ast.statements;
 
 import com.ast.expressions.Expression;
 
+import java.util.List;
+
 public class While extends Statement {
     public Expression condition;
-    public Block block;
+    public List<Statement> statementList;
 
-    public While(Expression condition, Block block) {
+    public While(Expression condition, List<Statement> statementList) {
         this.condition = condition;
-        this.block = block;
+        this.statementList = statementList;
     }
 
     public String toString() {
         StringBuffer s = new StringBuffer();
         s.append("while(");
         s.append(condition);
-        s.append(") ");
-        s.append(block);
+        s.append(") {\n");
+        for(Statement statement : statementList) {
+            s.append("\t" + statement + "\n");
+        }
 
         return s.toString();
     }
