@@ -6,6 +6,7 @@ import com.ast.mutable.Identifier;
 import com.ast.expressions.Expression;
 import com.ast.expressions.Call;
 import com.ast.expressions.binary.*;
+import com.ast.expressions.literals.*;
 import com.ast.statements.*;
 import com.ast.types.*;
 import com.ast.*;
@@ -148,6 +149,12 @@ expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs);
                function_call:fc {: RESULT = fc; :}
                |
                IDENTIFIER:i {: RESULT = i; :}
+               |
+               INTEGER_LITERAL:il {: RESULT = new IntLiteral(il); :}
+               |
+               DOUBLE_LITERAL:dl {: RESULT = new DoubleLiteral(dl); :}
+               |
+               CHARACTER_LITERAL:cl {: RESULT = new CharLiteral(cl); :}
                ;
 
 if_block ::= IF LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE

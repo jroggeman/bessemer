@@ -3,8 +3,8 @@ int main() {
     joel = x + x;
     if(x + y) {
         x = func(j, x);
-        func(j, x);
-        while(x + x) {
+        func(j, 3.4);
+        while(x + 1) {
             print(j);
         }
     }

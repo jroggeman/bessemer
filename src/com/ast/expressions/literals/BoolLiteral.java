@@ -1,9 +1,9 @@
-package com.ast.constants;
+package com.ast.expressions.literals;
 
-public class BoolConstant extends Constant {
+public class BoolLiteral extends Literal {
     public boolean value;
 
-    public BoolConstant(boolean value) {
+    public BoolLiteral(boolean value) {
         this.value = value;
     }
 

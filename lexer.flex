@@ -34,6 +34,7 @@ EndOfLineComment = "//" {InputCharacter}* {LineTerminator}?
 Identifier = [a-zA-Z][a-zA-Z0-9]*
 
 DecIntegerLiteral = 0 | [1-9][0-9]*
+DoubleLiteral = (0|[1-9][0-9]*)\.[0-9]+
 CharLiteral = "'" [a-zA-Z0-9] "'"
 
 //%state STRING
@@ -63,6 +64,7 @@ CharLiteral = "'" [a-zA-Z0-9] "'"
     "="                   { return symbol(sym.EQUALS); }
     {Identifier}          { return symbol(sym.IDENTIFIER, new Identifier(yytext())); }
     {DecIntegerLiteral}   { return symbol(sym.INTEGER_LITERAL, Integer.parseInt(yytext())); }
+    {DoubleLiteral}       { return symbol(sym.DOUBLE_LITERAL, Double.parseDouble(yytext())); }
     {CharLiteral}         { return symbol(sym.CHARACTER_LITERAL, yytext().charAt(0)); }
 }
 

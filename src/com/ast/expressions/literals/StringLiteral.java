@@ -1,9 +1,9 @@
-package com.ast.constants;
+package com.ast.expressions.literals;
 
-public class StringConstant extends Constant {
+public class StringLiteral extends Literal {
     public String value;
 
-    public StringConstant(String value) {
+    public StringLiteral(String value) {
         this.value = value;
     }
 

@@ -1,9 +1,9 @@
-package com.ast.constants;
+package com.ast.expressions.literals;
 
-public class CharConstant extends Constant {
+public class CharLiteral extends Literal {
     public char value;
 
-    public CharConstant(char value) {
+    public CharLiteral(char value) {
         this.value = value;
     }
 

@@ -1,9 +1,9 @@
-package com.ast.constants;
+package com.ast.expressions.literals;
 
-public class DoubleConstant extends Constant {
+public class DoubleLiteral extends Literal {
     public double value;
 
-    public DoubleConstant(double value) {
+    public DoubleLiteral(double value) {
         this.value = value;
     }
 
