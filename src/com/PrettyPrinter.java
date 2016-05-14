@@ -5,7 +5,7 @@ import com.ast.Program;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class Compiler {
+public class PrettyPrinter {
 
     public static void main(String args[]) throws Exception {
         String inputFilename = args[0];
