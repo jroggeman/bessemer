@@ -43,15 +43,11 @@ non terminal Function function;
 non terminal List<Function> function_list;
 
 non terminal Expression expression;
-non terminal Add add_expression;
-non terminal Subtract subtract_expression;
-non terminal Multiply multiply_expression;
-non terminal Divide divide_expression;
-non terminal Modulo modulo_expression;
 
 non terminal Program program;
 
-precedence left PLUS;
+precedence left TIMES, DIVIDE;
+precedence left PLUS, MINUS;
 
 start with program;
 
@@ -116,5 +112,13 @@ statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
 vardecl ::= type:t IDENTIFIER:i {: RESULT = new VariableDeclaration(t, i); :};
 
 expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs); :}
+               |
+               expression:lhs MINUS expression:rhs {: RESULT = new Subtract(lhs, rhs); :}
+               |
+               expression:lhs TIMES expression:rhs {: RESULT = new Multiply(lhs, rhs); :}
+               |
+               expression:lhs DIVIDE expression:rhs {: RESULT = new Divide(lhs, rhs); :}
+               |
+               LPAREN expression:e RPAREN {: RESULT = e; :}
                |
                IDENTIFIER:i {: RESULT = i; :};
