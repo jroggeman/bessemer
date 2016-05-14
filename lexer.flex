@@ -64,6 +64,7 @@ CharLiteral = "'" [a-zA-Z0-9] "'"
     "="                   { return symbol(sym.EQUALS); }
     "&&"                  { return symbol(sym.LOG_AND); }
     "||"                  { return symbol(sym.LOG_OR); }
+    "!"                   { return symbol(sym.LOG_NOT); }
     "=="                  { return symbol(sym.EQUALS); }
     "<"                   { return symbol(sym.LESS_THAN); }
     "<="                  { return symbol(sym.LESS_THAN_EQUALS); }

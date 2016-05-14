@@ -6,6 +6,7 @@ import com.ast.mutable.Identifier;
 import com.ast.expressions.Expression;
 import com.ast.expressions.Call;
 import com.ast.expressions.binary.*;
+import com.ast.expressions.unary.*;
 import com.ast.expressions.literals.*;
 import com.ast.statements.*;
 import com.ast.types.*;
@@ -23,7 +24,7 @@ parser code {:
 scan with {: return lexer.next_token(); :};
 
 terminal PLUS, MINUS, TIMES, DIVIDE, MODULO;
-terminal LOG_AND, LOG_OR;
+terminal LOG_AND, LOG_OR, LOG_NOT;
 terminal EQUALS, LESS_THAN, LESS_THAN_EQUALS, NOT_EQUALS;
 terminal LPAREN, RPAREN;
 terminal LBRACE, RBRACE;
@@ -153,6 +154,8 @@ expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs);
                expression:lhs LOG_AND expression:rhs {: RESULT = new And(lhs, rhs); :}
                |
                expression:lhs LOG_OR expression:rhs {: RESULT = new Or(lhs, rhs); :}
+               |
+               LOG_NOT expression:e {: RESULT = new Not(e); :}
                |
                LPAREN expression:e RPAREN {: RESULT = e; :}
                |
