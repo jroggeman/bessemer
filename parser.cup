@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.ast.mutable.Identifier;
 import com.ast.expressions.Expression;
+import com.ast.expressions.Call;
 import com.ast.expressions.binary.*;
 import com.ast.statements.*;
 import com.ast.types.*;
@@ -55,6 +56,9 @@ non terminal Expression expression;
 
 non terminal If if_block;
 non terminal While while_block;
+non terminal Call function_call;
+non terminal List<Expression> call_param_list;
+non terminal List<Expression> remaining_call_param_list;
 
 non terminal Program program;
 
@@ -137,10 +141,28 @@ expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs);
                |
                LPAREN expression:e RPAREN {: RESULT = e; :}
                |
-               IDENTIFIER:i {: RESULT = i; :};
+               function_call:fc {: RESULT = fc; :}
+               |
+               IDENTIFIER:i {: RESULT = i; :}
+               ;
 
 if_block ::= IF LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
              {: RESULT = new If(e, sl); :};
 
 while_block ::= WHILE LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
                 {: RESULT = new While(e, sl); :};
+
+function_call ::= IDENTIFIER:i LPAREN call_param_list:cpl RPAREN
+                  {: RESULT = new Call(i, cpl); :};
+
+call_param_list ::= expression:e remaining_call_param_list:rcpl
+                    {: rcpl.add(0, e); RESULT = rcpl; :}
+                    |
+                    {: RESULT = new ArrayList<Expression>(); :}
+                    ;
+
+remaining_call_param_list ::= COMMA expression:e remaining_call_param_list:rcpl
+                              {: rcpl.add(0, e); RESULT = rcpl; :}
+                              |
+                              {: RESULT = new ArrayList<Expression>(); :}
+                              ;

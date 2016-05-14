@@ -19,6 +19,7 @@ public class If extends Statement {
         for(Statement statement : statementList) {
             s.append("\t" + statement + "\n");
         }
+        s.append("}");
         return s.toString();
     }
 }
