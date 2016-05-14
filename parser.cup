@@ -2,7 +2,6 @@ package com;
 import java.util.List;
 import java.util.ArrayList;
 
-
 parser code {:
     Lexer lexer;
 
@@ -52,6 +51,8 @@ non terminal Modulo modulo_expression;
 
 non terminal Program program;
 
+precedence left PLUS;
+
 start with program;
 
 program ::= function_list:fl {: RESULT = new Program(fl); :};
@@ -100,20 +101,20 @@ remaining_param_list ::= COMMA param_decl:pd remaining_param_list:rpl
 
 statement_list ::= statement:s statement_list:sl
                    {:
-                       sl.add(s);
+                       sl.add(0, s);
                        RESULT = sl;
                    :}
                    |
                    {: RESULT = new ArrayList<Statement>(); :}
                    ;
 
-statement ::= vardecl:v {: RESULT = v; :}
+statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
               |
-              IDENTIFIER:i EQUALS expression:e {: RESULT = new Assign(i, e); :}
+              IDENTIFIER:i EQUALS expression:e SEMICOLON {: RESULT = new Assign(i, e); :}
               ;
 
-vardecl ::= type:t IDENTIFIER:i SEMICOLON {: RESULT = new VariableDeclaration(t, i); :};
+vardecl ::= type:t IDENTIFIER:i {: RESULT = new VariableDeclaration(t, i); :};
 
 expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs); :}
                |
-               IDENTIFIER:i {: RESULT = i :};
+               IDENTIFIER:i {: RESULT = i; :};

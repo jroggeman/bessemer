@@ -14,6 +14,6 @@ public class Assign extends Statement {
     }
 
     public String toString() {
-        return leftHandSide + " = " + rightHandSide;
+        return leftHandSide + " = " + rightHandSide + ";";
     }
 }
