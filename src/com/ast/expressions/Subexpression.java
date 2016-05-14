@@ -1,8 +1,6 @@
 package com.ast.expressions;
 
-import com.ast.Token;
-
-public class Subexpression extends Token implements Expression {
+public class Subexpression implements Expression {
     public Expression expression;
 
     public Subexpression(Expression expression) {

@@ -20,8 +20,4 @@ public class Block implements Iterable<Statement> {
     public String toString() {
         throw new UnsupportedOperationException("Printing should be implemented in methods that contain blocks");
     }
-
-    public int size() {
-        return statementList.size();
-    }
 }
