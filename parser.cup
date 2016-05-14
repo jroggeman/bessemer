@@ -23,6 +23,7 @@ parser code {:
 scan with {: return lexer.next_token(); :};
 
 terminal PLUS, MINUS, TIMES, DIVIDE, MODULO;
+terminal LOG_AND, LOG_OR;
 terminal LPAREN, RPAREN;
 terminal LBRACE, RBRACE;
 terminal EQUALS;
@@ -65,6 +66,8 @@ non terminal Program program;
 
 precedence left TIMES, DIVIDE;
 precedence left PLUS, MINUS;
+precedence left LOG_AND;
+precedence left LOG_OR;
 
 start with program;
 
@@ -143,6 +146,10 @@ expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs);
                expression:lhs TIMES expression:rhs {: RESULT = new Multiply(lhs, rhs); :}
                |
                expression:lhs DIVIDE expression:rhs {: RESULT = new Divide(lhs, rhs); :}
+               |
+               expression:lhs LOG_AND expression:rhs {: RESULT = new And(lhs, rhs); :}
+               |
+               expression:lhs LOG_OR expression:rhs {: RESULT = new Or(lhs, rhs); :}
                |
                LPAREN expression:e RPAREN {: RESULT = e; :}
                |

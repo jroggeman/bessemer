@@ -62,6 +62,8 @@ CharLiteral = "'" [a-zA-Z0-9] "'"
     "{"                   { return symbol(sym.LBRACE); }
     "}"                   { return symbol(sym.RBRACE); }
     "="                   { return symbol(sym.EQUALS); }
+    "&&"                  { return symbol(sym.LOG_AND); }
+    "||"                  { return symbol(sym.LOG_OR); }
     {Identifier}          { return symbol(sym.IDENTIFIER, new Identifier(yytext())); }
     {DecIntegerLiteral}   { return symbol(sym.INTEGER_LITERAL, Integer.parseInt(yytext())); }
     {DoubleLiteral}       { return symbol(sym.DOUBLE_LITERAL, Double.parseDouble(yytext())); }
