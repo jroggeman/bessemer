@@ -54,7 +54,7 @@ start with program;
 program ::= function_list:fl {: RESULT = new Program(fl); :};
 
 function_list ::= function:f function_list:fl {:
-                                                  fl.add(f);
+                                                  fl.add(0, f);
                                                   RESULT = fl;
                                               :}
                   |
