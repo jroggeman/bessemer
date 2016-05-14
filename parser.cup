@@ -36,6 +36,8 @@ terminal SEMICOLON;
 
 terminal IF, WHILE, RETURN;
 
+terminal INPUT, OUTPUT;
+
 terminal Integer INTEGER_LITERAL;
 terminal Double DOUBLE_LITERAL;
 terminal Character CHARACTER_LITERAL;
@@ -139,6 +141,10 @@ statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
               function_call:fc SEMICOLON {: RESULT = fc; :}
               |
               RETURN expression:e SEMICOLON {: RESULT = new Return(e); :}
+              |
+              INPUT IDENTIFIER:i {: RESULT = new Input(i); :}
+              |
+              OUTPUT expression:e {: RESULT = new Output(e); :}
               ;
 
 vardecl ::= type:t IDENTIFIER:i {: RESULT = new VariableDeclaration(t, i); :};

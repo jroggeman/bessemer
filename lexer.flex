@@ -50,6 +50,8 @@ CharLiteral = "'" [a-zA-Z0-9] "'"
     "if"                  { return symbol(Symbols.IF); }
     "while"               { return symbol(Symbols.WHILE); }
     "return"              { return symbol(Symbols.RETURN); }
+    "input"               { return symbol(Symbols.INPUT); }
+    "output"              { return symbol(Symbols.OUTPUT); }
     ";"                   { return symbol(Symbols.SEMICOLON); }
     "+"                   { return symbol(Symbols.PLUS); }
     ")"                   { return symbol(Symbols.RPAREN); }
