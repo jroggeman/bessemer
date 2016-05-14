@@ -10,6 +10,6 @@ public class Return implements Statement {
     }
 
     public String toString() {
-        return "return " + expression;
+        return "return " + expression + ";";
     }
 }

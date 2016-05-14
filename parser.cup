@@ -128,6 +128,8 @@ statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
               |
               while_block:wb {: RESULT = wb; :}
               |
+              function_call:fc SEMICOLON {: RESULT = fc; :}
+              |
               RETURN expression:e SEMICOLON {: RESULT = new Return(e); :}
               ;
 
