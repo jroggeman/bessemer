@@ -12,9 +12,8 @@ public class Program {
     public String toString() {
         StringBuffer s = new StringBuffer();
 
-        for(Function function : functionList) {
-            s.append(function +"\n\n");
-        }
+        // Whoa, maps in Java!
+        functionList.forEach(s::append);
 
         return s.toString();
     }

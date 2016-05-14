@@ -31,7 +31,9 @@ public class Function {
         }
         s.append(") {\n");
         for(Statement statement : statementList) {
-            s.append("\t" + statement + "\n");
+            for(String line : statement.toString().split("\n")) {
+                s.append("\t" + line + "\n");
+            }
         }
         s.append("}\n\n");
 
