@@ -4,7 +4,7 @@ import com.ast.expressions.Expression;
 
 import java.util.List;
 
-public class While extends Statement {
+public class While implements Statement {
     public Expression condition;
     public List<Statement> statementList;
 

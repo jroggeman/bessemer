@@ -4,7 +4,7 @@ import com.ast.expressions.Expression;
 
 import java.util.List;
 
-public class If extends Statement {
+public class If implements Statement {
     public Expression condition;
     public List<Statement> statementList;
 

@@ -3,7 +3,7 @@ package com.ast.statements;
 import com.ast.mutable.Identifier;
 import com.ast.types.Type;
 
-public class VariableDeclaration extends Statement {
+public class VariableDeclaration implements Statement {
     public Type type;
     public Identifier name;
 
