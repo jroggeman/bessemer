@@ -4,8 +4,6 @@ import com.ast.mutable.Identifier;
 import com.ast.statements.Statement;
 import com.ast.types.Type;
 
-import java.util.List;
-
 public class Function {
     Type type;
     Identifier name;

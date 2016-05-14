@@ -3,8 +3,6 @@ package com.ast.statements;
 import com.ast.Block;
 import com.ast.expressions.Expression;
 
-import java.util.List;
-
 public class If implements Statement {
     public Expression condition;
     public Block block;
@@ -18,7 +16,9 @@ public class If implements Statement {
         StringBuffer s = new StringBuffer();
         s.append("if(").append(condition).append(") {\n");
         for(Statement statement : block) {
-            s.append("\t" + statement + "\n");
+            for(String line : statement.toString().split("\n")) {
+                s.append("\t" + line + "\n");
+            }
         }
         s.append("}");
         return s.toString();

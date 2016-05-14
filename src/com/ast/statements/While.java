@@ -3,8 +3,6 @@ package com.ast.statements;
 import com.ast.Block;
 import com.ast.expressions.Expression;
 
-import java.util.List;
-
 public class While implements Statement {
     public Expression condition;
     public Block block;
@@ -20,8 +18,12 @@ public class While implements Statement {
         s.append(condition);
         s.append(") {\n");
         for(Statement statement : block) {
-            s.append("\t" + statement + "\n");
+            for(String line : statement.toString().split("\n")) {
+                s.append("\t" + line + "\n");
+            }
         }
+
+        s.append("}");
 
         return s.toString();
     }
