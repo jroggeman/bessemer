@@ -28,6 +28,8 @@ terminal EQUALS;
 terminal COMMA;
 terminal SEMICOLON;
 
+terminal IF, WHILE;
+
 terminal Integer INTEGER_LITERAL;
 terminal Double DOUBLE_LITERAL;
 terminal Character CHARACTER_LITERAL;
@@ -50,6 +52,9 @@ non terminal Function function;
 non terminal List<Function> function_list;
 
 non terminal Expression expression;
+
+non terminal If if_block;
+non terminal While while_block;
 
 non terminal Program program;
 
@@ -114,6 +119,10 @@ statement_list ::= statement:s statement_list:sl
 statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
               |
               IDENTIFIER:i EQUALS expression:e SEMICOLON {: RESULT = new Assign(i, e); :}
+              |
+              if_block:ib {: RESULT = ib; :}
+              |
+              while_block:wb {: RESULT = wb; :}
               ;
 
 vardecl ::= type:t IDENTIFIER:i {: RESULT = new VariableDeclaration(t, i); :};
@@ -129,3 +138,9 @@ expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs);
                LPAREN expression:e RPAREN {: RESULT = e; :}
                |
                IDENTIFIER:i {: RESULT = i; :};
+
+if_block ::= IF LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
+             {: RESULT = new If(e, sl); :};
+
+while_block ::= WHILE LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
+                {: RESULT = new While(e, sl); :};
