@@ -10,33 +10,35 @@ public class Function {
     Type type;
     Identifier name;
     ParamDeclarationList paramList;
-    List<Statement> statementList;
+    Block block;
 
-    public Function(Type type, Identifier name, ParamDeclarationList paramList, List<Statement> statementList) {
+    public Function(Type type, Identifier name, ParamDeclarationList paramList, Block block) {
         this.type = type;
         this.name = name;
         this.paramList = paramList;
-        this.statementList = statementList;
+        this.block = block;
     }
 
     @Override
     public String toString() {
-        StringBuffer s = new StringBuffer();
-        s.append(type + " " + name + "(");
+        StringBuffer toReturn = new StringBuffer();
+        toReturn.append(type + " " + name + "(");
         if(paramList.params.size() > 0) {
             for(int i = 0; i < paramList.params.size() - 1; i++) {
-                s.append(paramList.params.get(i) + ",");
+                toReturn.append(paramList.params.get(i) + ",");
             }
-            s.append(paramList.params.get(paramList.params.size() - 1));
+            toReturn.append(paramList.params.get(paramList.params.size() - 1));
         }
-        s.append(") {\n");
-        for(Statement statement : statementList) {
-            for(String line : statement.toString().split("\n")) {
-                s.append("\t" + line + "\n");
-            }
-        }
-        s.append("}\n\n");
 
-        return s.toString();
+        toReturn.append(") {\n");
+        for(Statement statement : block) {
+            for(String line : statement.toString().split("\n")) {
+                toReturn.append("\t" + line + "\n");
+            }
+        }
+
+        toReturn.append("}\n\n");
+
+        return toReturn.toString();
     }
 }

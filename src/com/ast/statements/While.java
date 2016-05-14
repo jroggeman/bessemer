@@ -1,16 +1,17 @@
 package com.ast.statements;
 
+import com.ast.Block;
 import com.ast.expressions.Expression;
 
 import java.util.List;
 
 public class While implements Statement {
     public Expression condition;
-    public List<Statement> statementList;
+    public Block block;
 
-    public While(Expression condition, List<Statement> statementList) {
+    public While(Expression condition, Block block) {
         this.condition = condition;
-        this.statementList = statementList;
+        this.block = block;
     }
 
     public String toString() {
@@ -18,7 +19,7 @@ public class While implements Statement {
         s.append("while(");
         s.append(condition);
         s.append(") {\n");
-        for(Statement statement : statementList) {
+        for(Statement statement : block) {
             s.append("\t" + statement + "\n");
         }
 

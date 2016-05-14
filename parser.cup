@@ -78,7 +78,7 @@ function_list ::= function:f function_list:fl {:
                   ;
 
 function ::= type:t IDENTIFIER:i LPAREN param_decl_list:pdl RPAREN LBRACE statement_list:sl RBRACE {:
-                             RESULT = new Function(t, i, pdl, sl);
+                             RESULT = new Function(t, i, pdl, new Block(sl));
                          :};
 
 type ::= INTEGER_TYPE   {: RESULT = new IntegerType(); :}
@@ -151,10 +151,10 @@ expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs);
                ;
 
 if_block ::= IF LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
-             {: RESULT = new If(e, sl); :};
+             {: RESULT = new If(e, new Block(sl)); :};
 
 while_block ::= WHILE LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
-                {: RESULT = new While(e, sl); :};
+                {: RESULT = new While(e, new Block(sl)); :};
 
 function_call ::= IDENTIFIER:i LPAREN call_param_list:cpl RPAREN
                   {: RESULT = new Call(i, cpl); :};
