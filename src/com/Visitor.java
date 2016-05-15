@@ -1,0 +1,60 @@
+package com;
+
+import com.ast.Block;
+import com.ast.Program;
+import com.ast.expressions.Call;
+import com.ast.expressions.Subexpression;
+import com.ast.expressions.binary.*;
+import com.ast.expressions.literals.BoolLiteral;
+import com.ast.expressions.literals.CharLiteral;
+import com.ast.expressions.literals.DoubleLiteral;
+import com.ast.expressions.literals.IntLiteral;
+import com.ast.expressions.unary.Not;
+import com.ast.expressions.unary.UnaryExpression;
+import com.ast.function.Function;
+import com.ast.function.ParamDeclaration;
+import com.ast.function.ParamDeclarationList;
+import com.ast.mutable.Identifier;
+import com.ast.statements.*;
+import com.ast.types.CharacterType;
+import com.ast.types.DoubleType;
+import com.ast.types.IntegerType;
+
+public interface Visitor {
+    void visit(Block element);
+    void visit(Add element);
+    void visit(And element);
+    void visit(Divide element);
+    void visit(Equals element);
+    void visit(LessThan element);
+    void visit(LessThanOrEquals element);
+    void visit(Modulo element);
+    void visit(Multiply element);
+    void visit(NotEquals element);
+    void visit(Or element);
+    void visit(Subtract element);
+    void visit(Call element);
+    void visit(BoolLiteral element);
+    void visit(CharLiteral element);
+    void visit(DoubleLiteral element);
+    void visit(IntLiteral element);
+    void visit(Subexpression element);
+    void visit(Not element);
+    void visit(UnaryExpression element);
+    void visit(Function element);
+    void visit(ParamDeclaration element);
+    void visit(ParamDeclarationList element);
+    void visit(Identifier element);
+    void visit(Program element);
+    void visit(Assign element);
+    void visit(If element);
+    void visit(Input element);
+    void visit(Output element);
+    void visit(Return element);
+    void visit(VariableDeclaration element);
+    void visit(While element);
+    void visit(CharacterType element);
+    void visit(DoubleType element);
+    void visit(IntegerType element);
+
+}
