@@ -1,5 +1,6 @@
 package com.ast.function;
 
+import com.Visitor;
 import com.ast.Token;
 
 import java.util.List;
@@ -22,5 +23,11 @@ public class ParamDeclarationList implements Token {
         }
 
         return toReturn.toString();
+    }
+
+    public void accept(Visitor visitor) {
+        for (ParamDeclaration param : params) {
+            param.accept(visitor);
+        }
     }
 }

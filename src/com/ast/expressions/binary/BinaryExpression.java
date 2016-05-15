@@ -1,5 +1,6 @@
 package com.ast.expressions.binary;
 
+import com.Visitor;
 import com.ast.expressions.Expression;
 
 public abstract class BinaryExpression implements Expression {
@@ -16,5 +17,10 @@ public abstract class BinaryExpression implements Expression {
     @Override
     public String toString() {
         return leftHandSide + " " + getOperator() + " " + rightHandSide;
+    }
+
+    public void accept(Visitor visitor) {
+        leftHandSide.accept(visitor);
+        rightHandSide.accept(visitor);
     }
 }

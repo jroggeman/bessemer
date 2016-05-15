@@ -1,5 +1,6 @@
 package com.ast.statements;
 
+import com.Visitor;
 import com.ast.Block;
 import com.ast.expressions.Expression;
 
@@ -26,5 +27,11 @@ public class While implements Statement {
         s.append("}");
 
         return s.toString();
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        condition.accept(visitor);
+        block.accept(visitor);
     }
 }

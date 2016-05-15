@@ -1,5 +1,6 @@
 package com.ast;
 
+import com.Visitor;
 import com.ast.function.Function;
 
 import java.util.List;
@@ -18,6 +19,12 @@ public class Program implements Token {
         functionList.forEach(s::append);
 
         return s.toString();
+    }
+
+    public void accept(Visitor visitor) {
+        for (Function function : functionList) {
+            function.accept(visitor);
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 package com.ast.function;
 
+import com.Visitor;
 import com.ast.Block;
 import com.ast.Token;
 import com.ast.mutable.Identifier;
@@ -34,5 +35,12 @@ public class Function implements Token {
         toReturn.append("}\n\n");
 
         return toReturn.toString();
+    }
+
+    public void accept(Visitor visitor) {
+        type.accept(visitor);
+        name.accept(visitor);
+        paramList.accept(visitor);
+        block.accept(visitor);
     }
 }

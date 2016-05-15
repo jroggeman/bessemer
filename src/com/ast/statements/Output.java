@@ -1,5 +1,6 @@
 package com.ast.statements;
 
+import com.Visitor;
 import com.ast.expressions.Expression;
 
 public class Output implements Statement {
@@ -12,5 +13,10 @@ public class Output implements Statement {
     @Override
     public String toString() {
         return "print " + expression + ";";
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        expression.accept(visitor);
     }
 }

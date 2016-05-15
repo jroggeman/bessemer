@@ -1,5 +1,6 @@
 package com.ast.statements;
 
+import com.Visitor;
 import com.ast.mutable.Identifier;
 import com.ast.types.Type;
 
@@ -14,5 +15,11 @@ public class VariableDeclaration implements Statement {
 
     public String toString() {
         return type + " " + name + ";";
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        type.accept(visitor);
+        name.accept(visitor);
     }
 }

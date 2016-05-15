@@ -1,5 +1,6 @@
 package com.ast.expressions;
 
+import com.Visitor;
 import com.ast.mutable.Identifier;
 
 import java.util.List;
@@ -28,5 +29,12 @@ public class Call implements Expression {
         }
 
         return toReturn.toString();
+    }
+
+    public void accept(Visitor visitor) {
+        functionName.accept(visitor);
+        for (Expression expression : parameterList) {
+            expression.accept(visitor);
+        }
     }
 }

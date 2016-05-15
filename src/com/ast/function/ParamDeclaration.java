@@ -1,5 +1,6 @@
 package com.ast.function;
 
+import com.Visitor;
 import com.ast.Token;
 import com.ast.mutable.Identifier;
 import com.ast.types.Type;
@@ -16,5 +17,10 @@ public class ParamDeclaration implements Token {
     @Override
     public String toString() {
         return type + " " + id;
+    }
+
+    public void accept(Visitor visitor) {
+        type.accept(visitor);
+        id.accept(visitor);
     }
 }

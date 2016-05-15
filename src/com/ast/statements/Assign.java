@@ -1,5 +1,6 @@
 package com.ast.statements;
 
+import com.Visitor;
 import com.ast.mutable.Mutable;
 import com.ast.expressions.Expression;
 
@@ -14,5 +15,11 @@ public class Assign implements Statement {
 
     public String toString() {
         return leftHandSide + " = " + rightHandSide + ";";
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        leftHandSide.accept(visitor);
+        rightHandSide.accept(visitor);
     }
 }

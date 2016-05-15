@@ -1,5 +1,6 @@
 package com.ast.statements;
 
+import com.Visitor;
 import com.ast.expressions.Expression;
 
 public class Return implements Statement {
@@ -11,5 +12,10 @@ public class Return implements Statement {
 
     public String toString() {
         return "return " + expression + ";";
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        expression.accept(visitor);
     }
 }

@@ -1,5 +1,6 @@
 package com.ast.expressions.unary;
 
+import com.Visitor;
 import com.ast.expressions.Expression;
 
 public abstract class UnaryExpression implements Expression {
@@ -14,5 +15,9 @@ public abstract class UnaryExpression implements Expression {
     @Override
     public String toString() {
         return getOperator() + " " + expression;
+    }
+
+    public void accept(Visitor visitor) {
+        expression.accept(visitor);
     }
 }

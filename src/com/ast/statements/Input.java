@@ -1,5 +1,6 @@
 package com.ast.statements;
 
+import com.Visitor;
 import com.ast.mutable.Identifier;
 
 public class Input implements Statement {
@@ -12,5 +13,10 @@ public class Input implements Statement {
     @Override
     public String toString() {
         return "readInt => " + variable + ";";
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        variable.accept(visitor);
     }
 }

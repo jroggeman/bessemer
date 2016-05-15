@@ -1,5 +1,7 @@
 package com.ast.expressions;
 
+import com.Visitor;
+
 public class Subexpression implements Expression {
     public Expression expression;
 
@@ -10,5 +12,9 @@ public class Subexpression implements Expression {
     @Override
     public String toString() {
         return "(" + expression + ")";
+    }
+
+    public void accept(Visitor visitor) {
+        expression.accept(visitor);
     }
 }

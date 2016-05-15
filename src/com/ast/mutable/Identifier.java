@@ -1,5 +1,6 @@
 package com.ast.mutable;
 
+import com.Visitor;
 import com.ast.expressions.Expression;
 
 public class Identifier implements Expression, Mutable {
@@ -11,5 +12,9 @@ public class Identifier implements Expression, Mutable {
 
     public String toString() {
         return value;
+    }
+
+    public void accept(Visitor visitor) {
+        return;
     }
 }
