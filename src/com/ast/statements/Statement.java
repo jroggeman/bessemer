@@ -1,5 +1,4 @@
 package com.ast.statements;
 
-public abstract class Statement {
-
+public interface Statement {
 }

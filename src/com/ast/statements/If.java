@@ -1,8 +1,9 @@
 package com.ast.statements;
 
+import com.ast.Block;
 import com.ast.expressions.Expression;
 
-public class If extends Statement {
+public class If implements Statement {
     public Expression condition;
     public Block block;
 
@@ -13,8 +14,13 @@ public class If extends Statement {
 
     public String toString() {
         StringBuffer s = new StringBuffer();
-        s.append("if(").append(condition).append(") ");
-        s.append(block);
+        s.append("if(").append(condition).append(") {\n");
+        for(Statement statement : block) {
+            for(String line : statement.toString().split("\n")) {
+                s.append("\t" + line + "\n");
+            }
+        }
+        s.append("}");
         return s.toString();
     }
 }

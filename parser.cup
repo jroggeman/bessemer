@@ -1,0 +1,211 @@
+package com;
+import java.util.List;
+import java.util.ArrayList;
+
+import com.ast.mutable.Identifier;
+import com.ast.expressions.Expression;
+import com.ast.expressions.Subexpression;
+import com.ast.expressions.Call;
+import com.ast.expressions.binary.*;
+import com.ast.expressions.unary.*;
+import com.ast.expressions.literals.*;
+import com.ast.function.*;
+import com.ast.statements.*;
+import com.ast.types.*;
+import com.ast.*;
+
+parser code {:
+    Lexer lexer;
+
+    public Parser(Lexer lexer) {
+        super(lexer);
+        this.lexer = lexer;
+    }
+:}
+
+scan with {: return lexer.next_token(); :};
+
+terminal PLUS, MINUS, TIMES, DIVIDE, MODULO;
+terminal LOG_AND, LOG_OR, LOG_NOT;
+terminal EQUALS, LESS_THAN, LESS_THAN_EQUALS, NOT_EQUALS;
+terminal LPAREN, RPAREN;
+terminal LBRACE, RBRACE;
+
+terminal COMMA;
+terminal SEMICOLON;
+
+terminal IF, WHILE, RETURN;
+
+terminal INPUT, OUTPUT;
+
+terminal Integer INTEGER_LITERAL;
+terminal Double DOUBLE_LITERAL;
+terminal Character CHARACTER_LITERAL;
+terminal Boolean BOOLEAN_LITERAL;
+
+terminal INTEGER_TYPE, DOUBLE_TYPE, CHARACTER_TYPE;
+terminal Identifier IDENTIFIER;
+
+non terminal List<Statement> statement_list;
+non terminal Statement statement;
+
+non terminal ParamDeclaration param_decl;
+non terminal ParamDeclarationList param_decl_list;
+non terminal List<ParamDeclaration> remaining_param_list;
+
+non terminal Type type;
+
+non terminal VariableDeclaration vardecl;
+
+non terminal Function function;
+non terminal List<Function> function_list;
+
+non terminal Expression expression;
+
+non terminal If if_block;
+non terminal While while_block;
+non terminal Call function_call;
+non terminal List<Expression> call_param_list;
+non terminal List<Expression> remaining_call_param_list;
+
+non terminal Program program;
+
+precedence left TIMES, DIVIDE, MODULO;
+precedence left PLUS, MINUS;
+precedence left EQUALS, LESS_THAN, LESS_THAN_EQUALS, NOT_EQUALS;
+precedence left LOG_AND;
+precedence left LOG_OR;
+
+start with program;
+
+program ::= function_list:fl {: RESULT = new Program(fl); :};
+
+function_list ::= function:f function_list:fl {:
+                                                  fl.add(0, f);
+                                                  RESULT = fl;
+                                              :}
+                  |
+                  {: RESULT = new ArrayList<Function>(); :}
+                  ;
+
+function ::= type:t IDENTIFIER:i LPAREN param_decl_list:pdl RPAREN LBRACE statement_list:sl RBRACE {:
+                             RESULT = new Function(t, i, pdl, new Block(sl));
+                         :};
+
+type ::= INTEGER_TYPE   {: RESULT = new IntegerType(); :}
+         |
+         DOUBLE_TYPE    {: RESULT = new DoubleType(); :}
+         |
+         CHARACTER_TYPE {: RESULT = new CharacterType(); :}
+         ;
+
+param_decl ::= type:t IDENTIFIER:id {: RESULT = new ParamDeclaration(t, id); :}
+               ;
+
+param_decl_list ::= param_decl:p remaining_param_list:rl {: 
+        List<ParamDeclaration> params = new ArrayList<>();
+        params.add(p);
+        for(ParamDeclaration param : rl) {
+            params.add(param);
+        }
+        RESULT = new ParamDeclarationList(params);
+    :}
+    |
+    {: RESULT = new ParamDeclarationList(new ArrayList<ParamDeclaration>()); :};
+
+remaining_param_list ::= COMMA param_decl:pd remaining_param_list:rpl
+                    {:
+                        rpl.add(pd);
+                        RESULT = rpl;
+                    :}
+                    |
+                    {: RESULT = new ArrayList<ParamDeclaration>(); :}
+                    ;
+
+statement_list ::= statement:s statement_list:sl
+                   {:
+                       sl.add(0, s);
+                       RESULT = sl;
+                   :}
+                   |
+                   {: RESULT = new ArrayList<Statement>(); :}
+                   ;
+
+statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
+              |
+              IDENTIFIER:i EQUALS expression:e SEMICOLON {: RESULT = new Assign(i, e); :}
+              |
+              if_block:ib {: RESULT = ib; :}
+              |
+              while_block:wb {: RESULT = wb; :}
+              |
+              function_call:fc SEMICOLON {: RESULT = fc; :}
+              |
+              RETURN expression:e SEMICOLON {: RESULT = new Return(e); :}
+              |
+              INPUT IDENTIFIER:i {: RESULT = new Input(i); :}
+              |
+              OUTPUT expression:e {: RESULT = new Output(e); :}
+              ;
+
+vardecl ::= type:t IDENTIFIER:i {: RESULT = new VariableDeclaration(t, i); :};
+
+expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs); :}
+               |
+               expression:lhs MINUS expression:rhs {: RESULT = new Subtract(lhs, rhs); :}
+               |
+               expression:lhs TIMES expression:rhs {: RESULT = new Multiply(lhs, rhs); :}
+               |
+               expression:lhs DIVIDE expression:rhs {: RESULT = new Divide(lhs, rhs); :}
+               |
+               expression:lhs MODULO expression:rhs {: RESULT = new Modulo(lhs, rhs); :}
+               |
+               expression:lhs LOG_AND expression:rhs {: RESULT = new And(lhs, rhs); :}
+               |
+               expression:lhs LOG_OR expression:rhs {: RESULT = new Or(lhs, rhs); :}
+               |
+               LOG_NOT expression:e {: RESULT = new Not(e); :}
+               |
+               LPAREN expression:e RPAREN {: RESULT = new Subexpression(e); :}
+               |
+               expression:lhs EQUALS expression:rhs {: RESULT = new Equals(lhs, rhs); :}
+               |
+               expression:lhs LESS_THAN expression:rhs {: RESULT = new LessThan(lhs, rhs); :}
+               |
+               expression:lhs LESS_THAN_EQUALS expression:rhs {: RESULT = new LessThanOrEquals(lhs, rhs); :}
+               |
+               expression:lhs NOT_EQUALS expression:rhs {: RESULT = new NotEquals(lhs, rhs); :}
+               |
+               function_call:fc {: RESULT = fc; :}
+               |
+               IDENTIFIER:i {: RESULT = i; :}
+               |
+               INTEGER_LITERAL:il {: RESULT = new IntLiteral(il); :}
+               |
+               DOUBLE_LITERAL:dl {: RESULT = new DoubleLiteral(dl); :}
+               |
+               CHARACTER_LITERAL:cl {: RESULT = new CharLiteral(cl); :}
+               |
+               BOOLEAN_LITERAL:bl {: RESULT = new BoolLiteral(bl); :}
+               ;
+
+if_block ::= IF LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
+             {: RESULT = new If(e, new Block(sl)); :};
+
+while_block ::= WHILE LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
+                {: RESULT = new While(e, new Block(sl)); :};
+
+function_call ::= IDENTIFIER:i LPAREN call_param_list:cpl RPAREN
+                  {: RESULT = new Call(i, cpl); :};
+
+call_param_list ::= expression:e remaining_call_param_list:rcpl
+                    {: rcpl.add(0, e); RESULT = rcpl; :}
+                    |
+                    {: RESULT = new ArrayList<Expression>(); :}
+                    ;
+
+remaining_call_param_list ::= COMMA expression:e remaining_call_param_list:rcpl
+                              {: rcpl.add(0, e); RESULT = rcpl; :}
+                              |
+                              {: RESULT = new ArrayList<Expression>(); :}
+                              ;

@@ -1,8 +1,9 @@
 package com.ast.statements;
 
+import com.ast.Block;
 import com.ast.expressions.Expression;
 
-public class While extends Statement {
+public class While implements Statement {
     public Expression condition;
     public Block block;
 
@@ -15,8 +16,14 @@ public class While extends Statement {
         StringBuffer s = new StringBuffer();
         s.append("while(");
         s.append(condition);
-        s.append(") ");
-        s.append(block);
+        s.append(") {\n");
+        for(Statement statement : block) {
+            for(String line : statement.toString().split("\n")) {
+                s.append("\t" + line + "\n");
+            }
+        }
+
+        s.append("}");
 
         return s.toString();
     }

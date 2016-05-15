@@ -1,7 +1,6 @@
 package com.ast.expressions;
 
-/**
- * Created by joel on 4/12/16.
- */
-public interface Expression {
+import com.ast.statements.Statement;
+
+public interface Expression extends Statement {
 }

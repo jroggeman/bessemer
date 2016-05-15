@@ -2,14 +2,15 @@ package com.ast.statements;
 
 import com.ast.expressions.Expression;
 
-public class Return implements Statement {
+public class Output implements Statement {
     public Expression expression;
 
-    public Return(Expression expression) {
+    public Output(Expression expression) {
         this.expression = expression;
     }
 
+    @Override
     public String toString() {
-        return "return " + expression + ";";
+        return "print " + expression + ";";
     }
 }

@@ -1,8 +1,9 @@
-package com.ast.mutable;
+package com.ast.statements;
 
+import com.ast.mutable.Identifier;
 import com.ast.types.Type;
 
-public class VariableDeclaration implements Mutable {
+public class VariableDeclaration implements Statement {
     public Type type;
     public Identifier name;
 
@@ -12,6 +13,6 @@ public class VariableDeclaration implements Mutable {
     }
 
     public String toString() {
-        return type + " " + name;
+        return type + " " + name + ";";
     }
 }

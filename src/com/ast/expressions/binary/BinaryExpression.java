@@ -13,6 +13,7 @@ public abstract class BinaryExpression implements Expression {
 
     public abstract String getOperator();
 
+    @Override
     public String toString() {
         return leftHandSide + " " + getOperator() + " " + rightHandSide;
     }
