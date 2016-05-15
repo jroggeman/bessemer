@@ -1,4 +1,6 @@
 package com.ast.mutable;
 
-public interface Mutable {
+import com.ast.Token;
+
+public interface Mutable extends Token {
 }

@@ -1,11 +1,12 @@
 package com.ast.function;
 
 import com.ast.Block;
+import com.ast.Token;
 import com.ast.mutable.Identifier;
 import com.ast.statements.Statement;
 import com.ast.types.Type;
 
-public class Function {
+public class Function implements Token {
     public Type type;
     public Identifier name;
     public ParamDeclarationList paramList;

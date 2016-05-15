@@ -1,4 +1,6 @@
 package com.ast.statements;
 
-public interface Statement {
+import com.ast.Token;
+
+public interface Statement extends Token {
 }

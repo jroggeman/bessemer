@@ -1,4 +1,6 @@
 package com.ast.types;
 
-public abstract class Type {
+import com.ast.Token;
+
+public interface Type extends Token {
 }

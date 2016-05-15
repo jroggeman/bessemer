@@ -1,8 +1,10 @@
 package com.ast.function;
 
+import com.ast.Token;
+
 import java.util.List;
 
-public class ParamDeclarationList {
+public class ParamDeclarationList implements Token {
     public List<ParamDeclaration> params;
 
     public ParamDeclarationList(List<ParamDeclaration> params) {

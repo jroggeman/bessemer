@@ -5,7 +5,7 @@ import com.ast.statements.Statement;
 import java.util.Iterator;
 import java.util.List;
 
-public class Block implements Iterable<Statement> {
+public class Block implements Iterable<Statement>, Token {
     public List<Statement> statementList;
 
     public Block(List<Statement> statementList) {

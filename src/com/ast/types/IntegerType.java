@@ -1,6 +1,6 @@
 package com.ast.types;
 
-public class IntegerType extends Type {
+public class IntegerType implements Type {
     public IntegerType() {}
 
     public String toString() {

@@ -1,6 +1,6 @@
 package com.ast.types;
 
-public class CharacterType extends Type {
+public class CharacterType implements Type {
     public CharacterType() {}
 
     public String toString() {
