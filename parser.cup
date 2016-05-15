@@ -41,6 +41,7 @@ terminal INPUT, OUTPUT;
 terminal Integer INTEGER_LITERAL;
 terminal Double DOUBLE_LITERAL;
 terminal Character CHARACTER_LITERAL;
+terminal Boolean BOOLEAN_LITERAL;
 
 terminal INTEGER_TYPE, DOUBLE_TYPE, CHARACTER_TYPE;
 terminal Identifier IDENTIFIER;
@@ -184,6 +185,8 @@ expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs);
                DOUBLE_LITERAL:dl {: RESULT = new DoubleLiteral(dl); :}
                |
                CHARACTER_LITERAL:cl {: RESULT = new CharLiteral(cl); :}
+               |
+               BOOLEAN_LITERAL:bl {: RESULT = new BoolLiteral(bl); :}
                ;
 
 if_block ::= IF LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
