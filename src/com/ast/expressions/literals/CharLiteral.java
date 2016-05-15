@@ -7,6 +7,7 @@ public class CharLiteral extends Literal {
         this.value = value;
     }
 
+    @Override
     public String toString() {
         return "'" + Character.toString(value) + "'";
     }

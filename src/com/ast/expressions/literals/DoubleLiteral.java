@@ -7,6 +7,7 @@ public class DoubleLiteral extends Literal {
         this.value = value;
     }
 
+    @Override
     public String toString() {
         return Double.toString(value);
     }

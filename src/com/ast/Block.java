@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Block implements Iterable<Statement> {
-    List<Statement> statementList;
+    public List<Statement> statementList;
 
     public Block(List<Statement> statementList) {
         this.statementList = statementList;

@@ -5,7 +5,6 @@ import com.ast.expressions.Expression;
 
 public class Assign implements Statement {
     public Mutable leftHandSide;
-    // TODO: Should be statement?
     public Expression rightHandSide;
 
     public Assign(Mutable leftHandSide, Expression rightHandSide) {

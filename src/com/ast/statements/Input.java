@@ -3,7 +3,7 @@ package com.ast.statements;
 import com.ast.mutable.Identifier;
 
 public class Input implements Statement {
-    Identifier variable;
+    public Identifier variable;
 
     public Input(Identifier variable) {
         this.variable = variable;

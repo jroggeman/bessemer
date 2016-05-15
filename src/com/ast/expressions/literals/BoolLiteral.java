@@ -7,6 +7,7 @@ public class BoolLiteral extends Literal {
         this.value = value;
     }
 
+    @Override
     public String toString() {
         return Boolean.toString(value);
     }
