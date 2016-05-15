@@ -38,8 +38,6 @@ DoubleLiteral = (0|[1-9][0-9]*)\.[0-9]+
 CharLiteral = "'" [a-zA-Z0-9] "'"
 BoolLiteral = (true|false)
 
-//%state STRING
-
 %%
 <YYINITIAL> {
     {WhiteSpace}          { /* Ignore */ }
