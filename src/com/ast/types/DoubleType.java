@@ -6,7 +6,9 @@ import com.symbol_table.entries.DoubleEntry;
 import com.symbol_table.entries.Entry;
 
 public class DoubleType extends Type {
-    public DoubleType() {}
+    public DoubleType() {
+        super(Types.DOUBLE);
+    }
 
     public String toString() {
         return "double";
@@ -15,21 +17,6 @@ public class DoubleType extends Type {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
-    }
-
-    @Override
-    public boolean isNumeric() {
-        return true;
-    }
-
-    @Override
-    public boolean isBoolean() {
-        return false;
-    }
-
-    @Override
-    public boolean isDouble() {
-        return true;
     }
 
     @Override

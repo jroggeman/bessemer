@@ -6,7 +6,9 @@ import com.symbol_table.entries.CharEntry;
 import com.symbol_table.entries.Entry;
 
 public class CharacterType extends Type {
-    public CharacterType() {}
+    public CharacterType() {
+        super(Types.CHARACTER);
+    }
 
     public String toString() {
         return "char";
@@ -15,21 +17,6 @@ public class CharacterType extends Type {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
-    }
-
-    @Override
-    public boolean isNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean isBoolean() {
-        return false;
-    }
-
-    @Override
-    public boolean isDouble() {
-        return false;
     }
 
     @Override

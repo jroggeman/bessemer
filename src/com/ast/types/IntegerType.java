@@ -6,7 +6,9 @@ import com.symbol_table.entries.Entry;
 import com.symbol_table.entries.IntEntry;
 
 public class IntegerType extends Type {
-    public IntegerType() {}
+    public IntegerType() {
+        super(Types.INTEGER);
+    }
 
     public String toString() {
         return "int";
@@ -15,21 +17,6 @@ public class IntegerType extends Type {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
-    }
-
-    @Override
-    public boolean isNumeric() {
-        return true;
-    }
-
-    @Override
-    public boolean isBoolean() {
-        return false;
-    }
-
-    @Override
-    public boolean isDouble() {
-        return false;
     }
 
     @Override

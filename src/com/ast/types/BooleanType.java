@@ -6,24 +6,13 @@ import com.symbol_table.entries.BoolEntry;
 import com.symbol_table.entries.Entry;
 
 public class BooleanType extends Type {
+    public BooleanType() {
+        super(Types.BOOLEAN);
+    }
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
-    }
-
-    @Override
-    public boolean isNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean isBoolean() {
-        return true;
-    }
-
-    @Override
-    public boolean isDouble() {
-        return false;
     }
 
     @Override
