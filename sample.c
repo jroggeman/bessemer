@@ -4,7 +4,6 @@ int main() {
     joel = x + x;
     int y;
     int z;
-    int j;
     if((x + y) && z) {
         x = func(j, x);
         func(j, 3.4);

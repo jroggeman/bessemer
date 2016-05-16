@@ -8,6 +8,7 @@ import com.visitors.PropagateSymbolInformationVisitor;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,11 +17,7 @@ public class Compiler {
     private static final Logger logger = Logger.getLogger(Compiler.class.getCanonicalName());
 
     public static void main(String args[]) throws Exception {
-        Logger rootLogger = Logger.getLogger("com");
-        rootLogger.setLevel(logLevel);
-        ConsoleHandler console = new ConsoleHandler();
-        console.setLevel(logLevel);
-        rootLogger.addHandler(console);
+        setupLogger();
 
         logger.log(Level.FINE, "Beginning compilation");
         String inputFilename = args[0];
@@ -31,15 +28,29 @@ public class Compiler {
 
         Program ast = (Program) parser.parse().value;
 
-        System.out.println(ast);
-
         BuildSymbolTableVisitor bstv = new BuildSymbolTableVisitor(ast);
 
         SymbolTable t = bstv.getSymbolTable();
 
-        System.out.println(t);
-
         PropagateSymbolInformationVisitor psiv = new PropagateSymbolInformationVisitor(ast, t);
         psiv.propagate();
+    }
+
+    private static void setupLogger() {
+        Logger rootLogger = Logger.getLogger("com");
+        rootLogger.setUseParentHandlers(false);
+
+        Handler[] handlers = rootLogger.getHandlers();
+        for(Handler handler : handlers) {
+            if(handler.getClass() == ConsoleHandler.class) {
+                rootLogger.removeHandler(handler);
+            }
+        }
+
+        ConsoleHandler console = new ConsoleHandler();
+        console.setLevel(logLevel);
+        rootLogger.addHandler(console);
+
+        rootLogger.setLevel(logLevel);
     }
 }

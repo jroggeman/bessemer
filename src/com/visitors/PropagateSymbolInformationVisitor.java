@@ -18,11 +18,16 @@ import com.symbol_table.SymbolTable;
 import com.symbol_table.entries.Entry;
 import com.symbol_table.entries.FuncEntry;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * This is run to associate all identifiers and method calls with their associated
  * types.
  */
 public class PropagateSymbolInformationVisitor implements Visitor {
+    private static final Logger logger = Logger.getLogger(PropagateSymbolInformationVisitor.class.getCanonicalName());
+
     private Program program;
     private SymbolTable table;
     private boolean hasErrors = false;
@@ -57,13 +62,13 @@ public class PropagateSymbolInformationVisitor implements Visitor {
     public void visit(Call element) {
         Entry associatedEntry = table.get(element.functionName);
         if(associatedEntry == null) {
-            System.out.println("Attempting to call a non-existent function.");
+            logger.log(Level.SEVERE, "Attempting to call a non-existent function.");
             hasErrors = true;
                     return;
         }
 
         if(!associatedEntry.isFunction()) {
-            System.out.println("Attempting to call a non-function.");
+            logger.log(Level.SEVERE, "Attempting to call a non-function identifier");
             hasErrors = true;
             return;
         }
@@ -122,7 +127,9 @@ public class PropagateSymbolInformationVisitor implements Visitor {
         Entry entry = table.get(element);
 
         if(entry == null) {
-            throw new RuntimeException("Using variable before declaration");
+            logger.log(Level.SEVERE, "Variable not declared");
+            hasErrors = true;
+            return;
         }
 
         element.type = entry.getType();
