@@ -4,15 +4,15 @@ import com.ast.Block;
 import com.ast.Program;
 import com.ast.expressions.Call;
 import com.ast.expressions.Subexpression;
-import com.ast.expressions.binary.*;
-import com.ast.expressions.literals.*;
+import com.ast.expressions.binary.BinaryExpression;
+import com.ast.expressions.literals.Literal;
 import com.ast.expressions.unary.UnaryExpression;
 import com.ast.function.Function;
 import com.ast.function.ParamDeclaration;
 import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
 import com.ast.statements.*;
-import com.ast.types.*;
+import com.ast.types.Type;
 
 public interface Visitor {
     void visit(Block element);

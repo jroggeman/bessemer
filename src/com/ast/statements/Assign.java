@@ -1,8 +1,8 @@
 package com.ast.statements;
 
 import com.Visitor;
-import com.ast.mutable.Mutable;
 import com.ast.expressions.Expression;
+import com.ast.mutable.Mutable;
 
 public class Assign implements Statement {
     public Mutable leftHandSide;

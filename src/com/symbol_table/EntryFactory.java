@@ -4,8 +4,9 @@ import com.ast.function.Function;
 import com.ast.function.ParamDeclaration;
 import com.ast.mutable.Identifier;
 import com.ast.statements.VariableDeclaration;
-import com.ast.types.*;
-import com.symbol_table.entries.*;
+import com.ast.types.Type;
+import com.symbol_table.entries.Entry;
+import com.symbol_table.entries.FuncEntry;
 
 public class EntryFactory {
     public static Entry createEntry(ParamDeclaration pdl) {

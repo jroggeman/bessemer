@@ -28,6 +28,11 @@ public class DoubleType implements Type {
     }
 
     @Override
+    public boolean isDouble() {
+        return true;
+    }
+
+    @Override
     public Entry getEntry(Identifier identifier) {
         return new DoubleEntry(identifier);
     }

@@ -7,5 +7,6 @@ import com.symbol_table.entries.Entry;
 public interface Type extends Token {
     boolean isNumeric();
     boolean isBoolean();
+    boolean isDouble();
     Entry getEntry(Identifier identifier);
 }

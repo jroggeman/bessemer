@@ -28,6 +28,11 @@ public class CharacterType implements Type {
     }
 
     @Override
+    public boolean isDouble() {
+        return false;
+    }
+
+    @Override
     public Entry getEntry(Identifier identifier) {
         return new CharEntry(identifier);
     }

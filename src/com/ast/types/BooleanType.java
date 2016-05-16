@@ -22,6 +22,11 @@ public class BooleanType implements Type {
     }
 
     @Override
+    public boolean isDouble() {
+        return false;
+    }
+
+    @Override
     public Entry getEntry(Identifier identifier) {
         return new BoolEntry(identifier);
     }
