@@ -5,8 +5,6 @@ import com.ast.function.Function;
 import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
 import com.ast.statements.VariableDeclaration;
-import com.ast.types.CharacterType;
-import com.ast.types.IntegerType;
 import com.ast.types.Type;
 import com.symbol_table.entries.CharEntry;
 import com.symbol_table.entries.Entry;
@@ -21,7 +19,7 @@ import static org.junit.Assert.*;
 public class EntryFactoryTest {
     @Test
     public void testCreateIntEntry() {
-        Type type = new IntegerType();
+        Type type = Type.INTEGER;
         Identifier id = new Identifier("variable");
         VariableDeclaration vd = new VariableDeclaration(type, id);
 
@@ -32,7 +30,7 @@ public class EntryFactoryTest {
 
     @Test
     public void testCreateCharEntry() {
-        Type type = new CharacterType();
+        Type type = Type.CHARACTER;
         Identifier id = new Identifier("variable");
         VariableDeclaration vd = new VariableDeclaration(type, id);
 
@@ -43,7 +41,7 @@ public class EntryFactoryTest {
 
     @Test
     public void testCreateFuncEntry() {
-        Type type = new IntegerType();
+        Type type = Type.INTEGER;
         Identifier name = new Identifier("function");
         ParamDeclarationList pdl = new ParamDeclarationList(new ArrayList<>());
         Block block = new Block(new ArrayList<>());
