@@ -92,13 +92,13 @@ function ::= type:t IDENTIFIER:i LPAREN param_decl_list:pdl RPAREN LBRACE statem
                              RESULT = new Function(t, i, pdl, new Block(sl));
                          :};
 
-type ::= INTEGER_TYPE   {: RESULT = new Type(Type.Types.INTEGER); :}
+type ::= INTEGER_TYPE   {: RESULT = Type.INTEGER; :}
          |
-         DOUBLE_TYPE    {: RESULT = new Type(Type.Types.DOUBLE); :}
+         DOUBLE_TYPE    {: RESULT = Type.DOUBLE; :}
          |
-         CHARACTER_TYPE {: RESULT = new Type(Type.Types.CHARACTER); :}
+         CHARACTER_TYPE {: RESULT = Type.CHARACTER; :}
          |
-         BOOLEAN_TYPE {: RESULT = new Type(Type.Types.BOOLEAN); :}
+         BOOLEAN_TYPE {: RESULT = Type.BOOLEAN; :}
          ;
 
 param_decl ::= type:t IDENTIFIER:id {: RESULT = new ParamDeclaration(t, id); :}
