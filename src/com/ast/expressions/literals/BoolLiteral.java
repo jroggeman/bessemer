@@ -11,4 +11,14 @@ public class BoolLiteral extends Literal {
     public String toString() {
         return Boolean.toString(value);
     }
+
+    @Override
+    public boolean isNumeric() {
+        return false;
+    }
+
+    @Override
+    public boolean isBoolean() {
+        return true;
+    }
 }

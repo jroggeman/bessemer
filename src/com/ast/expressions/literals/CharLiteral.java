@@ -11,4 +11,14 @@ public class CharLiteral extends Literal {
     public String toString() {
         return "'" + Character.toString(value) + "'";
     }
+
+    @Override
+    public boolean isNumeric() {
+        return false;
+    }
+
+    @Override
+    public boolean isBoolean() {
+        return false;
+    }
 }

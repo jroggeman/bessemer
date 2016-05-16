@@ -11,4 +11,14 @@ public class Modulo extends BinaryExpression {
     public String getOperator() {
         return "%";
     }
+
+    @Override
+    public boolean isNumeric() {
+        return true;
+    }
+
+    @Override
+    public boolean isBoolean() {
+        return false;
+    }
 }

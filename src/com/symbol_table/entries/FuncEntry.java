@@ -2,6 +2,7 @@ package com.symbol_table.entries;
 
 import com.ast.function.Function;
 import com.ast.mutable.Identifier;
+import com.ast.types.Type;
 
 public class FuncEntry extends Entry {
     private Function function;
@@ -9,6 +10,10 @@ public class FuncEntry extends Entry {
     public FuncEntry(Identifier identifier, Function function) {
         super(identifier);
         this.function = function;
+    }
+
+    public Function getFunction() {
+        return function;
     }
 
     @Override
@@ -19,6 +24,16 @@ public class FuncEntry extends Entry {
     @Override
     public boolean isBoolean() {
         return function.type.isBoolean();
+    }
+
+    @Override
+    public boolean isFunction() {
+        return true;
+    }
+
+    @Override
+    public Type getType() {
+        return function.type;
     }
 
     @Override

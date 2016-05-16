@@ -1,6 +1,7 @@
 package com.symbol_table.entries;
 
 import com.ast.mutable.Identifier;
+import com.ast.types.Type;
 
 public class CharEntry extends Entry {
     public CharEntry(Identifier identifier) {
@@ -15,6 +16,16 @@ public class CharEntry extends Entry {
     @Override
     public boolean isBoolean() {
         return false;
+    }
+
+    @Override
+    public boolean isFunction() {
+        return false;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.CHARACTER;
     }
 
     @Override

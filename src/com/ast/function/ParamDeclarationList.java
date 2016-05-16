@@ -2,10 +2,12 @@ package com.ast.function;
 
 import com.Visitor;
 import com.ast.Token;
+import com.sun.xml.internal.rngom.digested.DDataPattern;
 
+import java.util.Iterator;
 import java.util.List;
 
-public class ParamDeclarationList implements Token {
+public class ParamDeclarationList implements Token, Iterable<ParamDeclaration> {
     public List<ParamDeclaration> params;
 
     public ParamDeclarationList(List<ParamDeclaration> params) {
@@ -27,5 +29,10 @@ public class ParamDeclarationList implements Token {
 
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public Iterator<ParamDeclaration> iterator() {
+        return params.iterator();
     }
 }

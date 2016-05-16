@@ -11,4 +11,14 @@ public class Equals extends BinaryExpression {
     public String getOperator() {
         return "==";
     }
+
+    @Override
+    public boolean isNumeric() {
+        return false;
+    }
+
+    @Override
+    public boolean isBoolean() {
+        return true;
+    }
 }

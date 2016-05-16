@@ -1,6 +1,7 @@
 package com.symbol_table.entries;
 
 import com.ast.mutable.Identifier;
+import com.ast.types.Type;
 
 public abstract class Entry {
     private Identifier identifier;
@@ -11,4 +12,7 @@ public abstract class Entry {
 
     public abstract boolean isNumeric();
     public abstract boolean isBoolean();
+    public abstract boolean isFunction();
+
+    public abstract Type getType();
 }

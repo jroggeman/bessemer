@@ -2,9 +2,11 @@ package com.ast.mutable;
 
 import com.Visitor;
 import com.ast.expressions.Expression;
+import com.ast.types.Type;
 
 public class Identifier implements Expression, Mutable {
     public String value;
+    public Type type;
 
     public Identifier(String value) {
         if(value == null || value.isEmpty()) {
@@ -33,5 +35,15 @@ public class Identifier implements Expression, Mutable {
             return false;
 
         return value.equals(((Identifier)id).value);
+    }
+
+    @Override
+    public boolean isNumeric() {
+        return false;
+    }
+
+    @Override
+    public boolean isBoolean() {
+        return false;
     }
 }

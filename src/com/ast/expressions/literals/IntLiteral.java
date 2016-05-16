@@ -11,4 +11,14 @@ public class IntLiteral extends Literal {
     public String toString() {
         return Integer.toString(value);
     }
+
+    @Override
+    public boolean isNumeric() {
+        return true;
+    }
+
+    @Override
+    public boolean isBoolean() {
+        return false;
+    }
 }

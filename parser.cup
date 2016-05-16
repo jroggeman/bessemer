@@ -145,9 +145,9 @@ statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
               |
               RETURN expression:e SEMICOLON {: RESULT = new Return(e); :}
               |
-              INPUT IDENTIFIER:i {: RESULT = new Input(i); :}
+              INPUT LPAREN IDENTIFIER:i RPAREN SEMICOLON {: RESULT = new Input(i); :}
               |
-              OUTPUT expression:e {: RESULT = new Output(e); :}
+              OUTPUT LPAREN expression:e RPAREN SEMICOLON {: RESULT = new Output(e); :}
               ;
 
 vardecl ::= type:t IDENTIFIER:i {: RESULT = new VariableDeclaration(t, i); :};

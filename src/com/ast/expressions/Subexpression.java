@@ -17,4 +17,14 @@ public class Subexpression implements Expression {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
+
+    @Override
+    public boolean isNumeric() {
+        return expression.isNumeric();
+    }
+
+    @Override
+    public boolean isBoolean() {
+        return expression.isBoolean();
+    }
 }

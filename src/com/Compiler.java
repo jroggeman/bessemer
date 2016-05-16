@@ -24,5 +24,8 @@ public class Compiler {
         SymbolTable t = bstv.getSymbolTable();
 
         System.out.println(t);
+
+        PropagateSymbolInformationVisitor psiv = new PropagateSymbolInformationVisitor(ast, t);
+        psiv.propagate();
     }
 }
