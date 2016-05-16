@@ -19,7 +19,7 @@ public class Identifier implements Expression, Mutable {
     }
 
     public void accept(Visitor visitor) {
-        return;
+        visitor.visit(this);
     }
 
     @Override

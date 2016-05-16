@@ -19,7 +19,6 @@ public class Assign implements Statement {
 
     @Override
     public void accept(Visitor visitor) {
-        leftHandSide.accept(visitor);
-        rightHandSide.accept(visitor);
+        visitor.visit(this);
     }
 }

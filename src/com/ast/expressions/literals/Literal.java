@@ -5,6 +5,6 @@ import com.ast.expressions.Expression;
 
 public abstract class Literal implements Expression {
     public void accept(Visitor visitor) {
-        return;
+        visitor.visit(this);
     }
 }

@@ -49,4 +49,17 @@ public class Scope {
         entries.put(key, value);
         return value;
     }
+
+    public String toString() {
+        StringBuffer toReturn = new StringBuffer();
+        for (Identifier identifier : entries.keySet()) {
+            toReturn.append(" - " + identifier + " --> " + entries.get(identifier) + "\n");
+        }
+
+        for (Object o : childScopes.keySet()) {
+            toReturn.append("\n\n\n" + o.getClass() + " scope:\n-------------------\n\n" + childScopes.get(o));
+        }
+
+        return toReturn.toString();
+    }
 }

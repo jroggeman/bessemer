@@ -17,7 +17,7 @@ public class ParamDeclarationList implements Token {
         StringBuffer toReturn = new StringBuffer();
         if(params.size() > 0) {
             for(int i = 0; i < params.size() - 1; i++) {
-                toReturn.append(params.get(i) + ",");
+                toReturn.append(params.get(i) + ", ");
             }
             toReturn.append(params.get(params.size() - 1));
         }
@@ -26,8 +26,6 @@ public class ParamDeclarationList implements Token {
     }
 
     public void accept(Visitor visitor) {
-        for (ParamDeclaration param : params) {
-            param.accept(visitor);
-        }
+        visitor.visit(this);
     }
 }

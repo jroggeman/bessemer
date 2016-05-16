@@ -9,6 +9,7 @@ public class SymbolTable {
 
     public SymbolTable() {
         currentScope = new Scope();
+        rootScope = currentScope;
     }
 
     /**
@@ -57,5 +58,9 @@ public class SymbolTable {
         }
 
         currentScope = currentScope.parent;
+    }
+
+    public String toString() {
+        return "Root scope:\n-------------------------\n\n" + rootScope.toString();
     }
 }

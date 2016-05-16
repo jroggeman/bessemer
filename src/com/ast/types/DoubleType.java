@@ -1,6 +1,9 @@
 package com.ast.types;
 
 import com.Visitor;
+import com.ast.mutable.Identifier;
+import com.symbol_table.entries.DoubleEntry;
+import com.symbol_table.entries.Entry;
 
 public class DoubleType implements Type {
     public DoubleType() {}
@@ -11,7 +14,7 @@ public class DoubleType implements Type {
 
     @Override
     public void accept(Visitor visitor) {
-
+        visitor.visit(this);
     }
 
     @Override
@@ -22,5 +25,10 @@ public class DoubleType implements Type {
     @Override
     public boolean isBoolean() {
         return false;
+    }
+
+    @Override
+    public Entry getEntry(Identifier identifier) {
+        return new DoubleEntry(identifier);
     }
 }

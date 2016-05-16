@@ -20,7 +20,6 @@ public abstract class BinaryExpression implements Expression {
     }
 
     public void accept(Visitor visitor) {
-        leftHandSide.accept(visitor);
-        rightHandSide.accept(visitor);
+        visitor.visit(this);
     }
 }

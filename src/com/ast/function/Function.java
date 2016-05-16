@@ -38,9 +38,6 @@ public class Function implements Token {
     }
 
     public void accept(Visitor visitor) {
-        type.accept(visitor);
-        name.accept(visitor);
-        paramList.accept(visitor);
-        block.accept(visitor);
+        visitor.visit(this);
     }
 }

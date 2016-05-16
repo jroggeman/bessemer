@@ -15,6 +15,6 @@ public class Subexpression implements Expression {
     }
 
     public void accept(Visitor visitor) {
-        expression.accept(visitor);
+        visitor.visit(this);
     }
 }

@@ -1,6 +1,9 @@
 package com.ast.types;
 
 import com.Visitor;
+import com.ast.mutable.Identifier;
+import com.symbol_table.entries.CharEntry;
+import com.symbol_table.entries.Entry;
 
 public class CharacterType implements Type {
     public CharacterType() {}
@@ -11,7 +14,7 @@ public class CharacterType implements Type {
 
     @Override
     public void accept(Visitor visitor) {
-
+        visitor.visit(this);
     }
 
     @Override
@@ -22,5 +25,10 @@ public class CharacterType implements Type {
     @Override
     public boolean isBoolean() {
         return false;
+    }
+
+    @Override
+    public Entry getEntry(Identifier identifier) {
+        return new CharEntry(identifier);
     }
 }

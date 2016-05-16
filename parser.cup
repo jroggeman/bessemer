@@ -117,7 +117,7 @@ param_decl_list ::= param_decl:p remaining_param_list:rl {:
 
 remaining_param_list ::= COMMA param_decl:pd remaining_param_list:rpl
                     {:
-                        rpl.add(pd);
+                        rpl.add(0, pd);
                         RESULT = rpl;
                     :}
                     |

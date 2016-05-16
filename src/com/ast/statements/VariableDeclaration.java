@@ -19,7 +19,6 @@ public class VariableDeclaration implements Statement {
 
     @Override
     public void accept(Visitor visitor) {
-        type.accept(visitor);
-        name.accept(visitor);
+        visitor.visit(this);
     }
 }

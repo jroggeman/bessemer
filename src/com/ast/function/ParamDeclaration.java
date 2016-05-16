@@ -20,7 +20,6 @@ public class ParamDeclaration implements Token {
     }
 
     public void accept(Visitor visitor) {
-        type.accept(visitor);
-        id.accept(visitor);
+        visitor.visit(this);
     }
 }

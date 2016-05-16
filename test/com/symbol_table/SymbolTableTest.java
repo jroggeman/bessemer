@@ -20,7 +20,7 @@ public class SymbolTableTest {
     @Test
     public void testInsertAndRetrieveFromRoot() {
         Identifier id = new Identifier("variable");
-        Entry entry = new IntEntry();
+        Entry entry = new IntEntry(id);
 
         table.put(id, entry);
 
@@ -32,7 +32,7 @@ public class SymbolTableTest {
     @Test
     public void testInsertAndRetrieveAfterScopeMovement() {
         Identifier id = new Identifier("variable");
-        Entry entry = new IntEntry();
+        Entry entry = new IntEntry(id);
 
         Object scopeId = new Object();
 
@@ -50,7 +50,7 @@ public class SymbolTableTest {
     @Test
     public void testCanRetrieveFromParentScope() {
         Identifier id = new Identifier("variable");
-        Entry entry = new IntEntry();
+        Entry entry = new IntEntry(id);
 
         table.put(id, entry);
 
@@ -67,6 +67,6 @@ public class SymbolTableTest {
 
     @Test(expected = RuntimeException.class)
     public void testCannotInsertEntryWithNullOrEmptyKey() {
-        table.put(null, new IntEntry());
+        table.put(null, new IntEntry(null));
     }
 }

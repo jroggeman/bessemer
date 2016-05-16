@@ -32,9 +32,6 @@ public class Call implements Expression {
     }
 
     public void accept(Visitor visitor) {
-        functionName.accept(visitor);
-        for (Expression expression : parameterList) {
-            expression.accept(visitor);
-        }
+        visitor.visit(this);
     }
 }

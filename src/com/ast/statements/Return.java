@@ -16,6 +16,6 @@ public class Return implements Statement {
 
     @Override
     public void accept(Visitor visitor) {
-        expression.accept(visitor);
+        visitor.visit(this);
     }
 }

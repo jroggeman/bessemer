@@ -31,7 +31,6 @@ public class While implements Statement {
 
     @Override
     public void accept(Visitor visitor) {
-        condition.accept(visitor);
-        block.accept(visitor);
+        visitor.visit(this);
     }
 }

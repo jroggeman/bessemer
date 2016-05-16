@@ -18,6 +18,6 @@ public abstract class UnaryExpression implements Expression {
     }
 
     public void accept(Visitor visitor) {
-        expression.accept(visitor);
+        visitor.visit(this);
     }
 }

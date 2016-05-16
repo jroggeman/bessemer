@@ -17,6 +17,6 @@ public class Input implements Statement {
 
     @Override
     public void accept(Visitor visitor) {
-        variable.accept(visitor);
+        visitor.visit(this);
     }
 }
