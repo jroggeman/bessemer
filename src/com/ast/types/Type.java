@@ -5,7 +5,7 @@ import com.ast.Token;
 import com.ast.mutable.Identifier;
 import com.symbol_table.entries.*;
 
-public abstract class Type implements Token {
+public class Type implements Token {
     private Types type;
 
     public Type(Types type) {
@@ -49,7 +49,7 @@ public abstract class Type implements Token {
         return type.toString();
     }
 
-    protected enum Types {
+    public enum Types {
         INTEGER ("int"),
         DOUBLE ("double"),
         CHARACTER ("char"),
