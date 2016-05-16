@@ -17,6 +17,9 @@ public class SymbolTable {
      * @param value The actual Entry object to add
      */
     public void put(Identifier key, Entry value) {
+        if(key == null || value == null) {
+            throw new RuntimeException("Cannot insert null values into symbol table: [" + key + ", " + value + "]");
+        }
         currentScope.put(key, value);
     }
 
