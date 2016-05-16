@@ -1,6 +1,6 @@
 package com.ast.statements;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.Block;
 import com.ast.expressions.Expression;
 

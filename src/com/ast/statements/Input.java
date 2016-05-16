@@ -1,6 +1,6 @@
 package com.ast.statements;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.mutable.Identifier;
 
 public class Input implements Statement {

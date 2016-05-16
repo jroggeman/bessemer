@@ -1,6 +1,6 @@
 package com.ast;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.statements.Statement;
 
 import java.util.Iterator;

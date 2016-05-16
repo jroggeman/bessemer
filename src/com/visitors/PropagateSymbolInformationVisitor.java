@@ -1,4 +1,4 @@
-package com;
+package com.visitors;
 
 import com.ast.Block;
 import com.ast.Program;
@@ -15,12 +15,29 @@ import com.ast.mutable.Identifier;
 import com.ast.statements.*;
 import com.ast.types.Type;
 import com.symbol_table.SymbolTable;
+import com.symbol_table.entries.Entry;
+import com.symbol_table.entries.FuncEntry;
 
-public class GenericVisitor implements Visitor {
+/**
+ * This is run to associate all identifiers and method calls with their associated
+ * types.
+ */
+public class PropagateSymbolInformationVisitor implements Visitor {
+    private Program program;
     private SymbolTable table;
+    private boolean hasErrors = false;
 
-    public GenericVisitor(SymbolTable table) {
+    public PropagateSymbolInformationVisitor(Program program, SymbolTable table) {
+        this.program = program;
         this.table = table;
+    }
+
+    public void propagate() {
+        visit(program);
+    }
+
+    public boolean foundErrors() {
+        return hasErrors;
     }
 
     @Override
@@ -38,6 +55,22 @@ public class GenericVisitor implements Visitor {
 
     @Override
     public void visit(Call element) {
+        Entry associatedEntry = table.get(element.functionName);
+        if(associatedEntry == null) {
+            System.out.println("Attempting to call a non-existent function.");
+            hasErrors = true;
+                    return;
+        }
+
+        if(!associatedEntry.isFunction()) {
+            System.out.println("Attempting to call a non-function.");
+            hasErrors = true;
+            return;
+        }
+
+        FuncEntry functionEntry = (FuncEntry) associatedEntry;
+        element.associatedFunction = functionEntry.getFunction();
+
         element.functionName.accept(this);
         for (Expression expression : element.parameterList) {
             expression.accept(this);
@@ -86,7 +119,13 @@ public class GenericVisitor implements Visitor {
 
     @Override
     public void visit(Identifier element) {
-        /* Do nothing */
+        Entry entry = table.get(element);
+
+        if(entry == null) {
+            throw new RuntimeException("Using variable before declaration");
+        }
+
+        element.type = entry.getType();
     }
 
     @Override

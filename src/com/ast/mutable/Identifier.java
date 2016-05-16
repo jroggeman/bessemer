@@ -1,6 +1,6 @@
 package com.ast.mutable;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 import com.ast.types.Type;
 

@@ -1,6 +1,6 @@
 package com.ast.expressions;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.function.Function;
 import com.ast.mutable.Identifier;
 

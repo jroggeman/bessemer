@@ -1,6 +1,6 @@
 package com.ast.expressions.unary;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 
 public abstract class UnaryExpression implements Expression {

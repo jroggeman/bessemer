@@ -1,6 +1,6 @@
 package com.ast.function;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.Block;
 import com.ast.Token;
 import com.ast.mutable.Identifier;

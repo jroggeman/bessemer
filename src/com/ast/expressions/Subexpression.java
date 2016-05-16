@@ -1,6 +1,6 @@
 package com.ast.expressions;
 
-import com.Visitor;
+import com.visitors.Visitor;
 
 public class Subexpression implements Expression {
     public Expression expression;

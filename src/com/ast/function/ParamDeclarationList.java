@@ -1,8 +1,7 @@
 package com.ast.function;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.Token;
-import com.sun.xml.internal.rngom.digested.DDataPattern;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.ast.expressions.binary;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 
 public abstract class BinaryExpression implements Expression {

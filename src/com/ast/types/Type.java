@@ -1,6 +1,6 @@
 package com.ast.types;
 
-import com.Visitor;
+import com.visitors.Visitor;
 import com.ast.Token;
 import com.ast.mutable.Identifier;
 import com.symbol_table.entries.*;

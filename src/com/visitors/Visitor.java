@@ -1,4 +1,4 @@
-package com;
+package com.visitors;
 
 import com.ast.Block;
 import com.ast.Program;
