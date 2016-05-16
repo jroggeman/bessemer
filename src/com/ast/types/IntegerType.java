@@ -13,4 +13,14 @@ public class IntegerType implements Type {
     public void accept(Visitor visitor) {
 
     }
+
+    @Override
+    public boolean isNumeric() {
+        return true;
+    }
+
+    @Override
+    public boolean isBoolean() {
+        return false;
+    }
 }

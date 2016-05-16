@@ -70,11 +70,11 @@ BoolLiteral = (true|false)
     "<"                   { return symbol(Symbols.LESS_THAN); }
     "<="                  { return symbol(Symbols.LESS_THAN_EQUALS); }
     "!="                  { return symbol(Symbols.NOT_EQUALS); }
-    {Identifier}          { return symbol(Symbols.IDENTIFIER, new Identifier(yytext())); }
     {DecIntegerLiteral}   { return symbol(Symbols.INTEGER_LITERAL, Integer.parseInt(yytext())); }
     {DoubleLiteral}       { return symbol(Symbols.DOUBLE_LITERAL, Double.parseDouble(yytext())); }
     {CharLiteral}         { return symbol(Symbols.CHARACTER_LITERAL, yytext().charAt(0)); }
-    {BoolLiteral}         { return symbol(Symbols.BOOL_LITERAL, Boolean.parseBool(yytext())); }
+    {BoolLiteral}         { return symbol(Symbols.BOOLEAN_LITERAL, Boolean.parseBoolean(yytext())); }
+    {Identifier}          { return symbol(Symbols.IDENTIFIER, new Identifier(yytext())); }
 }
 
 [^] { throw new Error("Illegal character <" + yytext() + ">"); }

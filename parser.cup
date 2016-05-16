@@ -43,7 +43,7 @@ terminal Double DOUBLE_LITERAL;
 terminal Character CHARACTER_LITERAL;
 terminal Boolean BOOLEAN_LITERAL;
 
-terminal INTEGER_TYPE, DOUBLE_TYPE, CHARACTER_TYPE;
+terminal INTEGER_TYPE, DOUBLE_TYPE, CHARACTER_TYPE, BOOLEAN_TYPE;
 terminal Identifier IDENTIFIER;
 
 non terminal List<Statement> statement_list;
@@ -97,6 +97,8 @@ type ::= INTEGER_TYPE   {: RESULT = new IntegerType(); :}
          DOUBLE_TYPE    {: RESULT = new DoubleType(); :}
          |
          CHARACTER_TYPE {: RESULT = new CharacterType(); :}
+         |
+         BOOLEAN_TYPE {: RESULT = new BooleanType(); :}
          ;
 
 param_decl ::= type:t IDENTIFIER:id {: RESULT = new ParamDeclaration(t, id); :}

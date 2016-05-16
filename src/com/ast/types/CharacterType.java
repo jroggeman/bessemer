@@ -13,4 +13,14 @@ public class CharacterType implements Type {
     public void accept(Visitor visitor) {
 
     }
+
+    @Override
+    public boolean isNumeric() {
+        return false;
+    }
+
+    @Override
+    public boolean isBoolean() {
+        return false;
+    }
 }

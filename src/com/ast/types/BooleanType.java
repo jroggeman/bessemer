@@ -2,25 +2,19 @@ package com.ast.types;
 
 import com.Visitor;
 
-public class DoubleType implements Type {
-    public DoubleType() {}
-
-    public String toString() {
-        return "double";
-    }
-
+public class BooleanType implements Type {
     @Override
     public void accept(Visitor visitor) {
-
+        return;
     }
 
     @Override
     public boolean isNumeric() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isBoolean() {
-        return false;
+        return true;
     }
 }
