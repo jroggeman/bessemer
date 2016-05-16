@@ -24,8 +24,6 @@ public class Block implements Iterable<Statement>, Token {
 
     @Override
     public void accept(Visitor visitor) {
-        for (Statement statement : statementList) {
-            statement.accept(visitor);
-        }
+        visitor.visit(this);
     }
 }

@@ -22,9 +22,7 @@ public class Program implements Token {
     }
 
     public void accept(Visitor visitor) {
-        for (Function function : functionList) {
-            function.accept(visitor);
-        }
+        visitor.visit(this);
     }
 }
 

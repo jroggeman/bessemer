@@ -1,8 +1,9 @@
 package com.ast.types;
 
+import com.Visitor;
 import com.ast.Token;
 import com.ast.mutable.Identifier;
-import com.symbol_table.entries.Entry;
+import com.symbol_table.entries.*;
 
 public abstract class Type implements Token {
     private Types type;
@@ -25,7 +26,27 @@ public abstract class Type implements Token {
     }
 
     public Entry getEntry(Identifier identifier) {
-        throw new UnsupportedOperationException();
+        switch(type) {
+            case INTEGER:
+                return new IntEntry(identifier);
+            case DOUBLE:
+                return new DoubleEntry(identifier);
+            case CHARACTER:
+                return new CharEntry(identifier);
+            case BOOLEAN:
+                return new BoolEntry(identifier);
+            default:
+                throw new UnsupportedOperationException("Unexpected type " + type);
+        }
+    }
+
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public String toString() {
+        return type.toString();
     }
 
     protected enum Types {

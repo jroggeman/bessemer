@@ -9,18 +9,4 @@ public class IntegerType extends Type {
     public IntegerType() {
         super(Types.INTEGER);
     }
-
-    public String toString() {
-        return "int";
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
-    @Override
-    public Entry getEntry(Identifier identifier) {
-        return new IntEntry(identifier);
-    }
 }

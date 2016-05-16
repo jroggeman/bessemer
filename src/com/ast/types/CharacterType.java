@@ -9,18 +9,4 @@ public class CharacterType extends Type {
     public CharacterType() {
         super(Types.CHARACTER);
     }
-
-    public String toString() {
-        return "char";
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
-    @Override
-    public Entry getEntry(Identifier identifier) {
-        return new CharEntry(identifier);
-    }
 }
