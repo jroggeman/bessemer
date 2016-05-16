@@ -16,8 +16,6 @@ import com.ast.statements.*;
 import com.ast.types.Type;
 import com.symbol_table.EntryFactory;
 import com.symbol_table.SymbolTable;
-import com.symbol_table.entries.FuncEntry;
-import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 public class BuildSymbolTableVisitor implements Visitor {
     private SymbolTable table;
