@@ -5,7 +5,7 @@ import com.ast.mutable.Identifier;
 import com.symbol_table.entries.Entry;
 import com.symbol_table.entries.IntEntry;
 
-public class IntegerType implements Type {
+public class IntegerType extends Type {
     public IntegerType() {}
 
     public String toString() {

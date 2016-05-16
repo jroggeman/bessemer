@@ -5,7 +5,7 @@ import com.ast.mutable.Identifier;
 import com.symbol_table.entries.DoubleEntry;
 import com.symbol_table.entries.Entry;
 
-public class DoubleType implements Type {
+public class DoubleType extends Type {
     public DoubleType() {}
 
     public String toString() {
