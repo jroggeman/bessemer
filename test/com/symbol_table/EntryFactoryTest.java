@@ -20,9 +20,9 @@ import static org.junit.Assert.*;
 public class EntryFactoryTest {
     @Test
     public void testCreateIntEntry() {
-        TypeDeclaration type = new TypeDeclaration(Type.INTEGER);
-        Identifier id = new Identifier("variable");
-        VariableDeclaration vd = new VariableDeclaration(type, id);
+        TypeDeclaration type = new TypeDeclaration(0, 0, Type.INTEGER);
+        Identifier id = new Identifier(0, 0, "variable");
+        VariableDeclaration vd = new VariableDeclaration(0, 0, type, id);
 
         Entry entry = EntryFactory.createEntry(vd);
 
@@ -31,9 +31,9 @@ public class EntryFactoryTest {
 
     @Test
     public void testCreateCharEntry() {
-        TypeDeclaration type = new TypeDeclaration(Type.CHARACTER);
-        Identifier id = new Identifier("variable");
-        VariableDeclaration vd = new VariableDeclaration(type, id);
+        TypeDeclaration type = new TypeDeclaration(0, 0, Type.CHARACTER);
+        Identifier id = new Identifier(0, 0, "variable");
+        VariableDeclaration vd = new VariableDeclaration(0, 0, type, id);
 
         Entry entry = EntryFactory.createEntry(vd);
 
@@ -42,12 +42,12 @@ public class EntryFactoryTest {
 
     @Test
     public void testCreateFuncEntry() {
-        TypeDeclaration type = new TypeDeclaration(Type.INTEGER);
-        Identifier name = new Identifier("function");
-        ParamDeclarationList pdl = new ParamDeclarationList(new ArrayList<>());
-        Block block = new Block(new ArrayList<>());
+        TypeDeclaration type = new TypeDeclaration(0, 0, Type.INTEGER);
+        Identifier name = new Identifier(0, 0, "function");
+        ParamDeclarationList pdl = new ParamDeclarationList(0, 0, new ArrayList<>());
+        Block block = new Block(0, 0, new ArrayList<>());
 
-        Function function = new Function(type, name, pdl, block);
+        Function function = new Function(0, 0, type, name, pdl, block);
 
         Entry entry = EntryFactory.createEntry(function);
 
