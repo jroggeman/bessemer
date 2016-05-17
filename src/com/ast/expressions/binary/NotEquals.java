@@ -14,26 +14,6 @@ public class NotEquals extends BinaryExpression {
     }
 
     @Override
-    public boolean areInputsNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean areInputsBoolean() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputBoolean() {
-        return true;
-    }
-
-    @Override
     public Type getType() {
         if(!Type.areComparisonCompatible(leftHandSide.getType(), rightHandSide.getType())) {
             throw new RuntimeException("Invalid != comparison not caught in type checking");

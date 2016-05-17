@@ -16,26 +16,6 @@ public class IntLiteral extends Literal {
     }
 
     @Override
-    public boolean areInputsNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean areInputsBoolean() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputNumeric() {
-        return true;
-    }
-
-    @Override
-    public boolean isOutputBoolean() {
-        return false;
-    }
-
-    @Override
     public Type getType() {
         return Type.INTEGER;
     }

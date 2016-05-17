@@ -16,26 +16,6 @@ public class BoolLiteral extends Literal {
     }
 
     @Override
-    public boolean areInputsNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean areInputsBoolean() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputBoolean() {
-        return true;
-    }
-
-    @Override
     public Type getType() {
         return Type.BOOLEAN;
     }

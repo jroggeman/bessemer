@@ -40,26 +40,6 @@ public class Call extends Expression {
     }
 
     @Override
-    public boolean areInputsNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean areInputsBoolean() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputNumeric() {
-        return associatedFunction.type.isNumeric();
-    }
-
-    @Override
-    public boolean isOutputBoolean() {
-        return associatedFunction.type.isBoolean();
-    }
-
-    @Override
     public Type getType() {
         return associatedFunction.type.getType();
     }

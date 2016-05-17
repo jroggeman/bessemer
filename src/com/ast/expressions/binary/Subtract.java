@@ -15,26 +15,6 @@ public class Subtract extends BinaryExpression{
     }
 
     @Override
-    public boolean areInputsNumeric() {
-        return true;
-    }
-
-    @Override
-    public boolean areInputsBoolean() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputNumeric() {
-        return true;
-    }
-
-    @Override
-    public boolean isOutputBoolean() {
-        return false;
-    }
-
-    @Override
     public Type getType() {
         Type lhs = leftHandSide.getType();
         Type rhs = rightHandSide.getType();

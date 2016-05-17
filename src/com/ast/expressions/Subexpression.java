@@ -21,26 +21,6 @@ public class Subexpression extends Expression {
     }
 
     @Override
-    public boolean areInputsNumeric() {
-        return expression.areInputsNumeric();
-    }
-
-    @Override
-    public boolean areInputsBoolean() {
-        return expression.areInputsBoolean();
-    }
-
-    @Override
-    public boolean isOutputNumeric() {
-        return expression.isOutputNumeric();
-    }
-
-    @Override
-    public boolean isOutputBoolean() {
-        return expression.isOutputBoolean();
-    }
-
-    @Override
     public Type getType() {
         return expression.getType();
     }

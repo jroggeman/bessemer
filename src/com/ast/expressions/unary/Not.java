@@ -14,26 +14,6 @@ public class Not extends UnaryExpression {
     }
 
     @Override
-    public boolean areInputsNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean areInputsBoolean() {
-        return true;
-    }
-
-    @Override
-    public boolean isOutputNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputBoolean() {
-        return true;
-    }
-
-    @Override
     public Type getType() {
         return Type.BOOLEAN;
     }

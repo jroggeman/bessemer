@@ -40,26 +40,6 @@ public class Identifier extends Expression implements Mutable {
     }
 
     @Override
-    public boolean areInputsNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean areInputsBoolean() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputNumeric() {
-        return type.isNumeric();
-    }
-
-    @Override
-    public boolean isOutputBoolean() {
-        return type.isBoolean();
-    }
-
-    @Override
     public Type getType() {
         if(type == null)
             throw new RuntimeException("Found identifier with no type.  Should've caught all missing declaration errors.");

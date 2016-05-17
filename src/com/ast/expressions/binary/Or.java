@@ -14,26 +14,6 @@ public class Or extends BinaryExpression {
     }
 
     @Override
-    public boolean areInputsNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean areInputsBoolean() {
-        return true;
-    }
-
-    @Override
-    public boolean isOutputNumeric() {
-        return false;
-    }
-
-    @Override
-    public boolean isOutputBoolean() {
-        return true;
-    }
-
-    @Override
     public Type getType() {
         Type lhs = leftHandSide.getType();
         Type rhs = rightHandSide.getType();
