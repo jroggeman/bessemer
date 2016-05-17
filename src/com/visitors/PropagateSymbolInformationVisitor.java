@@ -1,5 +1,6 @@
 package com.visitors;
 
+import com.Errors;
 import com.ast.Block;
 import com.ast.Program;
 import com.ast.expressions.Call;
@@ -63,13 +64,13 @@ public class PropagateSymbolInformationVisitor implements Visitor {
     public void visit(Call element) {
         Entry associatedEntry = table.get(element.functionName);
         if(associatedEntry == null) {
-            logger.log(Level.SEVERE, "Attempting to call a non-existent function at line {0}, column {1}.", new Object[] { element.lineNumber, element.columnNumber});
+            logger.log(Level.SEVERE, Errors.CALL_NON_EXISTENT_FUNCTION.toString(), new Object[] { element.lineNumber, element.columnNumber});
             hasErrors = true;
                     return;
         }
 
         if(!associatedEntry.isFunction()) {
-            logger.log(Level.SEVERE, "Attempting to call a non-function identifier at line {0}, column {1}", new Object[] { element.lineNumber, element.columnNumber});
+            logger.log(Level.SEVERE, Errors.CALL_NON_FUNCTION.toString(), new Object[] { element.lineNumber, element.columnNumber});
             hasErrors = true;
             return;
         }
@@ -128,7 +129,7 @@ public class PropagateSymbolInformationVisitor implements Visitor {
         Entry entry = table.get(element);
 
         if(entry == null) {
-            logger.log(Level.SEVERE, "Variable not declared at line {0}, column {1}", new Object[] { element.lineNumber, element.columnNumber});
+            logger.log(Level.SEVERE, Errors.VARIABLE_USED_BEFORE_DECLARATION.toString(), new Object[] { element.lineNumber, element.columnNumber});
             hasErrors = true;
             return;
         }
