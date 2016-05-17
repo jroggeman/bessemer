@@ -1,5 +1,7 @@
 package com.ast.expressions.literals;
 
+import com.ast.types.Type;
+
 public class IntLiteral extends Literal {
     public int value;
 
@@ -31,5 +33,10 @@ public class IntLiteral extends Literal {
     @Override
     public boolean isOutputBoolean() {
         return false;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.INTEGER;
     }
 }

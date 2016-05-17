@@ -1,6 +1,7 @@
 package com.ast.expressions.unary;
 
 import com.ast.expressions.Expression;
+import com.ast.types.Type;
 
 public class Not extends UnaryExpression {
     public Not(int lineNumber, int columnNumber, Expression expression) {
@@ -30,5 +31,10 @@ public class Not extends UnaryExpression {
     @Override
     public boolean isOutputBoolean() {
         return true;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.BOOLEAN;
     }
 }

@@ -1,6 +1,7 @@
 package com.ast.mutable;
 
 import com.ast.types.Type;
+import com.sun.istack.internal.NotNull;
 import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 
@@ -56,5 +57,13 @@ public class Identifier extends Expression implements Mutable {
     @Override
     public boolean isOutputBoolean() {
         return type.isBoolean();
+    }
+
+    @Override
+    public Type getType() {
+        if(type == null)
+            throw new RuntimeException("Found identifier with no type.  Should've caught all missing declaration errors.");
+
+        return type;
     }
 }

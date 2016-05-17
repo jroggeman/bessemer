@@ -1,5 +1,7 @@
 package com.ast.expressions.literals;
 
+import com.ast.types.Type;
+
 public class CharLiteral extends Literal {
     public char value;
 
@@ -31,5 +33,10 @@ public class CharLiteral extends Literal {
     @Override
     public boolean isOutputBoolean() {
         return false;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.CHARACTER;
     }
 }

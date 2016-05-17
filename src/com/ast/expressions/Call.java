@@ -1,5 +1,6 @@
 package com.ast.expressions;
 
+import com.ast.types.Type;
 import com.visitors.Visitor;
 import com.ast.function.Function;
 import com.ast.mutable.Identifier;
@@ -56,5 +57,10 @@ public class Call extends Expression {
     @Override
     public boolean isOutputBoolean() {
         return associatedFunction.type.isBoolean();
+    }
+
+    @Override
+    public Type getType() {
+        return associatedFunction.type.getType();
     }
 }

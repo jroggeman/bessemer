@@ -1,6 +1,7 @@
 package com.ast.expressions.binary;
 
 import com.ast.expressions.Expression;
+import com.ast.types.Type;
 
 public class And extends BinaryExpression {
     public And(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
@@ -30,5 +31,17 @@ public class And extends BinaryExpression {
     @Override
     public boolean isOutputBoolean() {
         return true;
+    }
+
+    @Override
+    public Type getType() {
+        Type lhs = leftHandSide.getType();
+        Type rhs = rightHandSide.getType();
+
+        if(!lhs.isBoolean() || !rhs.isBoolean()) {
+            throw new RuntimeException("Non-boolean arguments to boolean operator, not caught in type checking");
+        }
+
+        return Type.BOOLEAN;
     }
 }

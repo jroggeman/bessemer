@@ -1,6 +1,7 @@
 package com.ast.expressions.binary;
 
 import com.ast.expressions.Expression;
+import com.ast.types.Type;
 
 public class LessThan extends BinaryExpression{
     public LessThan(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
@@ -30,5 +31,16 @@ public class LessThan extends BinaryExpression{
     @Override
     public boolean isOutputBoolean() {
         return true;
+    }
+
+    @Override
+    public Type getType() {
+        Type lhs = leftHandSide.getType();
+        Type rhs = rightHandSide.getType();
+
+        if(!lhs.isNumeric() || !rhs.isNumeric())
+            throw new RuntimeException("Non-numeric arguments for numeric operator, not caught in type checking");
+
+        return Type.BOOLEAN;
     }
 }

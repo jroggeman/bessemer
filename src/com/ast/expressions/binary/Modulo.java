@@ -1,6 +1,7 @@
 package com.ast.expressions.binary;
 
 import com.ast.expressions.Expression;
+import com.ast.types.Type;
 
 public class Modulo extends BinaryExpression {
     public Modulo(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
@@ -30,5 +31,16 @@ public class Modulo extends BinaryExpression {
     @Override
     public boolean isOutputBoolean() {
         return false;
+    }
+
+    @Override
+    public Type getType() {
+        Type lhs = leftHandSide.getType();
+        Type rhs = rightHandSide.getType();
+
+        if(!lhs.isNumeric() || !rhs.isNumeric())
+            throw new RuntimeException("Non-numeric arguments to numeric operator, not caught at compile time.");
+
+        return Type.getResultType(lhs, rhs);
     }
 }

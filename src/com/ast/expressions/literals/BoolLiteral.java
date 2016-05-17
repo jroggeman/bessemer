@@ -1,5 +1,7 @@
 package com.ast.expressions.literals;
 
+import com.ast.types.Type;
+
 public class BoolLiteral extends Literal {
     public boolean value;
 
@@ -31,5 +33,10 @@ public class BoolLiteral extends Literal {
     @Override
     public boolean isOutputBoolean() {
         return true;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.BOOLEAN;
     }
 }

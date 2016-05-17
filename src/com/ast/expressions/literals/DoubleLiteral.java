@@ -1,5 +1,7 @@
 package com.ast.expressions.literals;
 
+import com.ast.types.Type;
+
 public class DoubleLiteral extends Literal {
     @Override
     public boolean areInputsNumeric() {
@@ -19,6 +21,11 @@ public class DoubleLiteral extends Literal {
     @Override
     public boolean isOutputBoolean() {
         return false;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.DOUBLE;
     }
 
     public double value;

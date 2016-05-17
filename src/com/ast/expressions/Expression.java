@@ -1,6 +1,7 @@
 package com.ast.expressions;
 
 import com.ast.statements.Statement;
+import com.ast.types.Type;
 
 public abstract class Expression extends Statement {
     public Expression(int lineNumber, int columnNumber) {
@@ -14,4 +15,6 @@ public abstract class Expression extends Statement {
     // is the output of this particular thing numeric or boolean?
     public abstract boolean isOutputNumeric();
     public abstract boolean isOutputBoolean();
+
+    public abstract Type getType();
 }

@@ -1,5 +1,6 @@
 package com.ast.expressions;
 
+import com.ast.types.Type;
 import com.visitors.Visitor;
 
 public class Subexpression extends Expression {
@@ -37,5 +38,10 @@ public class Subexpression extends Expression {
     @Override
     public boolean isOutputBoolean() {
         return expression.isOutputBoolean();
+    }
+
+    @Override
+    public Type getType() {
+        return expression.getType();
     }
 }
