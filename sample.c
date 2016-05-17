@@ -4,7 +4,8 @@ int main() {
     joel = x + x;
     int y;
     int z;
-    if((x + y) && z) {
+    int j;
+    if((x + y) < 3 && z < 4) {
         x = func(j, x);
         func(j, 3.4);
         while(!(x == 1)) {

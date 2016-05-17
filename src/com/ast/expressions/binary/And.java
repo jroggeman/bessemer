@@ -13,12 +13,22 @@ public class And extends BinaryExpression {
     }
 
     @Override
-    public boolean isNumeric() {
+    public boolean areInputsNumeric() {
         return false;
     }
 
     @Override
-    public boolean isBoolean() {
+    public boolean areInputsBoolean() {
+        return true;
+    }
+
+    @Override
+    public boolean isOutputNumeric() {
+        return false;
+    }
+
+    @Override
+    public boolean isOutputBoolean() {
         return true;
     }
 }

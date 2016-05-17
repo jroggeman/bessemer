@@ -13,12 +13,22 @@ public class IntLiteral extends Literal {
     }
 
     @Override
-    public boolean isNumeric() {
+    public boolean areInputsNumeric() {
+        return false;
+    }
+
+    @Override
+    public boolean areInputsBoolean() {
+        return false;
+    }
+
+    @Override
+    public boolean isOutputNumeric() {
         return true;
     }
 
     @Override
-    public boolean isBoolean() {
+    public boolean isOutputBoolean() {
         return false;
     }
 }

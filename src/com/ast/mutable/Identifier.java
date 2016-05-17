@@ -38,12 +38,22 @@ public class Identifier implements Expression, Mutable {
     }
 
     @Override
-    public boolean isNumeric() {
+    public boolean areInputsNumeric() {
         return false;
     }
 
     @Override
-    public boolean isBoolean() {
+    public boolean areInputsBoolean() {
         return false;
+    }
+
+    @Override
+    public boolean isOutputNumeric() {
+        return type.isNumeric();
+    }
+
+    @Override
+    public boolean isOutputBoolean() {
+        return type.isBoolean();
     }
 }

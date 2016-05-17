@@ -38,12 +38,22 @@ public class Call implements Expression {
     }
 
     @Override
-    public boolean isNumeric() {
+    public boolean areInputsNumeric() {
         return false;
     }
 
     @Override
-    public boolean isBoolean() {
+    public boolean areInputsBoolean() {
         return false;
+    }
+
+    @Override
+    public boolean isOutputNumeric() {
+        return associatedFunction.type.isNumeric();
+    }
+
+    @Override
+    public boolean isOutputBoolean() {
+        return associatedFunction.type.isBoolean();
     }
 }

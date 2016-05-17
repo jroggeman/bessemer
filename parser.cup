@@ -70,11 +70,11 @@ non terminal List<Expression> remaining_call_param_list;
 
 non terminal Program program;
 
-precedence left TIMES, DIVIDE, MODULO;
-precedence left PLUS, MINUS;
-precedence left EQUALS, LESS_THAN, LESS_THAN_EQUALS, NOT_EQUALS;
-precedence left LOG_AND;
 precedence left LOG_OR;
+precedence left LOG_AND;
+precedence left EQUALS, LESS_THAN, LESS_THAN_EQUALS, NOT_EQUALS;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE, MODULO;
 
 start with program;
 

@@ -14,12 +14,22 @@ public class Multiply extends BinaryExpression {
     }
 
     @Override
-    public boolean isNumeric() {
+    public boolean areInputsNumeric() {
         return true;
     }
 
     @Override
-    public boolean isBoolean() {
+    public boolean areInputsBoolean() {
+        return false;
+    }
+
+    @Override
+    public boolean isOutputNumeric() {
+        return true;
+    }
+
+    @Override
+    public boolean isOutputBoolean() {
         return false;
     }
 }

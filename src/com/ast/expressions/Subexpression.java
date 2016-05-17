@@ -19,12 +19,22 @@ public class Subexpression implements Expression {
     }
 
     @Override
-    public boolean isNumeric() {
-        return expression.isNumeric();
+    public boolean areInputsNumeric() {
+        return expression.areInputsNumeric();
     }
 
     @Override
-    public boolean isBoolean() {
-        return expression.isBoolean();
+    public boolean areInputsBoolean() {
+        return expression.areInputsBoolean();
+    }
+
+    @Override
+    public boolean isOutputNumeric() {
+        return expression.isOutputNumeric();
+    }
+
+    @Override
+    public boolean isOutputBoolean() {
+        return expression.isOutputBoolean();
     }
 }

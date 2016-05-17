@@ -13,12 +13,22 @@ public class LessThan extends BinaryExpression{
     }
 
     @Override
-    public boolean isNumeric() {
+    public boolean areInputsNumeric() {
+        return true;
+    }
+
+    @Override
+    public boolean areInputsBoolean() {
         return false;
     }
 
     @Override
-    public boolean isBoolean() {
+    public boolean isOutputNumeric() {
+        return false;
+    }
+
+    @Override
+    public boolean isOutputBoolean() {
         return true;
     }
 }
