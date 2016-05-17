@@ -4,7 +4,7 @@ import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 import com.ast.mutable.Mutable;
 
-public class Assign implements Statement {
+public class Assign extends Statement {
     public Mutable leftHandSide;
     public Expression rightHandSide;
 

@@ -3,7 +3,7 @@ package com.ast.statements;
 import com.visitors.Visitor;
 import com.ast.mutable.Identifier;
 
-public class Input implements Statement {
+public class Input extends Statement {
     public Identifier variable;
 
     public Input(Identifier variable) {

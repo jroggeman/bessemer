@@ -4,7 +4,6 @@ import com.ast.Program;
 import com.symbol_table.SymbolTable;
 import com.visitors.BuildSymbolTableVisitor;
 import com.visitors.PropagateSymbolInformationVisitor;
-import com.visitors.TypeAgreementVisitor;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -41,13 +40,13 @@ public class Compiler {
             System.exit(1);
         }
 
-        TypeAgreementVisitor tav = new TypeAgreementVisitor(ast, t);
-        tav.checkTypeAgreement();
-
-        if(tav.foundErrors()) {
-            logger.log(Level.SEVERE, "Found type errors, aborting...");
-            System.exit(1);
-        }
+//        TypeAgreementVisitor tav = new TypeAgreementVisitor(ast, t);
+//        tav.checkTypeAgreement();
+//
+//        if(tav.foundErrors()) {
+//            logger.log(Level.SEVERE, "Found type errors, aborting...");
+//            System.exit(1);
+//        }
     }
 
     private static void setupLogger() {

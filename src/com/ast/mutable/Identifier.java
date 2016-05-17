@@ -4,7 +4,7 @@ import com.ast.types.Type;
 import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 
-public class Identifier implements Expression, Mutable {
+public class Identifier extends Expression implements Mutable {
     public String value;
     public Type type;
 

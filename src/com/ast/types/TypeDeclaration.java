@@ -5,7 +5,7 @@ import com.ast.Token;
 import com.ast.mutable.Identifier;
 import com.symbol_table.entries.*;
 
-public class TypeDeclaration implements Token {
+public class TypeDeclaration extends Token {
     private Type type;
 
     public Type getType() {

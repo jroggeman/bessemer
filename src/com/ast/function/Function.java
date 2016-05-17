@@ -7,7 +7,7 @@ import com.ast.mutable.Identifier;
 import com.ast.statements.Statement;
 import com.ast.types.TypeDeclaration;
 
-public class Function implements Token {
+public class Function extends Token {
     public TypeDeclaration type;
     public Identifier name;
     public ParamDeclarationList paramList;

@@ -6,7 +6,7 @@ import com.ast.Token;
 import java.util.Iterator;
 import java.util.List;
 
-public class ParamDeclarationList implements Token, Iterable<ParamDeclaration> {
+public class ParamDeclarationList extends Token implements Iterable<ParamDeclaration> {
     public List<ParamDeclaration> params;
 
     public ParamDeclarationList(List<ParamDeclaration> params) {

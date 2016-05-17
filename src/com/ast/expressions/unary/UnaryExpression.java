@@ -3,7 +3,7 @@ package com.ast.expressions.unary;
 import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 
-public abstract class UnaryExpression implements Expression {
+public abstract class UnaryExpression extends Expression {
     public Expression expression;
 
     public UnaryExpression(Expression expression) {

@@ -5,7 +5,7 @@ import com.ast.Token;
 import com.ast.mutable.Identifier;
 import com.ast.types.TypeDeclaration;
 
-public class ParamDeclaration implements Token {
+public class ParamDeclaration extends Token {
     public TypeDeclaration type;
     public Identifier id;
 

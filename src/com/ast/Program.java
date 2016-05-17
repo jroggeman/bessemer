@@ -5,7 +5,7 @@ import com.ast.function.Function;
 
 import java.util.List;
 
-public class Program implements Token {
+public class Program extends Token {
     public List<Function> functionList;
 
     public Program(List<Function> functionList) {

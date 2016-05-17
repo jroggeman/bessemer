@@ -4,7 +4,7 @@ import com.visitors.Visitor;
 import com.ast.Block;
 import com.ast.expressions.Expression;
 
-public class While implements Statement {
+public class While extends Statement {
     public Expression condition;
     public Block block;
 

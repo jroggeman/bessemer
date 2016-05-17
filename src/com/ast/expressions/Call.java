@@ -6,7 +6,7 @@ import com.ast.mutable.Identifier;
 
 import java.util.List;
 
-public class Call implements Expression {
+public class Call extends Expression {
     public Identifier functionName;
     public List<Expression> parameterList;
     public Function associatedFunction;

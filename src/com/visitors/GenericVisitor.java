@@ -12,6 +12,7 @@ import com.ast.function.Function;
 import com.ast.function.ParamDeclaration;
 import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
+import com.ast.mutable.Mutable;
 import com.ast.statements.*;
 import com.ast.types.TypeDeclaration;
 import com.symbol_table.SymbolTable;
@@ -100,6 +101,11 @@ public class GenericVisitor implements Visitor {
     public void visit(Assign element) {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
+    }
+
+    @Override
+    public void visit(Mutable element) {
+        /* Do nothing */
     }
 
     @Override

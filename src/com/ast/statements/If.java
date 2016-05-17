@@ -4,7 +4,7 @@ import com.visitors.Visitor;
 import com.ast.Block;
 import com.ast.expressions.Expression;
 
-public class If implements Statement {
+public class If extends Statement {
     public Expression condition;
     public Block block;
 

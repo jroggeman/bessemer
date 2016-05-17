@@ -3,7 +3,7 @@ package com.ast.statements;
 import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 
-public class Output implements Statement {
+public class Output extends Statement {
     public Expression expression;
 
     public Output(Expression expression) {

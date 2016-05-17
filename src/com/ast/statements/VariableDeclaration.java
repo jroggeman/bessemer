@@ -4,7 +4,7 @@ import com.visitors.Visitor;
 import com.ast.mutable.Identifier;
 import com.ast.types.TypeDeclaration;
 
-public class VariableDeclaration implements Statement {
+public class VariableDeclaration extends Statement {
     public TypeDeclaration type;
     public Identifier name;
 
