@@ -8,7 +8,8 @@ public class VariableDeclaration extends Statement {
     public TypeDeclaration type;
     public Identifier name;
 
-    public VariableDeclaration(TypeDeclaration type, Identifier name) {
+    public VariableDeclaration(int lineNumber, int columnNumber, TypeDeclaration type, Identifier name) {
+        super(lineNumber, columnNumber);
         this.type = type;
         this.name = name;
     }

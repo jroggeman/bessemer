@@ -6,7 +6,8 @@ import com.ast.expressions.Expression;
 public abstract class UnaryExpression extends Expression {
     public Expression expression;
 
-    public UnaryExpression(Expression expression) {
+    public UnaryExpression(int lineNumber, int columnNumber, Expression expression) {
+        super(lineNumber, columnNumber);
         this.expression = expression;
     }
 

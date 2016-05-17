@@ -11,7 +11,8 @@ public class Call extends Expression {
     public List<Expression> parameterList;
     public Function associatedFunction;
 
-    public Call(Identifier functionName, List<Expression> parameterList) {
+    public Call(int lineNumber, int columnNumber, Identifier functionName, List<Expression> parameterList) {
+        super(lineNumber, columnNumber);
         this.functionName = functionName;
         this.parameterList = parameterList;
     }

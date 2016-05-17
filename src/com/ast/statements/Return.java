@@ -6,7 +6,8 @@ import com.ast.expressions.Expression;
 public class Return extends Statement {
     public Expression expression;
 
-    public Return(Expression expression) {
+    public Return(int lineNumber, int columnNumber, Expression expression) {
+        super(lineNumber, columnNumber);
         this.expression = expression;
     }
 

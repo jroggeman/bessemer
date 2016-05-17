@@ -12,7 +12,8 @@ public class TypeDeclaration extends Token {
         return type;
     }
 
-    public TypeDeclaration(Type type) {
+    public TypeDeclaration(int lineNumber, int columnNumber, Type type) {
+        super(lineNumber, columnNumber);
         this.type = type;
     }
 

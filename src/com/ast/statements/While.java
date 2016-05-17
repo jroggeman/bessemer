@@ -8,7 +8,8 @@ public class While extends Statement {
     public Expression condition;
     public Block block;
 
-    public While(Expression condition, Block block) {
+    public While(int lineNumber, int columnNumber, Expression condition, Block block) {
+        super(lineNumber, columnNumber);
         this.condition = condition;
         this.block = block;
     }

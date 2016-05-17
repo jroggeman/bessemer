@@ -3,7 +3,8 @@ package com.ast.expressions.literals;
 public class BoolLiteral extends Literal {
     public boolean value;
 
-    public BoolLiteral(boolean value) {
+    public BoolLiteral(int lineNumber, int columnNumber, boolean value) {
+        super(lineNumber, columnNumber);
         this.value = value;
     }
 

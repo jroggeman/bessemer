@@ -13,7 +13,8 @@ public class Function extends Token {
     public ParamDeclarationList paramList;
     public Block block;
 
-    public Function(TypeDeclaration type, Identifier name, ParamDeclarationList paramList, Block block) {
+    public Function(int lineNumber, int columnNumber, TypeDeclaration type, Identifier name, ParamDeclarationList paramList, Block block) {
+        super(lineNumber, columnNumber);
         this.type = type;
         this.name = name;
         this.paramList = paramList;

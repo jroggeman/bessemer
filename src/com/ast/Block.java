@@ -9,7 +9,8 @@ import java.util.List;
 public class Block extends Token implements Iterable<Statement> {
     public List<Statement> statementList;
 
-    public Block(List<Statement> statementList) {
+    public Block(int lineNumber, int columnNumber, List<Statement> statementList) {
+        super(lineNumber, columnNumber);
         this.statementList = statementList;
     }
 

@@ -8,7 +8,8 @@ import java.util.List;
 public class Program extends Token {
     public List<Function> functionList;
 
-    public Program(List<Function> functionList) {
+    public Program(int lineNumber, int columnNumber, List<Function> functionList) {
+        super(lineNumber, columnNumber);
         this.functionList = functionList;
     }
 

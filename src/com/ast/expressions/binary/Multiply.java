@@ -4,8 +4,8 @@ package com.ast.expressions.binary;
 import com.ast.expressions.Expression;
 
 public class Multiply extends BinaryExpression {
-    public Multiply(Expression leftHandSide, Expression rightHandSide) {
-        super(leftHandSide, rightHandSide);
+    public Multiply(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
+        super(lineNumber, columnNumber, leftHandSide, rightHandSide);
     }
 
     @Override
