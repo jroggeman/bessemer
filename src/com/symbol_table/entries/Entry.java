@@ -2,6 +2,7 @@ package com.symbol_table.entries;
 
 import com.ast.mutable.Identifier;
 import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 
 public abstract class Entry {
     private Identifier identifier;

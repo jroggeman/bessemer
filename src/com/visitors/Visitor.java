@@ -12,7 +12,7 @@ import com.ast.function.ParamDeclaration;
 import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
 import com.ast.statements.*;
-import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 
 public interface Visitor {
     void visit(Block element);
@@ -33,5 +33,5 @@ public interface Visitor {
     void visit(Return element);
     void visit(VariableDeclaration element);
     void visit(While element);
-    void visit(Type element);
+    void visit(TypeDeclaration element);
 }

@@ -1,8 +1,8 @@
 package com.ast.mutable;
 
+import com.ast.types.Type;
 import com.visitors.Visitor;
 import com.ast.expressions.Expression;
-import com.ast.types.Type;
 
 public class Identifier implements Expression, Mutable {
     public String value;

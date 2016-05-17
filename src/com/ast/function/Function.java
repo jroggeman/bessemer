@@ -5,15 +5,15 @@ import com.ast.Block;
 import com.ast.Token;
 import com.ast.mutable.Identifier;
 import com.ast.statements.Statement;
-import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 
 public class Function implements Token {
-    public Type type;
+    public TypeDeclaration type;
     public Identifier name;
     public ParamDeclarationList paramList;
     public Block block;
 
-    public Function(Type type, Identifier name, ParamDeclarationList paramList, Block block) {
+    public Function(TypeDeclaration type, Identifier name, ParamDeclarationList paramList, Block block) {
         this.type = type;
         this.name = name;
         this.paramList = paramList;

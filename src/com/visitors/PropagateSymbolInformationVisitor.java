@@ -13,7 +13,7 @@ import com.ast.function.ParamDeclaration;
 import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
 import com.ast.statements.*;
-import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 import com.symbol_table.SymbolTable;
 import com.symbol_table.entries.Entry;
 import com.symbol_table.entries.FuncEntry;
@@ -186,7 +186,7 @@ public class PropagateSymbolInformationVisitor implements Visitor {
     }
 
     @Override
-    public void visit(Type element) {
+    public void visit(TypeDeclaration element) {
         /* Do nothing */
     }
 }
