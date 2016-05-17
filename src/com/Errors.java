@@ -1,5 +1,8 @@
 package com;
 
+import com.ast.Token;
+
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public enum Errors {
@@ -13,8 +16,8 @@ public enum Errors {
         this.message = message;
     }
 
-    public static void logError(Logger logger, Errors error) {
-
+    public void log(Logger logger, Token element) {
+        logger.log(Level.SEVERE, message, new Object[] { element.lineNumber, element.columnNumber });
     }
 
     public String toString() {

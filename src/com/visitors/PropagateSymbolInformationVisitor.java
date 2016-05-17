@@ -64,13 +64,13 @@ public class PropagateSymbolInformationVisitor implements Visitor {
     public void visit(Call element) {
         Entry associatedEntry = table.get(element.functionName);
         if(associatedEntry == null) {
-            logger.log(Level.SEVERE, Errors.CALL_NON_EXISTENT_FUNCTION.toString(), new Object[] { element.lineNumber, element.columnNumber});
+            Errors.CALL_NON_EXISTENT_FUNCTION.log(logger, element);
             hasErrors = true;
                     return;
         }
 
         if(!associatedEntry.isFunction()) {
-            logger.log(Level.SEVERE, Errors.CALL_NON_FUNCTION.toString(), new Object[] { element.lineNumber, element.columnNumber});
+            Errors.CALL_NON_FUNCTION.log(logger, element);
             hasErrors = true;
             return;
         }
@@ -129,7 +129,7 @@ public class PropagateSymbolInformationVisitor implements Visitor {
         Entry entry = table.get(element);
 
         if(entry == null) {
-            logger.log(Level.SEVERE, Errors.VARIABLE_USED_BEFORE_DECLARATION.toString(), new Object[] { element.lineNumber, element.columnNumber});
+            Errors.VARIABLE_USED_BEFORE_DECLARATION.log(logger, element);
             hasErrors = true;
             return;
         }
