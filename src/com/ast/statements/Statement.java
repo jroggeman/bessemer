@@ -2,5 +2,8 @@ package com.ast.statements;
 
 import com.ast.Token;
 
-public interface Statement extends Token {
+public abstract class Statement extends Token {
+    public Statement(int lineNumber, int columnNumber) {
+        super(lineNumber, columnNumber);
+    }
 }

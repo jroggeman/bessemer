@@ -1,14 +1,15 @@
 package com.ast.mutable;
 
+import com.ast.types.Type;
 import com.visitors.Visitor;
 import com.ast.expressions.Expression;
-import com.ast.types.Type;
 
-public class Identifier implements Expression, Mutable {
+public class Identifier extends Expression implements Mutable {
     public String value;
     public Type type;
 
-    public Identifier(String value) {
+    public Identifier(int lineNumber, int columnNumber, String value) {
+        super(lineNumber, columnNumber);
         if(value == null || value.isEmpty()) {
             throw new RuntimeException("Cannot create identifier without name.");
         }

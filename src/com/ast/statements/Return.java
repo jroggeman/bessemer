@@ -3,10 +3,11 @@ package com.ast.statements;
 import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 
-public class Return implements Statement {
+public class Return extends Statement {
     public Expression expression;
 
-    public Return(Expression expression) {
+    public Return(int lineNumber, int columnNumber, Expression expression) {
+        super(lineNumber, columnNumber);
         this.expression = expression;
     }
 

@@ -3,13 +3,14 @@ package com.ast.function;
 import com.visitors.Visitor;
 import com.ast.Token;
 import com.ast.mutable.Identifier;
-import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 
-public class ParamDeclaration implements Token {
-    public Type type;
+public class ParamDeclaration extends Token {
+    public TypeDeclaration type;
     public Identifier id;
 
-    public ParamDeclaration(Type type, Identifier id) {
+    public ParamDeclaration(int lineNumber, int columnNumber, TypeDeclaration type, Identifier id) {
+        super(lineNumber, columnNumber);
         this.type = type;
         this.id = id;
     }

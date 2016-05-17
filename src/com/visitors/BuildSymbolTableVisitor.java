@@ -12,8 +12,9 @@ import com.ast.function.Function;
 import com.ast.function.ParamDeclaration;
 import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
+import com.ast.mutable.Mutable;
 import com.ast.statements.*;
-import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 import com.symbol_table.EntryFactory;
 import com.symbol_table.SymbolTable;
 
@@ -126,6 +127,11 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
+    public void visit(Mutable element) {
+        /* Do nothing */
+    }
+
+    @Override
     public void visit(If element) {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.condition.accept(this);
@@ -168,7 +174,7 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
-    public void visit(Type element) {
+    public void visit(TypeDeclaration element) {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         /* Do nothing */
     }

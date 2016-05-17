@@ -6,10 +6,11 @@ import com.ast.Token;
 import java.util.Iterator;
 import java.util.List;
 
-public class ParamDeclarationList implements Token, Iterable<ParamDeclaration> {
+public class ParamDeclarationList extends Token implements Iterable<ParamDeclaration> {
     public List<ParamDeclaration> params;
 
-    public ParamDeclarationList(List<ParamDeclaration> params) {
+    public ParamDeclarationList(int lineNumber, int columnNumber, List<ParamDeclaration> params) {
+        super(lineNumber, columnNumber);
         this.params = params;
     }
 

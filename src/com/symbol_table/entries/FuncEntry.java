@@ -33,7 +33,7 @@ public class FuncEntry extends Entry {
 
     @Override
     public Type getType() {
-        return function.type;
+        return function.type.getType();
     }
 
     @Override

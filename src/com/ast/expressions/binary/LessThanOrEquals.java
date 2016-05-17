@@ -3,8 +3,8 @@ package com.ast.expressions.binary;
 import com.ast.expressions.Expression;
 
 public class LessThanOrEquals extends BinaryExpression {
-    public LessThanOrEquals(Expression leftHandSide, Expression rightHandSide) {
-        super(leftHandSide, rightHandSide);
+    public LessThanOrEquals(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
+        super(lineNumber, columnNumber, leftHandSide, rightHandSide);
     }
 
     @Override

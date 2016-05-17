@@ -1,11 +1,9 @@
 package com.ast.types;
 
-import com.visitors.Visitor;
-import com.ast.Token;
 import com.ast.mutable.Identifier;
 import com.symbol_table.entries.*;
 
-public enum Type implements Token {
+public enum Type {
     INTEGER ("int"),
     DOUBLE ("double"),
     CHARACTER ("char"),
@@ -17,20 +15,12 @@ public enum Type implements Token {
         this.printableName = printableName;
     }
 
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
     public boolean isNumeric() {
         return (this == INTEGER || this == DOUBLE);
     }
 
     public boolean isBoolean() {
         return this == BOOLEAN;
-    }
-
-    public boolean isDouble() {
-        return this == DOUBLE;
     }
 
     public Entry getEntry(Identifier identifier) {

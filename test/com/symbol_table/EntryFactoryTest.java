@@ -6,6 +6,7 @@ import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
 import com.ast.statements.VariableDeclaration;
 import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 import com.symbol_table.entries.CharEntry;
 import com.symbol_table.entries.Entry;
 import com.symbol_table.entries.FuncEntry;
@@ -19,9 +20,9 @@ import static org.junit.Assert.*;
 public class EntryFactoryTest {
     @Test
     public void testCreateIntEntry() {
-        Type type = Type.INTEGER;
-        Identifier id = new Identifier("variable");
-        VariableDeclaration vd = new VariableDeclaration(type, id);
+        TypeDeclaration type = new TypeDeclaration(0, 0, Type.INTEGER);
+        Identifier id = new Identifier(0, 0, "variable");
+        VariableDeclaration vd = new VariableDeclaration(0, 0, type, id);
 
         Entry entry = EntryFactory.createEntry(vd);
 
@@ -30,9 +31,9 @@ public class EntryFactoryTest {
 
     @Test
     public void testCreateCharEntry() {
-        Type type = Type.CHARACTER;
-        Identifier id = new Identifier("variable");
-        VariableDeclaration vd = new VariableDeclaration(type, id);
+        TypeDeclaration type = new TypeDeclaration(0, 0, Type.CHARACTER);
+        Identifier id = new Identifier(0, 0, "variable");
+        VariableDeclaration vd = new VariableDeclaration(0, 0, type, id);
 
         Entry entry = EntryFactory.createEntry(vd);
 
@@ -41,12 +42,12 @@ public class EntryFactoryTest {
 
     @Test
     public void testCreateFuncEntry() {
-        Type type = Type.INTEGER;
-        Identifier name = new Identifier("function");
-        ParamDeclarationList pdl = new ParamDeclarationList(new ArrayList<>());
-        Block block = new Block(new ArrayList<>());
+        TypeDeclaration type = new TypeDeclaration(0, 0, Type.INTEGER);
+        Identifier name = new Identifier(0, 0, "function");
+        ParamDeclarationList pdl = new ParamDeclarationList(0, 0, new ArrayList<>());
+        Block block = new Block(0, 0, new ArrayList<>());
 
-        Function function = new Function(type, name, pdl, block);
+        Function function = new Function(0, 0, type, name, pdl, block);
 
         Entry entry = EntryFactory.createEntry(function);
 

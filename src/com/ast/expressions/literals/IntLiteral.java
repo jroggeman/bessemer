@@ -3,7 +3,8 @@ package com.ast.expressions.literals;
 public class IntLiteral extends Literal {
     public int value;
 
-    public IntLiteral(int value) {
+    public IntLiteral(int lineNumber, int columnNumber, int value) {
+        super(lineNumber, columnNumber);
         this.value = value;
     }
 

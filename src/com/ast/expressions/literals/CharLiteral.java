@@ -3,7 +3,8 @@ package com.ast.expressions.literals;
 public class CharLiteral extends Literal {
     public char value;
 
-    public CharLiteral(char value) {
+    public CharLiteral(int lineNumber, int columnNumber, char value) {
+        super(lineNumber, columnNumber);
         this.value = value;
     }
 

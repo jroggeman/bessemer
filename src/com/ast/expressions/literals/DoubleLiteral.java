@@ -23,7 +23,8 @@ public class DoubleLiteral extends Literal {
 
     public double value;
 
-    public DoubleLiteral(double value) {
+    public DoubleLiteral(int lineNumber, int columnNumber, double value) {
+        super(lineNumber, columnNumber);
         this.value = value;
     }
 

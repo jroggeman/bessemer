@@ -4,8 +4,8 @@ import com.ast.expressions.Expression;
 
 public class Subtract extends BinaryExpression{
 
-    public Subtract(Expression leftHandSide, Expression rightHandSide) {
-        super(leftHandSide, rightHandSide);
+    public Subtract(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
+        super(lineNumber, columnNumber, leftHandSide, rightHandSide);
     }
 
     @Override

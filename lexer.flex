@@ -74,7 +74,7 @@ BoolLiteral = (true|false)
     {DoubleLiteral}       { return symbol(Symbols.DOUBLE_LITERAL, Double.parseDouble(yytext())); }
     {CharLiteral}         { return symbol(Symbols.CHARACTER_LITERAL, yytext().charAt(0)); }
     {BoolLiteral}         { return symbol(Symbols.BOOLEAN_LITERAL, Boolean.parseBoolean(yytext())); }
-    {Identifier}          { return symbol(Symbols.IDENTIFIER, new Identifier(yytext())); }
+    {Identifier}          { return symbol(Symbols.IDENTIFIER, new Identifier(yyline, yycolumn, yytext())); }
 }
 
 [^] { throw new Error("Illegal character <" + yytext() + ">"); }

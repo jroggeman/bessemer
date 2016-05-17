@@ -3,8 +3,8 @@ package com.ast.expressions.unary;
 import com.ast.expressions.Expression;
 
 public class Not extends UnaryExpression {
-    public Not(Expression expression) {
-        super(expression);
+    public Not(int lineNumber, int columnNumber, Expression expression) {
+        super(lineNumber, columnNumber, expression);
     }
 
     @Override

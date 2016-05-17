@@ -1,6 +1,7 @@
 package com.ast.mutable;
 
-import com.ast.Token;
+import com.visitors.Visitor;
 
-public interface Mutable extends Token {
+public interface Mutable {
+    void accept(Visitor visitor);
 }

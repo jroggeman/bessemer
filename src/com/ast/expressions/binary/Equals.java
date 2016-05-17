@@ -3,8 +3,8 @@ package com.ast.expressions.binary;
 import com.ast.expressions.Expression;
 
 public class Equals extends BinaryExpression {
-    public Equals(Expression leftHandSide, Expression rightHandSide) {
-        super(leftHandSide, rightHandSide);
+    public Equals(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
+        super(lineNumber, columnNumber, leftHandSide, rightHandSide);
     }
 
     @Override

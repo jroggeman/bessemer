@@ -3,10 +3,11 @@ package com.ast.expressions.unary;
 import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 
-public abstract class UnaryExpression implements Expression {
+public abstract class UnaryExpression extends Expression {
     public Expression expression;
 
-    public UnaryExpression(Expression expression) {
+    public UnaryExpression(int lineNumber, int columnNumber, Expression expression) {
+        super(lineNumber, columnNumber);
         this.expression = expression;
     }
 

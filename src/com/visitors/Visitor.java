@@ -11,8 +11,9 @@ import com.ast.function.Function;
 import com.ast.function.ParamDeclaration;
 import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
+import com.ast.mutable.Mutable;
 import com.ast.statements.*;
-import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 
 public interface Visitor {
     void visit(Block element);
@@ -27,11 +28,12 @@ public interface Visitor {
     void visit(Identifier element);
     void visit(Program element);
     void visit(Assign element);
+    void visit(Mutable element);
     void visit(If element);
     void visit(Input element);
     void visit(Output element);
     void visit(Return element);
     void visit(VariableDeclaration element);
     void visit(While element);
-    void visit(Type element);
+    void visit(TypeDeclaration element);
 }

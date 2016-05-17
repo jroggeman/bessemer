@@ -6,12 +6,13 @@ import com.ast.mutable.Identifier;
 
 import java.util.List;
 
-public class Call implements Expression {
+public class Call extends Expression {
     public Identifier functionName;
     public List<Expression> parameterList;
     public Function associatedFunction;
 
-    public Call(Identifier functionName, List<Expression> parameterList) {
+    public Call(int lineNumber, int columnNumber, Identifier functionName, List<Expression> parameterList) {
+        super(lineNumber, columnNumber);
         this.functionName = functionName;
         this.parameterList = parameterList;
     }

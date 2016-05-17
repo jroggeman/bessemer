@@ -12,8 +12,9 @@ import com.ast.function.Function;
 import com.ast.function.ParamDeclaration;
 import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
+import com.ast.mutable.Mutable;
 import com.ast.statements.*;
-import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 import com.symbol_table.SymbolTable;
 import com.symbol_table.entries.Entry;
 import com.symbol_table.entries.FuncEntry;
@@ -62,13 +63,13 @@ public class PropagateSymbolInformationVisitor implements Visitor {
     public void visit(Call element) {
         Entry associatedEntry = table.get(element.functionName);
         if(associatedEntry == null) {
-            logger.log(Level.SEVERE, "Attempting to call a non-existent function.");
+            logger.log(Level.SEVERE, "Attempting to call a non-existent function at line {0}, column {1}.", new Object[] { element.lineNumber, element.columnNumber});
             hasErrors = true;
                     return;
         }
 
         if(!associatedEntry.isFunction()) {
-            logger.log(Level.SEVERE, "Attempting to call a non-function identifier");
+            logger.log(Level.SEVERE, "Attempting to call a non-function identifier at line {0}, column {1}", new Object[] { element.lineNumber, element.columnNumber});
             hasErrors = true;
             return;
         }
@@ -127,7 +128,7 @@ public class PropagateSymbolInformationVisitor implements Visitor {
         Entry entry = table.get(element);
 
         if(entry == null) {
-            logger.log(Level.SEVERE, "Variable not declared");
+            logger.log(Level.SEVERE, "Variable not declared at line {0}, column {1}", new Object[] { element.lineNumber, element.columnNumber});
             hasErrors = true;
             return;
         }
@@ -146,6 +147,11 @@ public class PropagateSymbolInformationVisitor implements Visitor {
     public void visit(Assign element) {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
+    }
+
+    @Override
+    public void visit(Mutable element) {
+        /* Do nothing */
     }
 
     @Override
@@ -186,7 +192,7 @@ public class PropagateSymbolInformationVisitor implements Visitor {
     }
 
     @Override
-    public void visit(Type element) {
+    public void visit(TypeDeclaration element) {
         /* Do nothing */
     }
 }

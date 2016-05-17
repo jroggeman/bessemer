@@ -2,10 +2,11 @@ package com.ast.expressions;
 
 import com.visitors.Visitor;
 
-public class Subexpression implements Expression {
+public class Subexpression extends Expression {
     public Expression expression;
 
-    public Subexpression(Expression expression) {
+    public Subexpression(int lineNumber, int columnNumber, Expression expression) {
+        super(lineNumber, columnNumber);
         this.expression = expression;
     }
 

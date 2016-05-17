@@ -4,11 +4,12 @@ import com.visitors.Visitor;
 import com.ast.expressions.Expression;
 import com.ast.mutable.Mutable;
 
-public class Assign implements Statement {
+public class Assign extends Statement {
     public Mutable leftHandSide;
     public Expression rightHandSide;
 
-    public Assign(Mutable leftHandSide, Expression rightHandSide) {
+    public Assign(int lineNumber, int columnNumber, Mutable leftHandSide, Expression rightHandSide) {
+        super(lineNumber, columnNumber);
         this.leftHandSide = leftHandSide;
         this.rightHandSide = rightHandSide;
     }

@@ -2,12 +2,16 @@ package com.ast.expressions;
 
 import com.ast.statements.Statement;
 
-public interface Expression extends Statement {
-    // Are inputs to this particular thing required to be numeric or boolean?
-    boolean areInputsNumeric();
-    boolean areInputsBoolean();
+public abstract class Expression extends Statement {
+    public Expression(int lineNumber, int columnNumber) {
+        super(lineNumber, columnNumber);
+    }
 
-    // Is the output of this particular thing numeric or boolean?
-    boolean isOutputNumeric();
-    boolean isOutputBoolean();
+    // Are inputs to this particular thing required to be numeric or boolean?
+    public abstract boolean areInputsNumeric();
+    public abstract boolean areInputsBoolean();
+
+    // is the output of this particular thing numeric or boolean?
+    public abstract boolean isOutputNumeric();
+    public abstract boolean isOutputBoolean();
 }

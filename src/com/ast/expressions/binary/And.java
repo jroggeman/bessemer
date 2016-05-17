@@ -3,8 +3,8 @@ package com.ast.expressions.binary;
 import com.ast.expressions.Expression;
 
 public class And extends BinaryExpression {
-    public And(Expression leftHandSide, Expression rightHandSide) {
-        super(leftHandSide, rightHandSide);
+    public And(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
+        super(lineNumber, columnNumber, leftHandSide, rightHandSide);
     }
 
     @Override
