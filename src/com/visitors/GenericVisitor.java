@@ -19,10 +19,19 @@ import com.exceptions.TypeCheckException;
 import com.symbol_table.SymbolTable;
 
 public abstract class GenericVisitor implements Visitor {
-    private SymbolTable table;
+    protected Program program;
+    protected SymbolTable table;
 
-    public GenericVisitor(SymbolTable table) {
+    protected boolean hasErrors = false;
+
+    public GenericVisitor(Program program, SymbolTable table) {
+        this.program = program;
         this.table = table;
+    }
+
+    public boolean hasErrors() {
+        visit(program);
+        return hasErrors;
     }
 
     @Override
@@ -42,8 +51,8 @@ public abstract class GenericVisitor implements Visitor {
 
     public void beforeBlock(Block block) throws TypeCheckException { }
     public void afterBlock(Block block) throws TypeCheckException { }
-    public void beforeAllStatementsInBlock(Block block) { }
-    public void afterAllStatementsInBlock(Block block) { }
+    public void beforeAllStatementsInBlock(Block block) throws TypeCheckException { }
+    public void afterAllStatementsInBlock(Block block) throws TypeCheckException { }
     public void beforeEachStatementInBlock(Block block, Statement statement) throws TypeCheckException { }
     public void afterEachStatementInBlock(Block block, Statement statement) throws TypeCheckException { }
 
@@ -62,12 +71,12 @@ public abstract class GenericVisitor implements Visitor {
         afterBinaryExpression(expression);
     }
 
-    public void beforeBinaryExpression(BinaryExpression expression) { }
-    public void afterBinaryExpression(BinaryExpression expression) { }
-    public void beforeBinaryExpressionLeftHandSide(BinaryExpression expression, Expression leftHandSide) { }
-    public void afterBinaryExpressionLeftHandSide(BinaryExpression expression, Expression leftHandSide) { }
-    public void beforeBinaryExpressionRightHandSide(BinaryExpression expression, Expression rightHandSide) { }
-    public void afterBinaryExpressionRightHandSide(BinaryExpression expression, Expression rightHandSide) { }
+    public void beforeBinaryExpression(BinaryExpression expression) throws TypeCheckException { }
+    public void afterBinaryExpression(BinaryExpression expression) throws TypeCheckException { }
+    public void beforeBinaryExpressionLeftHandSide(BinaryExpression expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterBinaryExpressionLeftHandSide(BinaryExpression expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeBinaryExpressionRightHandSide(BinaryExpression expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterBinaryExpressionRightHandSide(BinaryExpression expression, Expression rightHandSide) throws TypeCheckException { }
 
     @Override
     public void visit(Call call) throws TypeCheckException {
@@ -88,23 +97,23 @@ public abstract class GenericVisitor implements Visitor {
         afterCall(call);
     }
 
-    public void beforeCall(Call call) { }
-    public void afterCall(Call call) { }
-    public void beforeFunctionNameForCall(Call call, Identifier functionName) { }
-    public void afterFunctionNameForCall(Call call, Identifier functionName) { }
-    public void beforeAllExpressionInCallParameterList(Call call) { }
-    public void afterAllExpressionInCallParameterList(Call call) { }
-    public void beforeEachExpressionInCallParameterList(Call call, Expression expression) { }
-    public void afterEachExpressionInCallParameterList(Call call, Expression expression) { }
+    public void beforeCall(Call call) throws TypeCheckException { }
+    public void afterCall(Call call) throws TypeCheckException { }
+    public void beforeFunctionNameForCall(Call call, Identifier functionName) throws TypeCheckException { }
+    public void afterFunctionNameForCall(Call call, Identifier functionName) throws TypeCheckException { }
+    public void beforeAllExpressionInCallParameterList(Call call) throws TypeCheckException { }
+    public void afterAllExpressionInCallParameterList(Call call) throws TypeCheckException { }
+    public void beforeEachExpressionInCallParameterList(Call call, Expression expression) throws TypeCheckException { }
+    public void afterEachExpressionInCallParameterList(Call call, Expression expression) throws TypeCheckException { }
 
     @Override
-    public void visit(Literal literal) {
+    public void visit(Literal literal) throws TypeCheckException {
         beforeLiteral(literal);
         afterLiteral(literal);
     }
 
-    public void beforeLiteral(Literal literal) { }
-    public void afterLiteral(Literal literal) { }
+    public void beforeLiteral(Literal literal) throws TypeCheckException { }
+    public void afterLiteral(Literal literal) throws TypeCheckException { }
 
     @Override
     public void visit(Subexpression subexpression) throws TypeCheckException {
@@ -113,8 +122,8 @@ public abstract class GenericVisitor implements Visitor {
         afterSubexpression(subexpression);
     }
 
-    public void beforeSubexpression(Subexpression subexpression) { }
-    public void afterSubexpression(Subexpression subexpression) { }
+    public void beforeSubexpression(Subexpression subexpression) throws TypeCheckException { }
+    public void afterSubexpression(Subexpression subexpression) throws TypeCheckException { }
 
     @Override
     public void visit(UnaryExpression unaryExpression) throws TypeCheckException {
@@ -123,8 +132,8 @@ public abstract class GenericVisitor implements Visitor {
         afterUnaryExpression(unaryExpression);
     }
 
-    public void beforeUnaryExpression(UnaryExpression unaryExpression) { }
-    public void afterUnaryExpression(UnaryExpression unaryExpression) { }
+    public void beforeUnaryExpression(UnaryExpression unaryExpression) throws TypeCheckException { }
+    public void afterUnaryExpression(UnaryExpression unaryExpression) throws TypeCheckException { }
 
     @Override
     public void visit(Function function) throws TypeCheckException {
@@ -153,16 +162,16 @@ public abstract class GenericVisitor implements Visitor {
         afterFunction(function);
     }
 
-    public void beforeFunction(Function function) { }
-    public void afterFunction(Function function) { }
-    public void beforeNameOfFunction(Function function, Identifier name) { }
-    public void afterNameOfFunction(Function function, Identifier name) { }
-    public void beforeTypeOfFunction(Function function, TypeDeclaration type) { }
-    public void afterTypeOfFunction(Function function, TypeDeclaration type) { }
-    public void beforeParamListOfFunction(Function function, ParamDeclarationList parameterList) { }
-    public void afterParamListOfFunction(Function function, ParamDeclarationList parameterList) { }
-    public void beforeBlockOfFunction(Function function, Block block) { }
-    public void afterBlockOfFunction(Function function, Block block) { }
+    public void beforeFunction(Function function) throws TypeCheckException { }
+    public void afterFunction(Function function) throws TypeCheckException { }
+    public void beforeNameOfFunction(Function function, Identifier name) throws TypeCheckException { }
+    public void afterNameOfFunction(Function function, Identifier name) throws TypeCheckException { }
+    public void beforeTypeOfFunction(Function function, TypeDeclaration type) throws TypeCheckException { }
+    public void afterTypeOfFunction(Function function, TypeDeclaration type) throws TypeCheckException { }
+    public void beforeParamListOfFunction(Function function, ParamDeclarationList parameterList) throws TypeCheckException { }
+    public void afterParamListOfFunction(Function function, ParamDeclarationList parameterList) throws TypeCheckException { }
+    public void beforeBlockOfFunction(Function function, Block block) throws TypeCheckException { }
+    public void afterBlockOfFunction(Function function, Block block) throws TypeCheckException { }
 
     @Override
     public void visit(ParamDeclaration paramDeclaration) throws TypeCheckException {
@@ -179,12 +188,12 @@ public abstract class GenericVisitor implements Visitor {
         afterParamDeclaration(paramDeclaration);
     }
 
-    public void beforeParamDeclaration(ParamDeclaration paramDeclaration) { }
-    public void afterParamDeclaration(ParamDeclaration paramDeclaration) { }
-    public void beforeNameOfParamDeclaration(ParamDeclaration paramDeclaration, Identifier name) { }
-    public void afterNameOfParamDeclaration(ParamDeclaration paramDeclaration, Identifier name) { }
-    public void beforeTypeOfParamDeclaration(ParamDeclaration paramDeclaration, TypeDeclaration type) { }
-    public void afterTypeOfParamDeclaration(ParamDeclaration paramDeclaration, TypeDeclaration type) { }
+    public void beforeParamDeclaration(ParamDeclaration paramDeclaration) throws TypeCheckException { }
+    public void afterParamDeclaration(ParamDeclaration paramDeclaration) throws TypeCheckException { }
+    public void beforeNameOfParamDeclaration(ParamDeclaration paramDeclaration, Identifier name) throws TypeCheckException { }
+    public void afterNameOfParamDeclaration(ParamDeclaration paramDeclaration, Identifier name) throws TypeCheckException { }
+    public void beforeTypeOfParamDeclaration(ParamDeclaration paramDeclaration, TypeDeclaration type) throws TypeCheckException { }
+    public void afterTypeOfParamDeclaration(ParamDeclaration paramDeclaration, TypeDeclaration type) throws TypeCheckException { }
 
     @Override
     public void visit(ParamDeclarationList paramDeclarationList) throws TypeCheckException {
@@ -201,28 +210,28 @@ public abstract class GenericVisitor implements Visitor {
         afterParamDeclarationList(paramDeclarationList);
     }
 
-    public void beforeParamDeclarationList(ParamDeclarationList paramDeclarationList) { }
-    public void afterParamDeclarationList(ParamDeclarationList paramDeclarationList) { }
-    public void beforeAllParamDeclarationInList(ParamDeclarationList paramDeclarationList) { }
-    public void afterAllParamDeclarationInList(ParamDeclarationList paramDeclarationList) { }
-    public void beforeEachParamDeclarationInList(ParamDeclarationList paramDeclarationList, ParamDeclaration paramDeclaration) { }
-    public void afterEachParamDeclarationInList(ParamDeclarationList paramDeclarationList, ParamDeclaration paramDeclaration) { }
+    public void beforeParamDeclarationList(ParamDeclarationList paramDeclarationList) throws TypeCheckException { }
+    public void afterParamDeclarationList(ParamDeclarationList paramDeclarationList) throws TypeCheckException { }
+    public void beforeAllParamDeclarationInList(ParamDeclarationList paramDeclarationList) throws TypeCheckException { }
+    public void afterAllParamDeclarationInList(ParamDeclarationList paramDeclarationList) throws TypeCheckException { }
+    public void beforeEachParamDeclarationInList(ParamDeclarationList paramDeclarationList, ParamDeclaration paramDeclaration) throws TypeCheckException { }
+    public void afterEachParamDeclarationInList(ParamDeclarationList paramDeclarationList, ParamDeclaration paramDeclaration) throws TypeCheckException { }
 
     @Override
-    public void visit(Identifier identifier) {
+    public void visit(Identifier identifier) throws TypeCheckException {
         beforeIdentifier(identifier);
         /* Do nothing */
         afterIdentifier(identifier);
     }
 
-    public void beforeIdentifier(Identifier identifier) { }
-    public void afterIdentifier(Identifier identifier) { }
+    public void beforeIdentifier(Identifier identifier) throws TypeCheckException { }
+    public void afterIdentifier(Identifier identifier) throws TypeCheckException { }
 
     @Override
     public void visit(Program program) {
-        beforeProgram(program);
-
         try {
+            beforeProgram(program);
+
             beforeAllFunctionsInProgram(program);
             for (Function function : program.functionList) {
                 beforeEachFunctionInProgram(program, function);
@@ -230,19 +239,19 @@ public abstract class GenericVisitor implements Visitor {
                 afterEachFunctionInProgram(program, function);
             }
             afterAllFunctionsInProgram(program);
+
+            afterProgram(program);
         } catch(TypeCheckException exception) {
             throw new RuntimeException("Override this, log errors and quit");
         }
-
-        afterProgram(program);
     }
 
-    public void beforeProgram(Program program) { }
-    public void afterProgram(Program program) { }
-    public void beforeAllFunctionsInProgram(Program program) { }
-    public void afterAllFunctionsInProgram(Program program) { }
-    public void beforeEachFunctionInProgram(Program program, Function function) { }
-    public void afterEachFunctionInProgram(Program program, Function function) { }
+    public void beforeProgram(Program program) throws TypeCheckException { }
+    public void afterProgram(Program program) throws TypeCheckException { }
+    public void beforeAllFunctionsInProgram(Program program) throws TypeCheckException { }
+    public void afterAllFunctionsInProgram(Program program) throws TypeCheckException { }
+    public void beforeEachFunctionInProgram(Program program, Function function) throws TypeCheckException { }
+    public void afterEachFunctionInProgram(Program program, Function function) throws TypeCheckException { }
 
     @Override
     public void visit(Assign assign) throws TypeCheckException {
@@ -259,22 +268,22 @@ public abstract class GenericVisitor implements Visitor {
         afterAssign(assign);
     }
 
-    public void beforeAssign(Assign assign) { }
-    public void afterAssign(Assign assign) { }
-    public void beforeLeftOfAssign(Assign assign, Mutable mutable) { }
-    public void afterLeftOfAssign(Assign assign, Mutable mutable) { }
-    public void beforeRightOfAssign(Assign assign, Expression expression) { }
-    public void afterRightOfAssign(Assign assign, Expression expression) { }
+    public void beforeAssign(Assign assign) throws TypeCheckException { }
+    public void afterAssign(Assign assign) throws TypeCheckException { }
+    public void beforeLeftOfAssign(Assign assign, Mutable mutable) throws TypeCheckException { }
+    public void afterLeftOfAssign(Assign assign, Mutable mutable) throws TypeCheckException { }
+    public void beforeRightOfAssign(Assign assign, Expression expression) throws TypeCheckException { }
+    public void afterRightOfAssign(Assign assign, Expression expression) throws TypeCheckException { }
 
     @Override
-    public void visit(Mutable mutable) {
+    public void visit(Mutable mutable) throws TypeCheckException {
         beforeMutable(mutable);
         /* Do nothing */
         afterMutable(mutable);
     }
 
-    public void beforeMutable(Mutable mutable) { }
-    public void afterMutable(Mutable mutable) { }
+    public void beforeMutable(Mutable mutable) throws TypeCheckException { }
+    public void afterMutable(Mutable mutable) throws TypeCheckException { }
 
     @Override
     public void visit(If ifElement) throws TypeCheckException {
@@ -295,12 +304,12 @@ public abstract class GenericVisitor implements Visitor {
         afterIf(ifElement);
     }
 
-    public void beforeIf(If ifElement) { }
-    public void afterIf(If ifElement) { }
-    public void beforeConditionOfIf(If ifElement, Expression condition) { }
-    public void afterConditionOfIf(If ifElement, Expression condition) { }
-    public void beforeBlockOfIf(If ifElement, Block block) { }
-    public void afterBlockOfIf(If ifElement, Block block) { }
+    public void beforeIf(If ifElement) throws TypeCheckException { }
+    public void afterIf(If ifElement) throws TypeCheckException { }
+    public void beforeConditionOfIf(If ifElement, Expression condition) throws TypeCheckException { }
+    public void afterConditionOfIf(If ifElement, Expression condition) throws TypeCheckException { }
+    public void beforeBlockOfIf(If ifElement, Block block) throws TypeCheckException { }
+    public void afterBlockOfIf(If ifElement, Block block) throws TypeCheckException { }
 
     @Override
     public void visit(Input input) throws TypeCheckException {
@@ -309,8 +318,8 @@ public abstract class GenericVisitor implements Visitor {
         afterInput(input);
     }
 
-    public void beforeInput(Input input) { }
-    public void afterInput(Input input) { }
+    public void beforeInput(Input input) throws TypeCheckException { }
+    public void afterInput(Input input) throws TypeCheckException { }
 
     @Override
     public void visit(Output output) throws TypeCheckException {
@@ -319,8 +328,8 @@ public abstract class GenericVisitor implements Visitor {
         afterOutput(output);
     }
 
-    public void beforeOutput(Output output) { }
-    public void afterOutput(Output output) { }
+    public void beforeOutput(Output output) throws TypeCheckException { }
+    public void afterOutput(Output output) throws TypeCheckException { }
 
     @Override
     public void visit(Return returnElement) throws TypeCheckException {
@@ -329,8 +338,8 @@ public abstract class GenericVisitor implements Visitor {
         afterReturn(returnElement);
     }
 
-    public void beforeReturn(Return returnElement) { }
-    public void afterReturn(Return returnElement) { }
+    public void beforeReturn(Return returnElement) throws TypeCheckException { }
+    public void afterReturn(Return returnElement) throws TypeCheckException { }
 
     @Override
     public void visit(VariableDeclaration variableDeclaration) throws TypeCheckException {
@@ -347,12 +356,12 @@ public abstract class GenericVisitor implements Visitor {
         afterVariableDeclaration(variableDeclaration);
     }
 
-    public void beforeVariableDeclaration(VariableDeclaration variableDeclaration) { }
-    public void afterVariableDeclaration(VariableDeclaration variableDeclaration) { }
-    public void beforeNameOfVariableDeclaration(VariableDeclaration variableDeclaration, Identifier name) { }
-    public void afterNameOfVariableDeclaration(VariableDeclaration variableDeclaration, Identifier name) { }
-    public void beforeTypeOfVariableDeclaration(VariableDeclaration variableDeclaration, TypeDeclaration typeDeclaration) { }
-    public void afterTypeOfVariableDeclaration(VariableDeclaration variableDeclaration, TypeDeclaration typeDeclaration) { }
+    public void beforeVariableDeclaration(VariableDeclaration variableDeclaration) throws TypeCheckException { }
+    public void afterVariableDeclaration(VariableDeclaration variableDeclaration) throws TypeCheckException { }
+    public void beforeNameOfVariableDeclaration(VariableDeclaration variableDeclaration, Identifier name) throws TypeCheckException { }
+    public void afterNameOfVariableDeclaration(VariableDeclaration variableDeclaration, Identifier name) throws TypeCheckException { }
+    public void beforeTypeOfVariableDeclaration(VariableDeclaration variableDeclaration, TypeDeclaration typeDeclaration) throws TypeCheckException { }
+    public void afterTypeOfVariableDeclaration(VariableDeclaration variableDeclaration, TypeDeclaration typeDeclaration) throws TypeCheckException { }
 
     @Override
     public void visit(While whileElement) throws TypeCheckException {
@@ -373,20 +382,20 @@ public abstract class GenericVisitor implements Visitor {
         afterWhile(whileElement);
     }
 
-    public void beforeWhile(While whileElement) { }
-    public void afterWhile(While whileElement) { }
-    public void beforeConditionOfWhile(While whileElement, Expression condition) { }
-    public void afterConditionOfWhile(While whileElement, Expression condition) { }
-    public void beforeBlockOfWhile(While whileElement, Block block) { }
-    public void afterBlockOfWhile(While whileElement, Block block) { }
+    public void beforeWhile(While whileElement) throws TypeCheckException { }
+    public void afterWhile(While whileElement) throws TypeCheckException { }
+    public void beforeConditionOfWhile(While whileElement, Expression condition) throws TypeCheckException { }
+    public void afterConditionOfWhile(While whileElement, Expression condition) throws TypeCheckException { }
+    public void beforeBlockOfWhile(While whileElement, Block block) throws TypeCheckException { }
+    public void afterBlockOfWhile(While whileElement, Block block) throws TypeCheckException { }
 
     @Override
-    public void visit(TypeDeclaration typeDeclaration) {
+    public void visit(TypeDeclaration typeDeclaration) throws TypeCheckException {
         beforeTypeDeclaration(typeDeclaration);
         /* Do nothing */
         afterTypeDeclaration(typeDeclaration);
     }
 
-    public void beforeTypeDeclaration(TypeDeclaration typeDeclaration) { }
-    public void afterTypeDeclaration(TypeDeclaration typeDeclaration) { }
+    public void beforeTypeDeclaration(TypeDeclaration typeDeclaration) throws TypeCheckException { }
+    public void afterTypeDeclaration(TypeDeclaration typeDeclaration) throws TypeCheckException { }
 }

@@ -2,6 +2,7 @@ package com;
 
 import com.ast.Program;
 import com.symbol_table.SymbolTable;
+import com.visitors.AssignmentTypeAgreementVisitor;
 import com.visitors.BuildSymbolTableVisitor;
 import com.visitors.PropagateSymbolInformationVisitor;
 import com.visitors.TypeAgreementVisitor;
@@ -41,10 +42,8 @@ public class Compiler {
             System.exit(1);
         }
 
-        TypeAgreementVisitor tav = new TypeAgreementVisitor(ast, t);
-        tav.checkTypeAgreement();
-
-        if(tav.foundErrors()) {
+        AssignmentTypeAgreementVisitor atav = new AssignmentTypeAgreementVisitor(ast, t);
+        if(atav.hasErrors()) {
             logger.log(Level.SEVERE, "Found type errors, aborting...");
             System.exit(1);
         }

@@ -1,5 +1,5 @@
 int main() {
-    int joel;
+    char joel;
     int x;
     joel = x + x;
     int y;
