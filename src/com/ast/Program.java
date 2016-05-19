@@ -1,5 +1,7 @@
 package com.ast;
 
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
 import com.visitors.Visitor;
 import com.ast.function.Function;
 
@@ -24,6 +26,11 @@ public class Program extends Token {
 
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }
 

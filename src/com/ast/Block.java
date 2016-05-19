@@ -1,5 +1,7 @@
 package com.ast;
 
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
 import com.visitors.Visitor;
 import com.ast.statements.Statement;
 
@@ -24,7 +26,12 @@ public class Block extends Token implements Iterable<Statement> {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(Visitor visitor) throws TypeCheckException {
         visitor.visit(this);
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }

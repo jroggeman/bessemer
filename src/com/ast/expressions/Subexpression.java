@@ -1,6 +1,8 @@
 package com.ast.expressions;
 
 import com.ast.types.Type;
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
 import com.visitors.Visitor;
 
 public class Subexpression extends Expression {
@@ -16,8 +18,13 @@ public class Subexpression extends Expression {
         return "(" + expression + ")";
     }
 
-    public void accept(Visitor visitor) {
+    public void accept(Visitor visitor) throws TypeCheckException {
         visitor.visit(this);
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 
     @Override

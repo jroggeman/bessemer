@@ -15,6 +15,7 @@ import com.ast.mutable.Identifier;
 import com.ast.mutable.Mutable;
 import com.ast.statements.*;
 import com.ast.types.TypeDeclaration;
+import com.exceptions.TypeCheckException;
 import com.symbol_table.SymbolTable;
 
 public class GenericVisitor implements Visitor {
@@ -25,20 +26,20 @@ public class GenericVisitor implements Visitor {
     }
 
     @Override
-    public void visit(Block element) {
+    public void visit(Block element) throws TypeCheckException {
         for (Statement statement : element) {
             statement.accept(this);
         }
     }
 
     @Override
-    public void visit(BinaryExpression element) {
+    public void visit(BinaryExpression element) throws TypeCheckException {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
     }
 
     @Override
-    public void visit(Call element) {
+    public void visit(Call element) throws TypeCheckException {
         element.functionName.accept(this);
         for (Expression expression : element.parameterList) {
             expression.accept(this);
@@ -51,17 +52,17 @@ public class GenericVisitor implements Visitor {
     }
 
     @Override
-    public void visit(Subexpression element) {
+    public void visit(Subexpression element) throws TypeCheckException {
         element.expression.accept(this);
     }
 
     @Override
-    public void visit(UnaryExpression element) {
+    public void visit(UnaryExpression element) throws TypeCheckException {
         element.expression.accept(this);
     }
 
     @Override
-    public void visit(Function element) {
+    public void visit(Function element) throws TypeCheckException {
         element.name.accept(this);
         element.type.accept(this);
         table.enterScope(element);
@@ -73,13 +74,13 @@ public class GenericVisitor implements Visitor {
     }
 
     @Override
-    public void visit(ParamDeclaration element) {
+    public void visit(ParamDeclaration element) throws TypeCheckException {
         element.id.accept(this);
         element.type.accept(this);
     }
 
     @Override
-    public void visit(ParamDeclarationList element) {
+    public void visit(ParamDeclarationList element) throws TypeCheckException {
         for(ParamDeclaration paramDeclaration : element) {
             paramDeclaration.accept(this);
         }
@@ -92,13 +93,17 @@ public class GenericVisitor implements Visitor {
 
     @Override
     public void visit(Program element) {
-        for (Function function : element.functionList) {
-            function.accept(this);
+        try {
+            for (Function function : element.functionList) {
+                function.accept(this);
+            }
+        } catch(TypeCheckException exception) {
+            throw new RuntimeException("Override this, log errors and quit");
         }
     }
 
     @Override
-    public void visit(Assign element) {
+    public void visit(Assign element) throws TypeCheckException {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
     }
@@ -109,7 +114,7 @@ public class GenericVisitor implements Visitor {
     }
 
     @Override
-    public void visit(If element) {
+    public void visit(If element) throws TypeCheckException {
         element.condition.accept(this);
         table.enterScope(element);
         element.block.accept(this);
@@ -117,28 +122,28 @@ public class GenericVisitor implements Visitor {
     }
 
     @Override
-    public void visit(Input element) {
+    public void visit(Input element) throws TypeCheckException {
         element.variable.accept(this);
     }
 
     @Override
-    public void visit(Output element) {
+    public void visit(Output element) throws TypeCheckException {
         element.expression.accept(this);
     }
 
     @Override
-    public void visit(Return element) {
+    public void visit(Return element) throws TypeCheckException {
         element.expression.accept(this);
     }
 
     @Override
-    public void visit(VariableDeclaration element) {
+    public void visit(VariableDeclaration element) throws TypeCheckException {
         element.name.accept(this);
         element.type.accept(this);
     }
 
     @Override
-    public void visit(While element) {
+    public void visit(While element) throws TypeCheckException {
         element.condition.accept(this);
         table.enterScope(element);
         element.block.accept(this);

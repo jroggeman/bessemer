@@ -2,6 +2,8 @@ package com.ast.expressions.binary;
 
 import com.ast.expressions.Expression;
 import com.ast.types.Type;
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
 
 public class Add extends BinaryExpression {
     public Add(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
@@ -23,5 +25,10 @@ public class Add extends BinaryExpression {
         }
 
         return Type.getResultType(lhs, rhs);
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }

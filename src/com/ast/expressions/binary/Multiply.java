@@ -3,6 +3,8 @@ package com.ast.expressions.binary;
 
 import com.ast.expressions.Expression;
 import com.ast.types.Type;
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
 
 public class Multiply extends BinaryExpression {
     public Multiply(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
@@ -23,5 +25,10 @@ public class Multiply extends BinaryExpression {
             throw new RuntimeException("Non-numeric arguments to numeric operator, not caught at compile time.");
 
         return Type.getResultType(lhs, rhs);
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }

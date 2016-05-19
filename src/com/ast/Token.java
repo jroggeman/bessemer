@@ -1,5 +1,7 @@
 package com.ast;
 
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
 import com.visitors.Visitor;
 
 public abstract class Token {
@@ -11,5 +13,6 @@ public abstract class Token {
         this.columnNumber = columnNumber;
     }
 
-    public abstract void accept(Visitor visitor);
+    public abstract void accept(Visitor visitor) throws TypeCheckException;
+    public abstract void checkTypes(SymbolTable table) throws TypeCheckException;
 }

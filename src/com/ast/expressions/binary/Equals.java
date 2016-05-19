@@ -2,6 +2,8 @@ package com.ast.expressions.binary;
 
 import com.ast.expressions.Expression;
 import com.ast.types.Type;
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
 
 public class Equals extends BinaryExpression {
     public Equals(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
@@ -20,5 +22,10 @@ public class Equals extends BinaryExpression {
         }
 
         return Type.BOOLEAN;
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }

@@ -2,6 +2,8 @@ package com.ast.expressions.binary;
 
 import com.ast.expressions.Expression;
 import com.ast.types.Type;
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
 
 public class LessThan extends BinaryExpression{
     public LessThan(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
@@ -22,5 +24,10 @@ public class LessThan extends BinaryExpression{
             throw new RuntimeException("Non-numeric arguments for numeric operator, not caught in type checking");
 
         return Type.BOOLEAN;
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }

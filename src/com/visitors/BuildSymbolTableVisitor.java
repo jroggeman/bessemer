@@ -15,6 +15,7 @@ import com.ast.mutable.Identifier;
 import com.ast.mutable.Mutable;
 import com.ast.statements.*;
 import com.ast.types.TypeDeclaration;
+import com.exceptions.TypeCheckException;
 import com.symbol_table.EntryFactory;
 import com.symbol_table.SymbolTable;
 
@@ -40,7 +41,7 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
-    public void visit(Block element) {
+    public void visit(Block element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         for (Statement statement : element) {
             statement.accept(this);
@@ -48,14 +49,14 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
-    public void visit(BinaryExpression element) {
+    public void visit(BinaryExpression element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
     }
 
     @Override
-    public void visit(Call element) {
+    public void visit(Call element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.functionName.accept(this);
         for (Expression expression : element.parameterList) {
@@ -70,19 +71,19 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
-    public void visit(Subexpression element) {
+    public void visit(Subexpression element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.expression.accept(this);
     }
 
     @Override
-    public void visit(UnaryExpression element) {
+    public void visit(UnaryExpression element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.expression.accept(this);
     }
 
     @Override
-    public void visit(Function element) {
+    public void visit(Function element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         table.put(element.name, EntryFactory.createEntry(element));
         table.enterScope(element);
@@ -98,7 +99,7 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
-    public void visit(ParamDeclarationList element) {
+    public void visit(ParamDeclarationList element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         for (ParamDeclaration param : element.params) {
             param.accept(this);
@@ -113,14 +114,18 @@ public class BuildSymbolTableVisitor implements Visitor {
 
     @Override
     public void visit(Program element) {
-        logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
-        for (Function function : element.functionList) {
-            function.accept(this);
+        try {
+            logger.log(Level.FINER, "Visiting {0} {1}", new Object[]{element.getClass().getName(), element.hashCode()});
+            for (Function function : element.functionList) {
+                function.accept(this);
+            }
+        } catch(TypeCheckException exception) {
+            throw new RuntimeException("Somehow got TypeCheckException in SymbolTableVisitor");
         }
     }
 
     @Override
-    public void visit(Assign element) {
+    public void visit(Assign element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
@@ -132,7 +137,7 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
-    public void visit(If element) {
+    public void visit(If element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.condition.accept(this);
         table.enterScope(element);
@@ -141,19 +146,19 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
-    public void visit(Input element) {
+    public void visit(Input element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.variable.accept(this);
     }
 
     @Override
-    public void visit(Output element) {
+    public void visit(Output element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.expression.accept(this);
     }
 
     @Override
-    public void visit(Return element) {
+    public void visit(Return element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.expression.accept(this);
     }
@@ -165,7 +170,7 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
-    public void visit(While element) {
+    public void visit(While element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         element.condition.accept(this);
         table.enterScope(element);

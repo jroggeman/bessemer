@@ -1,6 +1,8 @@
 package com.ast.expressions.literals;
 
 import com.ast.types.Type;
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
 
 public class BoolLiteral extends Literal {
     public boolean value;
@@ -18,5 +20,10 @@ public class BoolLiteral extends Literal {
     @Override
     public Type getType() {
         return Type.BOOLEAN;
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }
