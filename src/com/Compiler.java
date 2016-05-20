@@ -5,7 +5,6 @@ import com.symbol_table.SymbolTable;
 import com.visitors.AssignmentTypeAgreementVisitor;
 import com.visitors.BuildSymbolTableVisitor;
 import com.visitors.PropagateSymbolInformationVisitor;
-import com.visitors.TypeAgreementVisitor;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
