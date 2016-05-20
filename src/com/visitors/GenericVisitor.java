@@ -7,6 +7,7 @@ import com.ast.expressions.Expression;
 import com.ast.expressions.Subexpression;
 import com.ast.expressions.binary.*;
 import com.ast.expressions.literals.*;
+import com.ast.expressions.unary.Not;
 import com.ast.expressions.unary.UnaryExpression;
 import com.ast.function.Function;
 import com.ast.function.ParamDeclaration;
@@ -134,6 +135,15 @@ public abstract class GenericVisitor implements Visitor {
 
     public void beforeUnaryExpression(UnaryExpression unaryExpression) throws TypeCheckException { }
     public void afterUnaryExpression(UnaryExpression unaryExpression) throws TypeCheckException { }
+
+    public void visit(Not not) throws TypeCheckException {
+        beforeUnaryExpression(not);
+        not.expression.accept(this);
+        afterUnaryExpression(not);
+    }
+
+    public void beforeNot(Not not) throws TypeCheckException { }
+    public void afterNot(Not not) throws TypeCheckException { }
 
     @Override
     public void visit(Function function) throws TypeCheckException {
