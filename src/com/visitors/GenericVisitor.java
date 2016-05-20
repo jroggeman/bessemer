@@ -5,7 +5,7 @@ import com.ast.Program;
 import com.ast.expressions.Call;
 import com.ast.expressions.Expression;
 import com.ast.expressions.Subexpression;
-import com.ast.expressions.binary.BinaryExpression;
+import com.ast.expressions.binary.*;
 import com.ast.expressions.literals.Literal;
 import com.ast.expressions.unary.UnaryExpression;
 import com.ast.function.Function;
@@ -398,4 +398,236 @@ public abstract class GenericVisitor implements Visitor {
 
     public void beforeTypeDeclaration(TypeDeclaration typeDeclaration) throws TypeCheckException { }
     public void afterTypeDeclaration(TypeDeclaration typeDeclaration) throws TypeCheckException { }
+
+    public void visit(Add expression) throws TypeCheckException {
+        beforeAdd(expression);
+
+        beforeAddLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterAddLeftHandSide(expression, expression.leftHandSide);
+
+        beforeAddRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterAddRightHandSide(expression, expression.rightHandSide);
+
+        afterAdd(expression);
+    }
+
+    public void beforeAdd(Add expression) throws TypeCheckException { }
+    public void afterAdd(Add expression) throws TypeCheckException { }
+    public void beforeAddLeftHandSide(Add expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterAddLeftHandSide(Add expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeAddRightHandSide(Add expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterAddRightHandSide(Add expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(And expression) throws TypeCheckException {
+        beforeAnd(expression);
+
+        beforeAndLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterAndLeftHandSide(expression, expression.leftHandSide);
+
+        beforeAndRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterAndRightHandSide(expression, expression.rightHandSide);
+
+        afterAnd(expression);
+    }
+
+    public void beforeAnd(And expression) throws TypeCheckException { }
+    public void afterAnd(And expression) throws TypeCheckException { }
+    public void beforeAndLeftHandSide(And expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterAndLeftHandSide(And expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeAndRightHandSide(And expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterAndRightHandSide(And expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(Divide expression) throws TypeCheckException {
+        beforeDivide(expression);
+
+        beforeDivideLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterDivideLeftHandSide(expression, expression.leftHandSide);
+
+        beforeDivideRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterDivideRightHandSide(expression, expression.rightHandSide);
+
+        afterDivide(expression);
+    }
+
+    public void beforeDivide(Divide expression) throws TypeCheckException { }
+    public void afterDivide(Divide expression) throws TypeCheckException { }
+    public void beforeDivideLeftHandSide(Divide expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterDivideLeftHandSide(Divide expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeDivideRightHandSide(Divide expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterDivideRightHandSide(Divide expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(Equals expression) throws TypeCheckException {
+        beforeEquals(expression);
+
+        beforeEqualsLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterEqualsLeftHandSide(expression, expression.leftHandSide);
+
+        beforeEqualsRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterEqualsRightHandSide(expression, expression.rightHandSide);
+
+        afterEquals(expression);
+    }
+
+    public void beforeEquals(Equals expression) throws TypeCheckException { }
+    public void afterEquals(Equals expression) throws TypeCheckException { }
+    public void beforeEqualsLeftHandSide(Equals expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterEqualsLeftHandSide(Equals expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeEqualsRightHandSide(Equals expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterEqualsRightHandSide(Equals expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(LessThan expression) throws TypeCheckException {
+        beforeLessThan(expression);
+
+        beforeLessThanLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterLessThanLeftHandSide(expression, expression.leftHandSide);
+
+        beforeLessThanRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterLessThanRightHandSide(expression, expression.rightHandSide);
+
+        afterLessThan(expression);
+    }
+
+    public void beforeLessThan(LessThan expression) throws TypeCheckException { }
+    public void afterLessThan(LessThan expression) throws TypeCheckException { }
+    public void beforeLessThanLeftHandSide(LessThan expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterLessThanLeftHandSide(LessThan expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeLessThanRightHandSide(LessThan expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterLessThanRightHandSide(LessThan expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(LessThanOrEquals expression) throws TypeCheckException {
+        beforeLessThanOrEquals(expression);
+
+        beforeLessThanOrEqualsLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterLessThanOrEqualsLeftHandSide(expression, expression.leftHandSide);
+
+        beforeLessThanOrEqualsRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterLessThanOrEqualsRightHandSide(expression, expression.rightHandSide);
+
+        afterLessThanOrEquals(expression);
+    }
+
+    public void beforeLessThanOrEquals(LessThanOrEquals expression) throws TypeCheckException { }
+    public void afterLessThanOrEquals(LessThanOrEquals expression) throws TypeCheckException { }
+    public void beforeLessThanOrEqualsLeftHandSide(LessThanOrEquals expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterLessThanOrEqualsLeftHandSide(LessThanOrEquals expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeLessThanOrEqualsRightHandSide(LessThanOrEquals expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterLessThanOrEqualsRightHandSide(LessThanOrEquals expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(Modulo expression) throws TypeCheckException {
+        beforeModulo(expression);
+
+        beforeModuloLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterModuloLeftHandSide(expression, expression.leftHandSide);
+
+        beforeModuloRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterModuloRightHandSide(expression, expression.rightHandSide);
+
+        afterModulo(expression);
+    }
+
+    public void beforeModulo(Modulo expression) throws TypeCheckException { }
+    public void afterModulo(Modulo expression) throws TypeCheckException { }
+    public void beforeModuloLeftHandSide(Modulo expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterModuloLeftHandSide(Modulo expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeModuloRightHandSide(Modulo expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterModuloRightHandSide(Modulo expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(Multiply expression) throws TypeCheckException {
+        beforeMultiply(expression);
+
+        beforeMultiplyLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterMultiplyLeftHandSide(expression, expression.leftHandSide);
+
+        beforeMultiplyRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterMultiplyRightHandSide(expression, expression.rightHandSide);
+
+        afterMultiply(expression);
+    }
+
+    public void beforeMultiply(Multiply expression) throws TypeCheckException { }
+    public void afterMultiply(Multiply expression) throws TypeCheckException { }
+    public void beforeMultiplyLeftHandSide(Multiply expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterMultiplyLeftHandSide(Multiply expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeMultiplyRightHandSide(Multiply expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterMultiplyRightHandSide(Multiply expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(NotEquals expression) throws TypeCheckException {
+        beforeNotEquals(expression);
+
+        beforeNotEqualsLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterNotEqualsLeftHandSide(expression, expression.leftHandSide);
+
+        beforeNotEqualsRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterNotEqualsRightHandSide(expression, expression.rightHandSide);
+
+        afterNotEquals(expression);
+    }
+
+    public void beforeNotEquals(NotEquals expression) throws TypeCheckException { }
+    public void afterNotEquals(NotEquals expression) throws TypeCheckException { }
+    public void beforeNotEqualsLeftHandSide(NotEquals expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterNotEqualsLeftHandSide(NotEquals expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeNotEqualsRightHandSide(NotEquals expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterNotEqualsRightHandSide(NotEquals expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(Or expression) throws TypeCheckException {
+        beforeOr(expression);
+
+        beforeOrLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterOrLeftHandSide(expression, expression.leftHandSide);
+
+        beforeOrRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterOrRightHandSide(expression, expression.rightHandSide);
+
+        afterOr(expression);
+    }
+
+    public void beforeOr(Or expression) throws TypeCheckException { }
+    public void afterOr(Or expression) throws TypeCheckException { }
+    public void beforeOrLeftHandSide(Or expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterOrLeftHandSide(Or expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeOrRightHandSide(Or expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterOrRightHandSide(Or expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(Subtract expression) throws TypeCheckException {
+        beforeSubtract(expression);
+
+        beforeSubtractLeftHandSide(expression, expression.leftHandSide);
+        expression.leftHandSide.accept(this);
+        afterSubtractLeftHandSide(expression, expression.leftHandSide);
+
+        beforeSubtractRightHandSide(expression, expression.rightHandSide);
+        expression.rightHandSide.accept(this);
+        afterSubtractRightHandSide(expression, expression.rightHandSide);
+
+        afterSubtract(expression);
+    }
+
+    public void beforeSubtract(Subtract expression) throws TypeCheckException { }
+    public void afterSubtract(Subtract expression) throws TypeCheckException { }
+    public void beforeSubtractLeftHandSide(Subtract expression, Expression leftHandSide) throws TypeCheckException { }
+    public void afterSubtractLeftHandSide(Subtract expression, Expression leftHandSide) throws TypeCheckException { }
+    public void beforeSubtractRightHandSide(Subtract expression, Expression rightHandSide) throws TypeCheckException { }
+    public void afterSubtractRightHandSide(Subtract expression, Expression rightHandSide) throws TypeCheckException { }
 }
+
