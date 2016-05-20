@@ -6,7 +6,7 @@ import com.ast.expressions.Call;
 import com.ast.expressions.Expression;
 import com.ast.expressions.Subexpression;
 import com.ast.expressions.binary.*;
-import com.ast.expressions.literals.Literal;
+import com.ast.expressions.literals.*;
 import com.ast.expressions.unary.UnaryExpression;
 import com.ast.function.Function;
 import com.ast.function.ParamDeclaration;
@@ -629,5 +629,37 @@ public abstract class GenericVisitor implements Visitor {
     public void afterSubtractLeftHandSide(Subtract expression, Expression leftHandSide) throws TypeCheckException { }
     public void beforeSubtractRightHandSide(Subtract expression, Expression rightHandSide) throws TypeCheckException { }
     public void afterSubtractRightHandSide(Subtract expression, Expression rightHandSide) throws TypeCheckException { }
+
+    public void visit(BoolLiteral literal) throws TypeCheckException {
+        beforeBoolLiteral(literal);
+        afterBoolLiteral(literal);
+    }
+
+    public void beforeBoolLiteral(BoolLiteral literal) throws TypeCheckException { }
+    public void afterBoolLiteral(BoolLiteral literal) throws TypeCheckException { }
+
+    public void visit(CharLiteral literal) throws TypeCheckException {
+        beforeCharLiteral(literal);
+        afterCharLiteral(literal);
+    }
+
+    public void beforeCharLiteral(CharLiteral literal) throws TypeCheckException { }
+    public void afterCharLiteral(CharLiteral literal) throws TypeCheckException { }
+
+    public void visit(DoubleLiteral literal) throws TypeCheckException {
+        beforeDoubleLiteral(literal);
+        afterDoubleLiteral(literal);
+    }
+
+    public void beforeDoubleLiteral(DoubleLiteral literal) throws TypeCheckException { }
+    public void afterDoubleLiteral(DoubleLiteral literal) throws TypeCheckException { }
+
+    public void visit(IntLiteral literal) throws TypeCheckException {
+        beforeIntLiteral(literal);
+        afterIntLiteral(literal);
+    }
+
+    public void beforeIntLiteral(IntLiteral literal) throws TypeCheckException { }
+    public void afterIntLiteral(IntLiteral literal) throws TypeCheckException { }
 }
 
