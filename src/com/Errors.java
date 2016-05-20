@@ -9,7 +9,8 @@ public enum Errors {
     CALL_NON_EXISTENT_FUNCTION ("Attempting to call a non-existent function at line {0}, column {1}."),
     CALL_NON_FUNCTION ("Attempting to call a non-function identifier at line {0}, column {1}"),
     VARIABLE_USED_BEFORE_DECLARATION ("Variable not declared at line {0}, column {1}"),
-    ASSIGNMENT_TYPE_DISAGREEMENT ("Variable type and expression type don''t agree at line {0}, column {1}");
+    ASSIGNMENT_TYPE_DISAGREEMENT ("Variable type and expression type don''t agree at line {0}, column {1}"),
+    INVALID_MATHEMATICAL_OPERANDS ("Non-arithmetic operands to arithmetic operator at line {0}, column {1}");
 
     private String message;
 

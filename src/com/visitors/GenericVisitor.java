@@ -297,22 +297,28 @@ public abstract class GenericVisitor implements Visitor {
 
     @Override
     public void visit(If ifElement) throws TypeCheckException {
-        beforeIf(ifElement);
+        try {
+            beforeIf(ifElement);
 
-        beforeConditionOfIf(ifElement, ifElement.condition);
-        ifElement.condition.accept(this);
-        afterConditionOfIf(ifElement, ifElement.condition);
+            beforeConditionOfIf(ifElement, ifElement.condition);
+            ifElement.condition.accept(this);
+            afterConditionOfIf(ifElement, ifElement.condition);
 
-        table.enterScope(ifElement);
+            table.enterScope(ifElement);
 
-        beforeBlockOfIf(ifElement, ifElement.block);
-        ifElement.block.accept(this);
-        afterBlockOfIf(ifElement, ifElement.block);
+            beforeBlockOfIf(ifElement, ifElement.block);
+            ifElement.block.accept(this);
+            afterBlockOfIf(ifElement, ifElement.block);
 
-        table.leaveScope();
+            table.leaveScope();
 
-        afterIf(ifElement);
+            afterIf(ifElement);
+        } catch(TypeCheckException exception) {
+            caughtExceptionForIf(exception);
+        }
     }
+
+    public void caughtExceptionForIf(TypeCheckException exception) { }
 
     public void beforeIf(If ifElement) throws TypeCheckException { }
     public void afterIf(If ifElement) throws TypeCheckException { }
@@ -671,5 +677,9 @@ public abstract class GenericVisitor implements Visitor {
 
     public void beforeIntLiteral(IntLiteral literal) throws TypeCheckException { }
     public void afterIntLiteral(IntLiteral literal) throws TypeCheckException { }
+
+    /* General methods */
+    public void beforeStatement(Statement statement) throws TypeCheckException { }
+    public void afterStatement(Statement statement) throws TypeCheckException { }
 }
 
