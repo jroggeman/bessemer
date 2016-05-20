@@ -6,8 +6,9 @@ import com.ast.Program;
 import com.ast.expressions.Call;
 import com.ast.expressions.Expression;
 import com.ast.expressions.Subexpression;
-import com.ast.expressions.binary.BinaryExpression;
-import com.ast.expressions.literals.Literal;
+import com.ast.expressions.binary.*;
+import com.ast.expressions.literals.*;
+import com.ast.expressions.unary.Not;
 import com.ast.expressions.unary.UnaryExpression;
 import com.ast.function.Function;
 import com.ast.function.ParamDeclaration;
@@ -21,7 +22,6 @@ import com.symbol_table.SymbolTable;
 import com.symbol_table.entries.Entry;
 import com.symbol_table.entries.FuncEntry;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -200,5 +200,85 @@ public class PropagateSymbolInformationVisitor implements Visitor {
     @Override
     public void visit(TypeDeclaration element) {
         /* Do nothing */
+    }
+
+    @Override
+    public void visit(Add element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(And element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(Divide element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(Equals element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(LessThan element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(LessThanOrEquals element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(Modulo element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(Multiply element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(NotEquals element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(Or element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(Subtract element) throws TypeCheckException {
+        visit((BinaryExpression) element);
+    }
+
+    @Override
+    public void visit(BoolLiteral element) throws TypeCheckException {
+        visit((Literal) element);
+    }
+
+    @Override
+    public void visit(CharLiteral element) throws TypeCheckException {
+        visit((Literal) element);
+    }
+
+    @Override
+    public void visit(DoubleLiteral element) throws TypeCheckException {
+        visit((Literal) element);
+    }
+
+    @Override
+    public void visit(IntLiteral element) throws TypeCheckException {
+        visit((Literal) element);
+    }
+
+    @Override
+    public void visit(Not element) throws TypeCheckException {
+        visit((UnaryExpression) element);
     }
 }
