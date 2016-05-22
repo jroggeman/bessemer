@@ -5,6 +5,7 @@ import com.ast.types.Type;
 import com.exceptions.InvalidMathematicalOperandsException;
 import com.exceptions.TypeCheckException;
 import com.symbol_table.SymbolTable;
+import com.visitors.Visitor;
 
 public class Add extends BinaryExpression {
     public Add(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
@@ -36,5 +37,9 @@ public class Add extends BinaryExpression {
         if(!lhs.isNumeric() || !rhs.isNumeric()) {
             throw new InvalidMathematicalOperandsException();
         }
+    }
+
+    public void accept(Visitor visitor) throws TypeCheckException {
+        visitor.visit(this);
     }
 }

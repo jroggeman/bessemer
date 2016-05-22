@@ -7,7 +7,8 @@ public enum Type {
     INTEGER ("int"),
     DOUBLE ("double"),
     CHARACTER ("char"),
-    BOOLEAN ("bool");
+    BOOLEAN ("bool"),
+    ERROR ("[ERROR]");
 
     private String printableName;
 
@@ -73,6 +74,8 @@ public enum Type {
                 if(t2 == BOOLEAN)
                     return BOOLEAN;
                 break;
+            case ERROR:
+                return ERROR;
         }
 
         throw new RuntimeException("Type mismatch not caught in type checking");

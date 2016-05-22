@@ -4,6 +4,7 @@ import com.ast.expressions.Expression;
 import com.ast.types.Type;
 import com.exceptions.TypeCheckException;
 import com.symbol_table.SymbolTable;
+import com.visitors.Visitor;
 
 public class Not extends UnaryExpression {
     public Not(int lineNumber, int columnNumber, Expression expression) {
@@ -13,6 +14,11 @@ public class Not extends UnaryExpression {
     @Override
     public String getOperator() {
         return "!";
+    }
+
+    @Override
+    public void accept(Visitor visitor) throws TypeCheckException {
+        visitor.visit(this);
     }
 
     @Override

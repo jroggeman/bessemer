@@ -4,6 +4,7 @@ import com.ast.expressions.Expression;
 import com.ast.types.Type;
 import com.exceptions.TypeCheckException;
 import com.symbol_table.SymbolTable;
+import com.visitors.Visitor;
 
 public class NotEquals extends BinaryExpression {
     public NotEquals(int lineNumber, int columnNumber, Expression leftHandSide, Expression rightHandSide) {
@@ -13,6 +14,11 @@ public class NotEquals extends BinaryExpression {
     @Override
     public String getOperator() {
         return "!=";
+    }
+
+    @Override
+    public void accept(Visitor visitor) throws TypeCheckException {
+        visitor.visit(this);
     }
 
     @Override

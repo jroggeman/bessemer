@@ -10,9 +10,7 @@ public abstract class Literal extends Expression {
         super(lineNumber, columnNumber);
     }
 
-    public void accept(Visitor visitor) throws TypeCheckException {
-        visitor.visit(this);
-    }
+    public abstract void accept(Visitor visitor) throws TypeCheckException;
 
     @Override
     public void checkTypes(SymbolTable table) throws TypeCheckException {

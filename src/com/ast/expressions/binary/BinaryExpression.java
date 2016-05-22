@@ -22,9 +22,7 @@ public abstract class BinaryExpression extends Expression {
         return leftHandSide + " " + getOperator() + " " + rightHandSide;
     }
 
-    public void accept(Visitor visitor) throws TypeCheckException {
-        visitor.visit(this);
-    }
+    public abstract void accept(Visitor visitor) throws TypeCheckException;
 
     @Override
     public void checkTypes(SymbolTable table) throws TypeCheckException {

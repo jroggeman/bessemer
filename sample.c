@@ -1,7 +1,8 @@
 int main() {
     int joel;
     int x;
-    joel = x + x;
+    int c;
+    joel = x + c;
     int y;
     int z;
     int j;

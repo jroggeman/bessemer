@@ -20,9 +20,7 @@ public abstract class UnaryExpression extends Expression {
         return getOperator() + " " + expression;
     }
 
-    public void accept(Visitor visitor) throws TypeCheckException {
-        visitor.visit(this);
-    }
+    public abstract void accept(Visitor visitor) throws TypeCheckException;
 
     @Override
     public void checkTypes(SymbolTable table) throws TypeCheckException {

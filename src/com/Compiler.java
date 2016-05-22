@@ -2,9 +2,7 @@ package com;
 
 import com.ast.Program;
 import com.symbol_table.SymbolTable;
-import com.visitors.AssignmentTypeAgreementVisitor;
-import com.visitors.BuildSymbolTableVisitor;
-import com.visitors.PropagateSymbolInformationVisitor;
+import com.visitors.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -41,8 +39,8 @@ public class Compiler {
             System.exit(1);
         }
 
-        AssignmentTypeAgreementVisitor atav = new AssignmentTypeAgreementVisitor(ast, t);
-        if(atav.hasErrors()) {
+        OperatorTypeAgreementVisitor otav = new OperatorTypeAgreementVisitor(ast, t);
+        if(otav.hasErrors()) {
             logger.log(Level.SEVERE, "Found type errors, aborting...");
             System.exit(1);
         }
