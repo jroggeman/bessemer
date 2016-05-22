@@ -2,6 +2,7 @@ package com.ast.expressions.binary;
 
 import com.ast.expressions.Expression;
 import com.ast.types.Type;
+import com.exceptions.ComparisonOperandDisagreementException;
 import com.exceptions.TypeCheckException;
 import com.symbol_table.SymbolTable;
 import com.visitors.Visitor;
@@ -24,7 +25,7 @@ public class Equals extends BinaryExpression {
     @Override
     public Type getType() {
         if(!Type.areComparisonCompatible(leftHandSide.getType(), rightHandSide.getType())) {
-            throw new RuntimeException("Invalid != comparison not caught in type checking");
+            return Type.ERROR;
         }
 
         return Type.BOOLEAN;
@@ -32,6 +33,11 @@ public class Equals extends BinaryExpression {
 
     @Override
     public void checkTypes(SymbolTable table) throws TypeCheckException {
+        Type lhs = leftHandSide.getType();
+        Type rhs = rightHandSide.getType();
 
+        if(!lhs.isComparisonCompatibleWith(rhs)) {
+            throw new ComparisonOperandDisagreementException();
+        }
     }
 }

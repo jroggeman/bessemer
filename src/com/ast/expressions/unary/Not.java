@@ -2,6 +2,7 @@ package com.ast.expressions.unary;
 
 import com.ast.expressions.Expression;
 import com.ast.types.Type;
+import com.exceptions.InvalidBooleanOperandsException;
 import com.exceptions.TypeCheckException;
 import com.symbol_table.SymbolTable;
 import com.visitors.Visitor;
@@ -28,6 +29,8 @@ public class Not extends UnaryExpression {
 
     @Override
     public void checkTypes(SymbolTable table) throws TypeCheckException {
-
+        if(!expression.getType().isBoolean()) {
+            throw new InvalidBooleanOperandsException();
+        }
     }
 }

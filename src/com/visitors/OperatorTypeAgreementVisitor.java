@@ -18,12 +18,20 @@ import com.ast.mutable.Identifier;
 import com.ast.mutable.Mutable;
 import com.ast.statements.*;
 import com.ast.types.TypeDeclaration;
+import com.exceptions.ComparisonOperandDisagreementException;
+import com.exceptions.InvalidBooleanOperandsException;
 import com.exceptions.InvalidMathematicalOperandsException;
 import com.exceptions.TypeCheckException;
 import com.symbol_table.SymbolTable;
 
 import java.util.logging.Logger;
 
+/**
+ * Checks for:
+ * - Numeric operands for numeric operators
+ * - Boolean operands for boolean operators
+ * - Agreement between types for comparison operators
+ */
 public class OperatorTypeAgreementVisitor implements Visitor {
     private static final Logger logger = Logger.getLogger(OperatorTypeAgreementVisitor.class.getCanonicalName());
 
@@ -205,6 +213,7 @@ public class OperatorTypeAgreementVisitor implements Visitor {
     public void visit(And element) throws TypeCheckException {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
+        checkBooleanOperators(element);
     }
 
     @Override
@@ -218,18 +227,21 @@ public class OperatorTypeAgreementVisitor implements Visitor {
     public void visit(Equals element) throws TypeCheckException {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
+        checkComparisonAgreement(element);
     }
 
     @Override
     public void visit(LessThan element) throws TypeCheckException {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
+        checkMathOperators(element);
     }
 
     @Override
     public void visit(LessThanOrEquals element) throws TypeCheckException {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
+        checkMathOperators(element);
     }
 
     @Override
@@ -250,12 +262,14 @@ public class OperatorTypeAgreementVisitor implements Visitor {
     public void visit(NotEquals element) throws TypeCheckException {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
+        checkComparisonAgreement(element);
     }
 
     @Override
     public void visit(Or element) throws TypeCheckException {
         element.leftHandSide.accept(this);
         element.rightHandSide.accept(this);
+        checkBooleanOperators(element);
     }
 
     @Override
@@ -288,6 +302,7 @@ public class OperatorTypeAgreementVisitor implements Visitor {
     @Override
     public void visit(Not element) throws TypeCheckException {
         element.expression.accept(this);
+        checkBooleanOperators(element);
     }
 
     public void checkMathOperators(Token element) throws TypeCheckException {
@@ -297,6 +312,22 @@ public class OperatorTypeAgreementVisitor implements Visitor {
             Errors.INVALID_MATHEMATICAL_OPERANDS.log(logger, element);
             foundErrors = true;
             throw exception;
+        }
+    }
+
+    public void checkBooleanOperators(Token element) throws TypeCheckException {
+        try {
+            element.checkTypes(table);
+        } catch (InvalidBooleanOperandsException exception) {
+            Errors.INVALID_BOOLEAN_OPERANDS.log(logger, element);
+        }
+    }
+
+    public void checkComparisonAgreement(Token element) throws TypeCheckException {
+        try {
+            element.checkTypes(table);
+        } catch (ComparisonOperandDisagreementException exception) {
+            Errors.COMPARISON_OPERAND_DISAGREEMENT.log(logger, element);
         }
     }
 }

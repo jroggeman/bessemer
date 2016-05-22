@@ -57,6 +57,10 @@ public enum Type {
 
     }
 
+    public boolean isComparisonCompatibleWith(Type t2) {
+        return areComparisonCompatible(this, t2);
+    }
+
     public static Type getResultType(Type t1, Type t2) {
         switch(t1) {
             case INTEGER:
