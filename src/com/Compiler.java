@@ -4,8 +4,7 @@ import com.ast.Program;
 import com.symbol_table.SymbolTable;
 import com.visitors.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -43,6 +42,16 @@ public class Compiler {
         if(otav.hasErrors()) {
             logger.log(Level.SEVERE, "Found type errors, aborting...");
             System.exit(1);
+        }
+
+        try {
+            FileOutputStream out = new FileOutputStream("ast.ser");
+            ObjectOutputStream objOut = new ObjectOutputStream(out);
+            objOut.writeObject(ast);
+            objOut.close();
+            out.close();
+        } catch(IOException exception) {
+            logger.log(Level.SEVERE, "Error writing AST to disk");
         }
     }
 

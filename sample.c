@@ -9,7 +9,7 @@ int main() {
     if((x + y) < 3 && z < 4) {
         x = func(j, x);
         func(j, 3.4);
-        char character;
+        int character;
         while(!(character == 1)) {
             output(j);
             char bluh;

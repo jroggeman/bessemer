@@ -4,7 +4,9 @@ import com.exceptions.TypeCheckException;
 import com.symbol_table.SymbolTable;
 import com.visitors.Visitor;
 
-public abstract class Token {
+import java.io.Serializable;
+
+public abstract class Token implements Serializable {
     public int lineNumber;
     public int columnNumber;
 
