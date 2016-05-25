@@ -21,13 +21,19 @@ public class Compiler {
 
         Options options = new Options();
 
-        options.addOption(new Option("astonly", "Only generate and save the AST (into ast.ser)"));
+        options.addOption(new Option("astOnly", "Only generate and save the AST (into ast.ser)"));
+        options.addOption(Option.builder("astFile").hasArg().desc("Dump AST into specified file").argName("file").build());
+        options.addOption(new Option("debug", "Print debug information"));
 
         logger.log(Level.FINE, "Beginning compilation");
 
         CommandLineParser commandLineParser = new DefaultParser();
 
         CommandLine line = commandLineParser.parse(options, args);
+
+        if(!line.hasOption("debug")) {
+            logger.setLevel(Level.SEVERE);
+        }
 
         List<String> remainingOptions = line.getArgList();
 
@@ -44,14 +50,15 @@ public class Compiler {
 
         Program ast = (Program) parser.parse().value;
 
-        if(line.hasOption("astonly")) {
+        if(line.hasOption("astOnly")) {
             try {
-                FileOutputStream out = new FileOutputStream("ast.ser");
+                String outputFilename = line.getOptionValue("astFile");
+                FileOutputStream out = new FileOutputStream(outputFilename);
                 ObjectOutputStream objOut = new ObjectOutputStream(out);
                 objOut.writeObject(ast);
                 objOut.close();
                 out.close();
-                logger.log(Level.FINE, "Succesfully saved AST to the disk");
+                logger.log(Level.FINE, "Successfully saved AST to the disk");
             } catch(IOException exception) {
                 logger.log(Level.SEVERE, "Error writing AST to disk");
             }
