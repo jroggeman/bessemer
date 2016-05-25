@@ -3,8 +3,10 @@ package com;
 import com.ast.Program;
 import com.symbol_table.SymbolTable;
 import com.visitors.*;
+import org.apache.commons.cli.*;
 
 import java.io.*;
+import java.util.List;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -17,8 +19,24 @@ public class Compiler {
     public static void main(String args[]) throws Exception {
         setupLogger();
 
+        Options options = new Options();
+
+        options.addOption(new Option("astonly", "Only generate and save the AST (into ast.ser)"));
+
         logger.log(Level.FINE, "Beginning compilation");
-        String inputFilename = args[0];
+
+        CommandLineParser commandLineParser = new DefaultParser();
+
+        CommandLine line = commandLineParser.parse(options, args);
+
+        List<String> remainingOptions = line.getArgList();
+
+        if(remainingOptions.size() == 0) {
+            logger.log(Level.SEVERE, "Please specify a file to compile.");
+            System.exit(1);
+        }
+
+        String inputFilename = remainingOptions.get(0);
 
         BufferedReader b = new BufferedReader(new FileReader(inputFilename));
 
@@ -26,32 +44,39 @@ public class Compiler {
 
         Program ast = (Program) parser.parse().value;
 
-        BuildSymbolTableVisitor bstv = new BuildSymbolTableVisitor(ast);
+        if(line.hasOption("astonly")) {
+            try {
+                FileOutputStream out = new FileOutputStream("ast.ser");
+                ObjectOutputStream objOut = new ObjectOutputStream(out);
+                objOut.writeObject(ast);
+                objOut.close();
+                out.close();
+                logger.log(Level.FINE, "Succesfully saved AST to the disk");
+            } catch(IOException exception) {
+                logger.log(Level.SEVERE, "Error writing AST to disk");
+            }
+        } else {
 
-        SymbolTable t = bstv.getSymbolTable();
+            BuildSymbolTableVisitor bstv = new BuildSymbolTableVisitor(ast);
 
-        PropagateSymbolInformationVisitor psiv = new PropagateSymbolInformationVisitor(ast, t);
-        psiv.propagate();
+            SymbolTable t = bstv.getSymbolTable();
 
-        if(psiv.foundErrors()) {
-            logger.log(Level.SEVERE, "Found errors, aborting...");
-            System.exit(1);
-        }
+            PropagateSymbolInformationVisitor psiv = new PropagateSymbolInformationVisitor(ast, t);
+            psiv.propagate();
 
-        OperatorTypeAgreementVisitor otav = new OperatorTypeAgreementVisitor(ast, t);
-        if(otav.hasErrors()) {
-            logger.log(Level.SEVERE, "Found type errors, aborting...");
-            System.exit(1);
-        }
+            if(psiv.foundErrors()) {
+                logger.log(Level.SEVERE, "Found errors, aborting...");
+                System.exit(1);
+            }
 
-        try {
-            FileOutputStream out = new FileOutputStream("ast.ser");
-            ObjectOutputStream objOut = new ObjectOutputStream(out);
-            objOut.writeObject(ast);
-            objOut.close();
-            out.close();
-        } catch(IOException exception) {
-            logger.log(Level.SEVERE, "Error writing AST to disk");
+            OperatorTypeAgreementVisitor otav = new OperatorTypeAgreementVisitor(ast, t);
+            if(otav.hasErrors()) {
+                logger.log(Level.SEVERE, "Found type errors, aborting...");
+                System.exit(1);
+            }
+
+            logger.log(Level.FINE, "Successfully passed type checking, exiting...");
+            System.exit(0);
         }
     }
 
