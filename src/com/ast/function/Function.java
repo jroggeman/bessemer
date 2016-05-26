@@ -1,17 +1,22 @@
 package com.ast.function;
 
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
+import com.visitors.Visitor;
 import com.ast.Block;
+import com.ast.Token;
 import com.ast.mutable.Identifier;
 import com.ast.statements.Statement;
-import com.ast.types.Type;
+import com.ast.types.TypeDeclaration;
 
-public class Function {
-    public Type type;
+public class Function extends Token {
+    public TypeDeclaration type;
     public Identifier name;
     public ParamDeclarationList paramList;
     public Block block;
 
-    public Function(Type type, Identifier name, ParamDeclarationList paramList, Block block) {
+    public Function(int lineNumber, int columnNumber, TypeDeclaration type, Identifier name, ParamDeclarationList paramList, Block block) {
+        super(lineNumber, columnNumber);
         this.type = type;
         this.name = name;
         this.paramList = paramList;
@@ -33,5 +38,14 @@ public class Function {
         toReturn.append("}\n\n");
 
         return toReturn.toString();
+    }
+
+    public void accept(Visitor visitor) throws TypeCheckException {
+        visitor.visit(this);
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }

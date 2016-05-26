@@ -1,13 +1,17 @@
 package com.ast.statements;
 
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
+import com.visitors.Visitor;
 import com.ast.Block;
 import com.ast.expressions.Expression;
 
-public class If implements Statement {
+public class If extends Statement {
     public Expression condition;
     public Block block;
 
-    public If(Expression condition, Block block) {
+    public If(int lineNumber, int columnNumber, Expression condition, Block block) {
+        super(lineNumber, columnNumber);
         this.condition = condition;
         this.block = block;
     }
@@ -22,5 +26,15 @@ public class If implements Statement {
         }
         s.append("}");
         return s.toString();
+    }
+
+    @Override
+    public void accept(Visitor visitor) throws TypeCheckException {
+        visitor.visit(this);
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }

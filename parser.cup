@@ -43,7 +43,7 @@ terminal Double DOUBLE_LITERAL;
 terminal Character CHARACTER_LITERAL;
 terminal Boolean BOOLEAN_LITERAL;
 
-terminal INTEGER_TYPE, DOUBLE_TYPE, CHARACTER_TYPE;
+terminal INTEGER_TYPE, DOUBLE_TYPE, CHARACTER_TYPE, BOOLEAN_TYPE;
 terminal Identifier IDENTIFIER;
 
 non terminal List<Statement> statement_list;
@@ -53,7 +53,7 @@ non terminal ParamDeclaration param_decl;
 non terminal ParamDeclarationList param_decl_list;
 non terminal List<ParamDeclaration> remaining_param_list;
 
-non terminal Type type;
+non terminal TypeDeclaration type;
 
 non terminal VariableDeclaration vardecl;
 
@@ -70,15 +70,15 @@ non terminal List<Expression> remaining_call_param_list;
 
 non terminal Program program;
 
-precedence left TIMES, DIVIDE, MODULO;
-precedence left PLUS, MINUS;
-precedence left EQUALS, LESS_THAN, LESS_THAN_EQUALS, NOT_EQUALS;
-precedence left LOG_AND;
 precedence left LOG_OR;
+precedence left LOG_AND;
+precedence left EQUALS, LESS_THAN, LESS_THAN_EQUALS, NOT_EQUALS;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE, MODULO;
 
 start with program;
 
-program ::= function_list:fl {: RESULT = new Program(fl); :};
+program ::= function_list:fl {: RESULT = new Program(flleft, flright, fl); :};
 
 function_list ::= function:f function_list:fl {:
                                                   fl.add(0, f);
@@ -89,17 +89,19 @@ function_list ::= function:f function_list:fl {:
                   ;
 
 function ::= type:t IDENTIFIER:i LPAREN param_decl_list:pdl RPAREN LBRACE statement_list:sl RBRACE {:
-                             RESULT = new Function(t, i, pdl, new Block(sl));
+                             RESULT = new Function(tleft, tright, t, i, pdl, new Block(slleft, slright, sl));
                          :};
 
-type ::= INTEGER_TYPE   {: RESULT = new IntegerType(); :}
+type ::= INTEGER_TYPE:it   {: RESULT = new TypeDeclaration(itleft, itright, Type.INTEGER); :}
          |
-         DOUBLE_TYPE    {: RESULT = new DoubleType(); :}
+         DOUBLE_TYPE:dt    {: RESULT = new TypeDeclaration(dtleft, dtright, Type.DOUBLE); :}
          |
-         CHARACTER_TYPE {: RESULT = new CharacterType(); :}
+         CHARACTER_TYPE:ct {: RESULT = new TypeDeclaration(ctleft, ctright, Type.CHARACTER); :}
+         |
+         BOOLEAN_TYPE:bt {: RESULT = new TypeDeclaration(btleft, btright, Type.BOOLEAN); :}
          ;
 
-param_decl ::= type:t IDENTIFIER:id {: RESULT = new ParamDeclaration(t, id); :}
+param_decl ::= type:t IDENTIFIER:id {: RESULT = new ParamDeclaration(tleft, tright, t, id); :}
                ;
 
 param_decl_list ::= param_decl:p remaining_param_list:rl {: 
@@ -108,14 +110,14 @@ param_decl_list ::= param_decl:p remaining_param_list:rl {:
         for(ParamDeclaration param : rl) {
             params.add(param);
         }
-        RESULT = new ParamDeclarationList(params);
+        RESULT = new ParamDeclarationList(pleft, pright, params);
     :}
     |
-    {: RESULT = new ParamDeclarationList(new ArrayList<ParamDeclaration>()); :};
+    {: RESULT = new ParamDeclarationList(-1, -1, new ArrayList<ParamDeclaration>()); :};
 
 remaining_param_list ::= COMMA param_decl:pd remaining_param_list:rpl
                     {:
-                        rpl.add(pd);
+                        rpl.add(0, pd);
                         RESULT = rpl;
                     :}
                     |
@@ -133,7 +135,7 @@ statement_list ::= statement:s statement_list:sl
 
 statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
               |
-              IDENTIFIER:i EQUALS expression:e SEMICOLON {: RESULT = new Assign(i, e); :}
+              IDENTIFIER:i EQUALS expression:e SEMICOLON {: RESULT = new Assign(ileft, iright, i, e); :}
               |
               if_block:ib {: RESULT = ib; :}
               |
@@ -141,62 +143,62 @@ statement ::= vardecl:v SEMICOLON {: RESULT = v; :}
               |
               function_call:fc SEMICOLON {: RESULT = fc; :}
               |
-              RETURN expression:e SEMICOLON {: RESULT = new Return(e); :}
+              RETURN:r expression:e SEMICOLON {: RESULT = new Return(rleft, rright, e); :}
               |
-              INPUT IDENTIFIER:i {: RESULT = new Input(i); :}
+              INPUT:ip LPAREN IDENTIFIER:i RPAREN SEMICOLON {: RESULT = new Input(ipleft, ipright, i); :}
               |
-              OUTPUT expression:e {: RESULT = new Output(e); :}
+              OUTPUT:op LPAREN expression:e RPAREN SEMICOLON {: RESULT = new Output(opleft, opright, e); :}
               ;
 
-vardecl ::= type:t IDENTIFIER:i {: RESULT = new VariableDeclaration(t, i); :};
+vardecl ::= type:t IDENTIFIER:i {: RESULT = new VariableDeclaration(tleft, tright, t, i); :};
 
-expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhs, rhs); :}
+expression ::= expression:lhs PLUS expression:rhs {: RESULT = new Add(lhsleft, lhsright, lhs, rhs); :}
                |
-               expression:lhs MINUS expression:rhs {: RESULT = new Subtract(lhs, rhs); :}
+               expression:lhs MINUS expression:rhs {: RESULT = new Subtract(lhsleft, lhsright, lhs, rhs); :}
                |
-               expression:lhs TIMES expression:rhs {: RESULT = new Multiply(lhs, rhs); :}
+               expression:lhs TIMES expression:rhs {: RESULT = new Multiply(lhsleft, lhsright, lhs, rhs); :}
                |
-               expression:lhs DIVIDE expression:rhs {: RESULT = new Divide(lhs, rhs); :}
+               expression:lhs DIVIDE expression:rhs {: RESULT = new Divide(lhsleft, lhsright, lhs, rhs); :}
                |
-               expression:lhs MODULO expression:rhs {: RESULT = new Modulo(lhs, rhs); :}
+               expression:lhs MODULO expression:rhs {: RESULT = new Modulo(lhsleft, lhsright, lhs, rhs); :}
                |
-               expression:lhs LOG_AND expression:rhs {: RESULT = new And(lhs, rhs); :}
+               expression:lhs LOG_AND expression:rhs {: RESULT = new And(lhsleft, lhsright, lhs, rhs); :}
                |
-               expression:lhs LOG_OR expression:rhs {: RESULT = new Or(lhs, rhs); :}
+               expression:lhs LOG_OR expression:rhs {: RESULT = new Or(lhsleft, lhsright, lhs, rhs); :}
                |
-               LOG_NOT expression:e {: RESULT = new Not(e); :}
+               LOG_NOT:ln expression:e {: RESULT = new Not(lnleft, lnright, e); :}
                |
-               LPAREN expression:e RPAREN {: RESULT = new Subexpression(e); :}
+               LPAREN:l expression:e RPAREN {: RESULT = new Subexpression(lleft, lright, e); :}
                |
-               expression:lhs EQUALS expression:rhs {: RESULT = new Equals(lhs, rhs); :}
+               expression:lhs EQUALS expression:rhs {: RESULT = new Equals(lhsleft, lhsright, lhs, rhs); :}
                |
-               expression:lhs LESS_THAN expression:rhs {: RESULT = new LessThan(lhs, rhs); :}
+               expression:lhs LESS_THAN expression:rhs {: RESULT = new LessThan(lhsleft, lhsright, lhs, rhs); :}
                |
-               expression:lhs LESS_THAN_EQUALS expression:rhs {: RESULT = new LessThanOrEquals(lhs, rhs); :}
+               expression:lhs LESS_THAN_EQUALS expression:rhs {: RESULT = new LessThanOrEquals(lhsleft, lhsright, lhs, rhs); :}
                |
-               expression:lhs NOT_EQUALS expression:rhs {: RESULT = new NotEquals(lhs, rhs); :}
+               expression:lhs NOT_EQUALS expression:rhs {: RESULT = new NotEquals(lhsleft, lhsright, lhs, rhs); :}
                |
                function_call:fc {: RESULT = fc; :}
                |
                IDENTIFIER:i {: RESULT = i; :}
                |
-               INTEGER_LITERAL:il {: RESULT = new IntLiteral(il); :}
+               INTEGER_LITERAL:il {: RESULT = new IntLiteral(illeft, ilright, il); :}
                |
-               DOUBLE_LITERAL:dl {: RESULT = new DoubleLiteral(dl); :}
+               DOUBLE_LITERAL:dl {: RESULT = new DoubleLiteral(dlleft, dlright, dl); :}
                |
-               CHARACTER_LITERAL:cl {: RESULT = new CharLiteral(cl); :}
+               CHARACTER_LITERAL:cl {: RESULT = new CharLiteral(clleft, clright, cl); :}
                |
-               BOOLEAN_LITERAL:bl {: RESULT = new BoolLiteral(bl); :}
+               BOOLEAN_LITERAL:bl {: RESULT = new BoolLiteral(blleft, blright, bl); :}
                ;
 
-if_block ::= IF LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
-             {: RESULT = new If(e, new Block(sl)); :};
+if_block ::= IF:i LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
+             {: RESULT = new If(ileft, iright, e, new Block(slleft, slright, sl)); :};
 
-while_block ::= WHILE LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
-                {: RESULT = new While(e, new Block(sl)); :};
+while_block ::= WHILE:w LPAREN expression:e RPAREN LBRACE statement_list:sl RBRACE
+                {: RESULT = new While(wleft, wright, e, new Block(slleft, slright, sl)); :};
 
 function_call ::= IDENTIFIER:i LPAREN call_param_list:cpl RPAREN
-                  {: RESULT = new Call(i, cpl); :};
+                  {: RESULT = new Call(ileft, iright, i, cpl); :};
 
 call_param_list ::= expression:e remaining_call_param_list:rcpl
                     {: rcpl.add(0, e); RESULT = rcpl; :}

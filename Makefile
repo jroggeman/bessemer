@@ -5,3 +5,6 @@ parser:
 	jflex lexer.flex
 	sed -i '' -e 's/sym\.EOF/Symbols\.EOF/g' Lexer.java
 	mv Lexer.java src/com/Lexer.java
+
+gentest:
+	./gentest.sh

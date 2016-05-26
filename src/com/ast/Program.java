@@ -1,13 +1,17 @@
 package com.ast;
 
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
+import com.visitors.Visitor;
 import com.ast.function.Function;
 
 import java.util.List;
 
-public class Program {
+public class Program extends Token {
     public List<Function> functionList;
 
-    public Program(List<Function> functionList) {
+    public Program(int lineNumber, int columnNumber, List<Function> functionList) {
+        super(lineNumber, columnNumber);
         this.functionList = functionList;
     }
 
@@ -18,6 +22,15 @@ public class Program {
         functionList.forEach(s::append);
 
         return s.toString();
+    }
+
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
     }
 }
 

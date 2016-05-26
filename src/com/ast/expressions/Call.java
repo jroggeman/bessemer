@@ -1,14 +1,21 @@
 package com.ast.expressions;
 
+import com.ast.types.Type;
+import com.exceptions.TypeCheckException;
+import com.symbol_table.SymbolTable;
+import com.visitors.Visitor;
+import com.ast.function.Function;
 import com.ast.mutable.Identifier;
 
 import java.util.List;
 
-public class Call implements Expression {
+public class Call extends Expression {
     public Identifier functionName;
     public List<Expression> parameterList;
+    public Function associatedFunction;
 
-    public Call(Identifier functionName, List<Expression> parameterList) {
+    public Call(int lineNumber, int columnNumber, Identifier functionName, List<Expression> parameterList) {
+        super(lineNumber, columnNumber);
         this.functionName = functionName;
         this.parameterList = parameterList;
     }
@@ -28,5 +35,19 @@ public class Call implements Expression {
         }
 
         return toReturn.toString();
+    }
+
+    public void accept(Visitor visitor) throws TypeCheckException {
+        visitor.visit(this);
+    }
+
+    @Override
+    public void checkTypes(SymbolTable table) throws TypeCheckException {
+
+    }
+
+    @Override
+    public Type getType() {
+        return associatedFunction.type.getType();
     }
 }
