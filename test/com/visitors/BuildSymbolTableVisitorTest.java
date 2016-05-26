@@ -1,4 +1,4 @@
-package com;
+package com.visitors;
 
 import static org.junit.Assert.*;
 

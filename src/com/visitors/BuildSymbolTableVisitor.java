@@ -42,6 +42,11 @@ public class BuildSymbolTableVisitor implements Visitor {
     }
 
     @Override
+    public boolean foundErrors() {
+        return false;
+    }
+
+    @Override
     public void visit(Block element) throws TypeCheckException {
         logger.log(Level.FINER, "Visiting {0} {1}", new Object[] {element.getClass().getName(), element.hashCode()});
         for (Statement statement : element) {

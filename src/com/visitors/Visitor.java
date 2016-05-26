@@ -14,11 +14,12 @@ import com.ast.function.ParamDeclarationList;
 import com.ast.mutable.Identifier;
 import com.ast.mutable.Mutable;
 import com.ast.statements.*;
-import com.ast.types.Type;
 import com.ast.types.TypeDeclaration;
 import com.exceptions.TypeCheckException;
 
 public interface Visitor {
+    boolean foundErrors();
+
     void visit(Block element) throws TypeCheckException;
     void visit(BinaryExpression element) throws TypeCheckException;
     void visit(Call element) throws TypeCheckException;

@@ -1,9 +1,8 @@
 package com.visitors;
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 
 import com.ast.Program;
-import com.symbol_table.SymbolTable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -78,27 +77,14 @@ public class SemanticAnalysisIntegrationTest {
     public void testSemanticAnalysis() {
         Program ast = null;
         try {
-            boolean foundErrors = false;
-
             FileInputStream fileIn = new FileInputStream(filename);
             ObjectInputStream in = new ObjectInputStream(fileIn);
 
             ast = (Program) in.readObject();
 
-            BuildSymbolTableVisitor bstv = new BuildSymbolTableVisitor(ast);
+            VisitorPipeline pipeline = new VisitorPipeline(ast);
 
-            SymbolTable t = bstv.getSymbolTable();
-
-            PropagateSymbolInformationVisitor psiv = new PropagateSymbolInformationVisitor(ast, t);
-            psiv.propagate();
-
-            foundErrors |= psiv.foundErrors();
-
-            OperatorTypeAgreementVisitor otav = new OperatorTypeAgreementVisitor(ast, t);
-
-            foundErrors  |= otav.foundErrors();
-
-            assertEquals(passed, !foundErrors);
+            assertEquals(passed, !pipeline.foundErrors());
         } catch(IOException exception) {
             exception.printStackTrace();
         } catch (ClassNotFoundException exception) {

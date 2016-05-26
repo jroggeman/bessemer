@@ -64,26 +64,12 @@ public class Compiler {
             }
         } else {
 
-            BuildSymbolTableVisitor bstv = new BuildSymbolTableVisitor(ast);
+            VisitorPipeline pipeline = new VisitorPipeline(ast);
 
-            SymbolTable t = bstv.getSymbolTable();
-
-            PropagateSymbolInformationVisitor psiv = new PropagateSymbolInformationVisitor(ast, t);
-            psiv.propagate();
-
-            if(psiv.foundErrors()) {
+            if(pipeline.foundErrors()) {
                 logger.log(Level.SEVERE, "Found errors, aborting...");
                 System.exit(1);
             }
-
-            OperatorTypeAgreementVisitor otav = new OperatorTypeAgreementVisitor(ast, t);
-            if(otav.foundErrors()) {
-                logger.log(Level.SEVERE, "Found type errors, aborting...");
-                System.exit(1);
-            }
-
-            logger.log(Level.FINE, "Successfully passed type checking, exiting...");
-            System.exit(0);
         }
     }
 
