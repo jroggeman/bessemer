@@ -11,6 +11,10 @@ public abstract class Entry {
         this.identifier = identifier;
     }
 
+    public Identifier getIdentifier() {
+        return identifier;
+    }
+
     public abstract boolean isNumeric();
     public abstract boolean isBoolean();
     public abstract boolean isFunction();
