@@ -45,7 +45,7 @@ public class OperatorTypeAgreementVisitor implements Visitor {
         this.table = table;
     }
 
-    public boolean hasErrors() {
+    public boolean foundErrors() {
         visit(program);
         return foundErrors;
     }

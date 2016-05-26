@@ -77,7 +77,7 @@ public class Compiler {
             }
 
             OperatorTypeAgreementVisitor otav = new OperatorTypeAgreementVisitor(ast, t);
-            if(otav.hasErrors()) {
+            if(otav.foundErrors()) {
                 logger.log(Level.SEVERE, "Found type errors, aborting...");
                 System.exit(1);
             }

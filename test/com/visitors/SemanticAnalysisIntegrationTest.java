@@ -96,7 +96,7 @@ public class SemanticAnalysisIntegrationTest {
 
             OperatorTypeAgreementVisitor otav = new OperatorTypeAgreementVisitor(ast, t);
 
-            foundErrors  |= otav.hasErrors();
+            foundErrors  |= otav.foundErrors();
 
             assertEquals(passed, !foundErrors);
         } catch(IOException exception) {
