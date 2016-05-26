@@ -15,6 +15,8 @@ import java.util.*;
 
 @RunWith(Parameterized.class)
 public class SemanticAnalysisIntegrationTest {
+    public static final String PASSING_TEST_RESOURCES = "test/resources/pass";
+    public static final String FAILING_TEST_RESOURCES = "test/resources/fail";
     private static List<String> passingFiles;
     private static List<String> failingFiles;
 
@@ -24,35 +26,7 @@ public class SemanticAnalysisIntegrationTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         if(passingFiles == null) {
-            passingFiles = new ArrayList<>();
-
-            File passFolder = new File("test/resources/pass");
-            File[] listOfPassingFiles = passFolder.listFiles();
-
-            for(File passFile : listOfPassingFiles) {
-                if(passFile.isFile()) {
-                    String filename = passFile.getName();
-                    String extension = filename.substring(filename.lastIndexOf('.') + 1);
-                    if(extension.equals("ser")) {
-                        passingFiles.add(passFile.getAbsolutePath());
-                    }
-                }
-            }
-
-            failingFiles = new ArrayList<>();
-
-            File failFolder = new File("test/resources/fail");
-            File[] listOfFailingFiles = failFolder.listFiles();
-
-            for(File failFile : listOfFailingFiles) {
-                if(failFile.isFile()) {
-                    String filename = failFile.getName();
-                    String extension = filename.substring(filename.lastIndexOf('.') + 1);
-                    if(extension.equals("ser")) {
-                        failingFiles.add(failFile.getAbsolutePath());
-                    }
-                }
-            }
+            buildListsOfSourceFiles();
         }
 
         List finalList = new ArrayList<>();
@@ -68,6 +42,38 @@ public class SemanticAnalysisIntegrationTest {
         return finalList;
     }
 
+    private static void buildListsOfSourceFiles() {
+        passingFiles = new ArrayList<>();
+
+        File passFolder = new File(PASSING_TEST_RESOURCES);
+        File[] listOfPassingFiles = passFolder.listFiles();
+
+        for(File passFile : listOfPassingFiles) {
+            if(passFile.isFile()) {
+                String filename = passFile.getName();
+                String extension = filename.substring(filename.lastIndexOf('.') + 1);
+                if(extension.equals("ser")) {
+                    passingFiles.add(passFile.getAbsolutePath());
+                }
+            }
+        }
+
+        failingFiles = new ArrayList<>();
+
+        File failFolder = new File(FAILING_TEST_RESOURCES);
+        File[] listOfFailingFiles = failFolder.listFiles();
+
+        for(File failFile : listOfFailingFiles) {
+            if(failFile.isFile()) {
+                String filename = failFile.getName();
+                String extension = filename.substring(filename.lastIndexOf('.') + 1);
+                if(extension.equals("ser")) {
+                    failingFiles.add(failFile.getAbsolutePath());
+                }
+            }
+        }
+    }
+
     public SemanticAnalysisIntegrationTest(String filename, boolean passed) {
         this.filename = filename;
         this.passed = passed;
@@ -75,7 +81,8 @@ public class SemanticAnalysisIntegrationTest {
 
     @Test
     public void testSemanticAnalysis() {
-        Program ast = null;
+        Program ast;
+
         try {
             FileInputStream fileIn = new FileInputStream(filename);
             ObjectInputStream in = new ObjectInputStream(fileIn);
