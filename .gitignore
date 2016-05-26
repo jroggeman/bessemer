@@ -6,4 +6,4 @@ build/
 Lexer.java
 Parser.java
 sym.java
-ast.ser
+*.ser

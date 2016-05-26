@@ -1,4 +1,4 @@
 int main() {
     char x;
-    output(x);
+    x = x + x;
 }
